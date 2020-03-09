@@ -1,0 +1,70 @@
+.pointer {
+  cursor: pointer;
+}
+
+// Color
+@each $key, $value in $themes {
+  .#{$key} {
+    color: $value !important;
+  }
+  .bg-#{$key} {
+    background-color: $value !important;
+  }
+}
+// Margin
+//
+// 依據 space 列舉top、right、bottom、left
+@each $key, $value in $spacer {
+  .m-#{$key} {
+    margin: $value !important;;
+  }
+  .mt-#{$key} {
+    margin-top: $value !important;;
+  }
+  .mr-#{$key} {
+    margin-right: $value !important;;
+  }
+  .mb-#{$key} {
+    margin-bottom: $value !important;;
+  }
+  .ml-#{$key} {
+    margin-left: $value !important;;
+  }
+}
+
+// Padding
+//
+// 依據 space 列舉top、right、bottom、left
+@each $key, $value in $spacer {
+  .p-#{$key} {
+    padding: $value !important;;
+  }
+  .pt-#{$key} {
+    padding-top: $value !important;
+  }
+  .pr-#{$key} {
+    padding-right: $value !important;;
+  }
+  .pb-#{$key} {
+    padding-bottom: $value !important;;
+  }
+  .pl-#{$key} {
+    padding-left: $value !important;;
+  }
+}
+
+// Width
+//
+@for $i from 1 to 21 {
+  .w#{$i*5} {
+    width: $i * 5%;
+  }
+}
+
+// grid
+//
+@for $i from 1 through $grid-columns {
+  .grid-#{$i} {
+    width: percentage($i / $grid-columns) !important;
+  }
+}

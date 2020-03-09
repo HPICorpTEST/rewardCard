@@ -1,0 +1,39 @@
+@mixin flex($dir, $jus, $ali, $wrap) {
+  display: flex;
+  flex-direction: $dir;
+  justify-content: $jus;
+  align-items: $ali;
+  flex-wrap: $wrap;
+}
+
+@mixin ab-position ($top, $left, $transform) {
+  position: absolute;
+  top: $top;
+  left: $left;
+  transform: $transform;
+}
+
+// media query
+@mixin iview-xs {
+  @media (max-width: 575px) {
+      @content;
+  }
+}
+
+@mixin iview-sm {
+  @media (min-width: 576px) and (max-width: 767px) {
+      @content;
+  }
+}
+
+@mixin iview-md {
+  @media (min-width: 768px) and (max-width: 991px) {
+      @content;
+  }
+}
+
+@mixin iview-lg {
+  @media (min-width: 991px) {
+      @content;
+  }
+}

@@ -1,0 +1,35 @@
+$grid-columns: 12;
+
+$box-shadow:  1px 2px 2px 0 rgba(0,0,0,0.1); 
+
+$blue: #1b73a7;
+$lightBlue: #e6f7ff;
+
+
+$gray-1: #4a4a4a;
+$gray-2: #6b6b6b;
+$gray-3: #989898;
+$gray-4: #aaa;
+
+
+$themes: (
+  'primary': $blue,
+  'secondary': $lightBlue,
+  'gray-1': $gray-1,
+  'gray-2': $gray-2,
+  'gray-3': $gray-3,
+  'gray-4': $gray-4
+);
+
+// Spacing | 間距
+// 
+$space: 1rem !default;
+
+$spacer: (
+  0: 0,
+  1: $space * 0.25,
+  2: $space * 0.5,
+  3: $space,
+  4: $space * 1.5,
+  5: $space * 2
+);
