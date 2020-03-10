@@ -11,51 +11,164 @@
     <header class="p-rewardCard__header"></header>
     <div class="p-rewardCard__content">
       <ul class="tabs">
-        <li class="tabs__item tabs__item--active">滿額集點卡</li>
+        <li class="tabs__item">滿額集點卡</li>
         <li class="tabs__item">贈品列表</li>
-        <li class="tabs__item">兌換紀錄</li>
+        <li class="tabs__item tabs__item--active">兌換紀錄</li>
       </ul>
-
-      <div class="wrapCard">
-        <ul class="wrapCard__card">
+      <div class="p-rewardCard__rewardCard hidden">
+        <div class="wrapCard">
+          <div class="cards">
+            <ul class="cards__item">
+              <li>
+                <p><span>1</span></p>
+              </li>
+              <li>
+                <p><span>2</span></p>
+              </li>
+              <li>
+                <p><span>3</span></p>
+              </li>
+              <li>
+                <p><span>4</span></p>
+              </li>
+              <li>
+                <p><span>5</span></p>
+              </li>
+              <li>
+                <p><span>6</span></p>
+              </li>
+              <li>
+                <p><span>7</span></p>
+              </li>
+              <li>
+                <p><span>8</span></p>
+              </li>
+              <li>
+                <p><span>9</span></p>
+              </li>
+              <li>
+                <p><span>10</span></p>
+              </li>
+            </ul>
+          </div>
+          <ul class="cards__dot">
+            <li class="dot dot--active"></li>
+            <li class="dot"></li>
+          </ul>
+        </div>
+        <ul class="discription">
           <li>
-            <p><span>1</span></p>
+            <img src="../images/icon-blue-point.png" alt="">
+            <p class="discription__title">可用點數 <span>0</span> 點</p>
+            <p class="discription__detail">還差兩點就能兌換商品啦！加油！</p>
           </li>
-          <li>
-            <p><span>2</span></p>
+          <li class="mt-3">
+            <img src="../images/icon-blue-date.png" alt="">
+            <p class="discription__title">兌換期限</p>
+            <p class="discription__detail">2020-01-01 ~ 2020-01-31</p>
           </li>
-          <li>
-            <p><span>3</span></p>
-          </li>
-          <li>
-            <p><span>4</span></p>
-          </li>
-          <li>
-            <p><span>5</span></p>
-          </li>
-          <li>
-            <p><span>6</span></p>
-          </li>
-          <li>
-            <p><span>7</span></p>
-          </li>
-          <li>
-            <p><span>8</span></p>
-          </li>
-          <li>
-            <p><span>9</span></p>
-          </li>
-          <li>
-            <p><span>10</span></p>
+          <li class="mt-3">
+            <img src="../images/icon-blue-doc.png" alt="">
+            <p class="discription__title">活動說明</p>
+            <p class="discription__detail">blablablablablablablablablablablablabla bla</p>
           </li>
         </ul>
+        <div class="rwBtn mt-3 m-auto">返回列表</div>
       </div>
-      <ul class="card__dot">
-        <li></li>
-      </ul>
 
+      <div class="p-rewardCard__redeem hidden">
+        <div class="list mt-3">
+          <div class="list__img grid-4">
+            <img src="../images/temp_prize.png" alt="">
+          </div>
+          <div class="list__main grid-4">
+            <p class="list__name">Line Point 10點</p>
+            <p class="list__point">剩餘數量: 1,000</p>
+            <p class="list__status success">可兌換</p>
+          </div>
+          
+          <p class="list__detail grid-4"><span>5</span>點</p>
+        </div>
+        <div class="list mt-3">
+          <div class="list__img grid-4">
+            <img src="../images/temp_prize.png" alt="">
+          </div>
+          <div class="list__main grid-4">
+            <p class="list__name">Line Point 10點</p>
+            <p class="list__point">剩餘數量: 1,000</p>
+            <p class="list__status danger">未達到</p>
+          </div>
+          
+          <p class="list__detail grid-4"><span>15</span>點</p>
+        </div>
+      </div>
+      <div class="p-rewardCard__record">
+        <div class="hidden">
+          <table class="recordTable mt-3 w100" value="1"> 
+            <tr class="recordTable__title">
+              <td class="w10"><img src="../images/temp_prize.png" alt=""></td>
+              <td class="w30">2020-02-19</td>
+              <td class="w30">2020-02-19</td>
+              <td class="w30">已扣除8點</td>
+            </tr>
+            <tr class="recordTable__content">
+              <td class="w10"></td>
+              <td class="w30">收件資訊</td>
+              <td colspan="2" class="w60">
+                <p>09123456</p>
+                <p>00@gmail.com</p>
+                <p>王小明</p>
+              </td>
+            </tr>
+          </table>
+          <table class="recordTable mt-3 w100"> 
+            <tr class="recordTable__title" value="2">
+              <td class="w10"><img src="../images/temp_prize2.png" alt=""></td>
+              <td class="w30">2020-02-19</td>
+              <td class="w30">2020-02-19</td>
+              <td class="w30">已扣除8點</td>
+            </tr>
+            <tr class="recordTable__content">
+              <td class="w10"></td>
+              <td class="w30">贈品序號</td>
+              <td colspan="2" class="w60">
+                <p>http://points.line.me/?code=hahahaha</p>
+              </td>
+            </tr>
+          </table>
+  
+          <p class="mt-4 align-c">
+            *點擊項目能展開看更多兌獎詳情
+          </p>
+        </div>
+        <div class="noRecord">
+          <img src="../images/no-record.png" alt="">
+          <p>目前尚無兌換紀錄</p>
+        </div>
+
+
+      </div>
     </div>
 
   </div>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+  <script>
+    try {
+      let tableList = document.querySelectorAll('.recordTable__title')
+      let showCollapse = 'recordTable__content--collapse'
+      for (let i = 0; i < tableList.length; i++) {
+        tableList[i].addEventListener('click', function () {
+          if (this.parentNode.children[1].classList.contains(showCollapse)) {
+            this.parentNode.children[1].classList.remove(showCollapse)
+          } else {
+            this.parentNode.children[1].classList.add(showCollapse)
+            currentValue = this.getAttribute('value')
+          }
+        })
+      } 
+    } catch (error) {
+    }
+
+  </script>
 </body>
 </html>

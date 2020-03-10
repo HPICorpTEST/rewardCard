@@ -1,4 +1,8 @@
 .p-rewardCard{
+  width: 100%;
+  max-width: $max-width;
+  margin: auto;
+  min-height: 100vh;
   &__header {
     width: 100%;
     height: 0;
@@ -9,9 +13,9 @@
   }
   &__content {
     padding: 1.2rem;;
-    .wrapCard {
+    .cards {
       margin-top: 1rem;
-      &__card {
+      &__item {
         display: grid;
         grid-template-columns: repeat(5, 1fr);
         grid-template-rows: repeat(2, 1fr);
@@ -27,15 +31,17 @@
             color: #fff;
             width: 100%;
             height: 0;;
-            padding-bottom: calc(96%);
+            padding-bottom: calc(100% - 4px);
             line-height: 1;
             margin: auto;
             border-radius: 50%;
             line-height: 50%;
-            border: 1px solid #fff;
+            border: 2px solid #fff;
             text-align: center;
             color: $blue; //
             span {
+              font-weight: bold;
+              font-size: 12px;
               @include ab-position(50%, 50%, translate(-50%, -50%) );
             }
             &::after {
@@ -51,8 +57,137 @@
           }
         }
       }
+      &__dot {
+        display: flex;
+        justify-content: center;
+        margin-top: 8px;
+        li.dot {
+          width: 0.5rem;
+          height: 0.5rem;
+          margin-right: 0.5rem;
+          background: $blue;
+          opacity: 0.5;
+          border-radius: 50%;
+          &--active {
+            opacity: 1;
+          }
+        }
+      }
+    }
+    .discription {
+      margin-top: 1rem;
+      border-radius: 20px;
+      padding: 1.4rem;
+      background-color: rgba(27,115,167, 0.3);
+      p {
+        color: $blue;
+      }
+      li {
+        padding-left: 2.5rem;
+        img {
+          width: 30px;
+          position: absolute;
+          left: 0;
+        }
+      }
+      &__title {
+        font-size: 14px;
+        font-weight: bold;
+        line-height: 1.68;
+      }
+      &__detail {
+        font-size: 13px;
+        color: $blue;
+      }
+     
+    }
+  }
+
+  .list {
+    display: flex;
+    align-items: center;
+    border: 1px solid $blue;
+    padding-right: 0.6rem;
+    border-radius: 20px;
+    
+    &__img {
+      padding: 1rem;
+      color: $gray-1;
+    }
+    &__main {
+      p {
+        font-size: 0.9rem;
+        color: $gray-1;
+        line-height: 2;
+      }
+    }
+    &__detail {
+      text-align: right;
+      color: $blue;
+      span {
+        font-family: 'Avenir', '微軟正黑體';
+        font-size: 4.5rem;
+        line-height: 1.2;
+      }
+    }
+  }
+  // 2. collapse
+  .recordTable{
+    background: #fff;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, .15);
+    padding: .2rem 1rem;
+    border-radius: 18px;
+    cursor: pointer;
+    &__title{
+      line-height: 2.2;
+      td:first-of-type {
+        border-bottom: 0;
+      }
+      td {
+        padding: 2px;
+        font-size: 0.9rem;
+        text-align: right;
+      }
     }
 
+    &__content{
+      display: none;
+      font-size: 1rem;
+      line-height: 1.68;
+      border-radius: 20px;
+      margin-top: .5rem;
+      &--collapse {
+        display: table-row;
+      }
+      td {
+        border-top: 1px dotted $gray-4;
+        padding: 10px;
+      }
+      td:first-of-type {
+        border-top: 0;
+      }
+      td:nth-of-type(2) {
+        font-size: 0.8rem;
+        color: $gray-2;
+        text-align: right;
+      }
+      td:last-of-type {
+        padding: 10px;
+        font-size: 0.7rem;
+      }
+    }
+  }
+  .noRecord {
+    opacity: 0.4;
+    top: 120px;
+    img {
+      margin: auto;
+      width: 30%;
+    }
+    p {
+      text-align: center;
+      font-size: 1.2rem;
+    }
   }
 }
 

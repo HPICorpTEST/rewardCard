@@ -14,26 +14,20 @@
 }
 
 // media query
-@mixin iview-xs {
-  @media (max-width: 575px) {
+@mixin smallPhone {
+  @media (max-width: 320px) {
       @content;
   }
 }
 
-@mixin iview-sm {
+@mixin normalPhone {
   @media (min-width: 576px) and (max-width: 767px) {
       @content;
   }
 }
 
-@mixin iview-md {
-  @media (min-width: 768px) and (max-width: 991px) {
-      @content;
-  }
-}
-
-@mixin iview-lg {
-  @media (min-width: 991px) {
+@mixin pad {
+  @media (min-width: 768px) {
       @content;
   }
 }

@@ -1,9 +1,12 @@
 $grid-columns: 12;
+$max-width: 800px;
 
 $box-shadow:  1px 2px 2px 0 rgba(0,0,0,0.1); 
 
 $blue: #1b73a7;
 $lightBlue: #e6f7ff;
+$success: #34bf49;
+$danger: #ff4c4c;
 
 
 $gray-1: #4a4a4a;
@@ -15,6 +18,8 @@ $gray-4: #aaa;
 $themes: (
   'primary': $blue,
   'secondary': $lightBlue,
+  'success': $success,
+  'danger': $danger,
   'gray-1': $gray-1,
   'gray-2': $gray-2,
   'gray-3': $gray-3,

@@ -1,7 +1,20 @@
 .pointer {
   cursor: pointer;
 }
-
+.hidden {
+  display: none;
+}
+.align {
+  &-c {
+    text-align: center;
+  }
+  &-r {
+    text-align: right;
+  }
+  &-l {
+    text-align: left;
+  }
+}
 // Color
 @each $key, $value in $themes {
   .#{$key} {
@@ -31,7 +44,9 @@
     margin-left: $value !important;;
   }
 }
-
+.m-auto {
+  margin: auto;
+}
 // Padding
 //
 // 依據 space 列舉top、right、bottom、left

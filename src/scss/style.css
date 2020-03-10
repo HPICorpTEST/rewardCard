@@ -1,6 +1,23 @@
+@charset "UTF-8";
 @import url("http://fonts.googleapis.com/earlyaccess/notosanstc.css");
 .pointer {
   cursor: pointer;
+}
+
+.hidden {
+  display: none;
+}
+
+.align-c {
+  text-align: center;
+}
+
+.align-r {
+  text-align: right;
+}
+
+.align-l {
+  text-align: left;
 }
 
 .primary {
@@ -17,6 +34,22 @@
 
 .bg-secondary {
   background-color: #e6f7ff !important;
+}
+
+.success {
+  color: #34bf49 !important;
+}
+
+.bg-success {
+  background-color: #34bf49 !important;
+}
+
+.danger {
+  color: #ff4c4c !important;
+}
+
+.bg-danger {
+  background-color: #ff4c4c !important;
 }
 
 .gray-1 {
@@ -169,6 +202,10 @@
 
 .ml-5 {
   margin-left: 2rem !important;
+}
+
+.m-auto {
+  margin: auto;
 }
 
 .p-0 {
@@ -419,6 +456,11 @@
   width: 100% !important;
 }
 
+@font-face {
+  font-family: 'Avenir';
+  src: url("../../fonts/AvenirLT45Book.ttf");
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -426,7 +468,29 @@
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
   font-family: 'Noto Sans TC', sans-serif;
-  letter-spacing: 1px;
+  word-break: break-all;
+}
+
+@media (max-width: 320px) {
+  html {
+    font-size: 12px;
+  }
+}
+
+@media (min-width: 576px) and (max-width: 767px) {
+  html {
+    font-size: 14px;
+  }
+}
+
+@media (min-width: 768px) {
+  html {
+    font-size: 25px;
+  }
+}
+
+body {
+  color: #1b73a7;
 }
 
 ul {
@@ -435,6 +499,11 @@ ul {
 
 li {
   list-style: none;
+}
+
+img {
+  display: block;
+  width: 100%;
 }
 
 .tabs {
@@ -469,6 +538,28 @@ li {
   color: #fff;
 }
 
+.rwBtn {
+  width: 50%;
+  border-radius: 12px;
+  background: #1b73a7;
+  text-align: center;
+  padding: 0.4rem 0;
+  color: #fff;
+  -webkit-box-shadow: 1px 1px 6px rgba(0, 0, 0, 0.3);
+          box-shadow: 1px 1px 6px rgba(0, 0, 0, 0.3);
+}
+
+.rwBtn:active {
+  top: 1px;
+}
+
+.p-rewardCard {
+  width: 100%;
+  max-width: 800px;
+  margin: auto;
+  min-height: 100vh;
+}
+
 .p-rewardCard__header {
   width: 100%;
   height: 0;
@@ -482,11 +573,11 @@ li {
   padding: 1.2rem;
 }
 
-.p-rewardCard__content .wrapCard {
+.p-rewardCard__content .cards {
   margin-top: 1rem;
 }
 
-.p-rewardCard__content .wrapCard__card {
+.p-rewardCard__content .cards__item {
   display: -ms-grid;
   display: grid;
   -ms-grid-columns: (1fr)[5];
@@ -500,28 +591,30 @@ li {
   padding: 1.5rem 1rem;
 }
 
-.p-rewardCard__content .wrapCard__card li {
+.p-rewardCard__content .cards__item li {
   z-index: 2;
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
 }
 
-.p-rewardCard__content .wrapCard__card li p {
+.p-rewardCard__content .cards__item li p {
   color: #fff;
   width: 100%;
   height: 0;
-  padding-bottom: calc(96%);
+  padding-bottom: calc(100% - 4px);
   line-height: 1;
   margin: auto;
   border-radius: 50%;
   line-height: 50%;
-  border: 1px solid #fff;
+  border: 2px solid #fff;
   text-align: center;
   color: #1b73a7;
 }
 
-.p-rewardCard__content .wrapCard__card li p span {
+.p-rewardCard__content .cards__item li p span {
+  font-weight: bold;
+  font-size: 12px;
   position: absolute;
   top: 50%;
   left: 50%;
@@ -529,7 +622,7 @@ li {
           transform: translate(-50%, -50%);
 }
 
-.p-rewardCard__content .wrapCard__card li p::after {
+.p-rewardCard__content .cards__item li p::after {
   content: '';
   position: absolute;
   width: 60%;
@@ -542,5 +635,164 @@ li {
   left: 50%;
   -webkit-transform: translate(-50%, -50%);
           transform: translate(-50%, -50%);
+}
+
+.p-rewardCard__content .cards__dot {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  margin-top: 8px;
+}
+
+.p-rewardCard__content .cards__dot li.dot {
+  width: 0.5rem;
+  height: 0.5rem;
+  margin-right: 0.5rem;
+  background: #1b73a7;
+  opacity: 0.5;
+  border-radius: 50%;
+}
+
+.p-rewardCard__content .cards__dot li.dot--active {
+  opacity: 1;
+}
+
+.p-rewardCard__content .discription {
+  margin-top: 1rem;
+  border-radius: 20px;
+  padding: 1.4rem;
+  background-color: rgba(27, 115, 167, 0.3);
+}
+
+.p-rewardCard__content .discription p {
+  color: #1b73a7;
+}
+
+.p-rewardCard__content .discription li {
+  padding-left: 2.5rem;
+}
+
+.p-rewardCard__content .discription li img {
+  width: 30px;
+  position: absolute;
+  left: 0;
+}
+
+.p-rewardCard__content .discription__title {
+  font-size: 14px;
+  font-weight: bold;
+  line-height: 1.68;
+}
+
+.p-rewardCard__content .discription__detail {
+  font-size: 13px;
+  color: #1b73a7;
+}
+
+.p-rewardCard .list {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  border: 1px solid #1b73a7;
+  padding-right: 0.6rem;
+  border-radius: 20px;
+}
+
+.p-rewardCard .list__img {
+  padding: 1rem;
+  color: #4a4a4a;
+}
+
+.p-rewardCard .list__main p {
+  font-size: 0.9rem;
+  color: #4a4a4a;
+  line-height: 2;
+}
+
+.p-rewardCard .list__detail {
+  text-align: right;
+  color: #1b73a7;
+}
+
+.p-rewardCard .list__detail span {
+  font-family: 'Avenir', '微軟正黑體';
+  font-size: 4.5rem;
+  line-height: 1.2;
+}
+
+.p-rewardCard .recordTable {
+  background: #fff;
+  -webkit-box-shadow: 0 2px 10px rgba(0, 0, 0, 0.15);
+          box-shadow: 0 2px 10px rgba(0, 0, 0, 0.15);
+  padding: .2rem 1rem;
+  border-radius: 18px;
+  cursor: pointer;
+}
+
+.p-rewardCard .recordTable__title {
+  line-height: 2.2;
+}
+
+.p-rewardCard .recordTable__title td:first-of-type {
+  border-bottom: 0;
+}
+
+.p-rewardCard .recordTable__title td {
+  padding: 2px;
+  font-size: 0.9rem;
+  text-align: right;
+}
+
+.p-rewardCard .recordTable__content {
+  display: none;
+  font-size: 1rem;
+  line-height: 1.68;
+  border-radius: 20px;
+  margin-top: .5rem;
+}
+
+.p-rewardCard .recordTable__content--collapse {
+  display: table-row;
+}
+
+.p-rewardCard .recordTable__content td {
+  border-top: 1px dotted #aaa;
+  padding: 10px;
+}
+
+.p-rewardCard .recordTable__content td:first-of-type {
+  border-top: 0;
+}
+
+.p-rewardCard .recordTable__content td:nth-of-type(2) {
+  font-size: 0.8rem;
+  color: #6b6b6b;
+  text-align: right;
+}
+
+.p-rewardCard .recordTable__content td:last-of-type {
+  padding: 10px;
+  font-size: 0.7rem;
+}
+
+.p-rewardCard .noRecord {
+  opacity: 0.4;
+  top: 120px;
+}
+
+.p-rewardCard .noRecord img {
+  margin: auto;
+  width: 30%;
+}
+
+.p-rewardCard .noRecord p {
+  text-align: center;
+  font-size: 1.2rem;
 }
 /*# sourceMappingURL=style.css.map */
