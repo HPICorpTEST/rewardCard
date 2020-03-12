@@ -7,15 +7,17 @@
   <title>LINE登錄發票集點換好禮</title>
 </head>
 <body>
-  <div class="p-rewardCard">
+  <div id="app" class="p-rewardCard">
     <header class="p-rewardCard__header"></header>
     <div class="p-rewardCard__content">
       <ul class="tabs">
-        <li class="tabs__item">滿額集點卡</li>
-        <li class="tabs__item">贈品列表</li>
-        <li class="tabs__item tabs__item--active">兌換紀錄</li>
+        <li v-for="(item, index) in tabsList" :key="index"
+          class="tabs__item" :class="{'tabs__item--active': currentPage == item.value}"
+          @click="currentPage = item.value">
+          {{item.name}}
+        </li>
       </ul>
-      <div class="p-rewardCard__rewardCard hidden">
+      <div v-if="currentPage == 'rewardCard'" class="p-rewardCard__rewardCard">
         <div class="wrapCard">
           <div class="cards">
             <ul class="cards__item">
@@ -58,28 +60,33 @@
         </div>
         <ul class="discription">
           <li>
-            <img src="../images/icon-blue-point.png" alt="">
+            <img src="../images/rewardCard/icon-blue-point.png" alt="">
             <p class="discription__title">可用點數 <span>0</span> 點</p>
             <p class="discription__detail">還差兩點就能兌換商品啦！加油！</p>
           </li>
           <li class="mt-3">
-            <img src="../images/icon-blue-date.png" alt="">
+            <img src="../images/rewardCard/icon-blue-date.png" alt="">
             <p class="discription__title">兌換期限</p>
             <p class="discription__detail">2020-01-01 ~ 2020-01-31</p>
           </li>
           <li class="mt-3">
-            <img src="../images/icon-blue-doc.png" alt="">
+            <img src="../images/rewardCard/icon-blue-doc.png" alt="">
             <p class="discription__title">活動說明</p>
+            <p class="discription__detail">blablablablablablablablablablablablabla bla</p>
+          </li>
+          <li class="mt-3">
+            <img src="../images/rewardCard/icon-blue-notice.png" alt="">
+            <p class="discription__title">注意事項</p>
             <p class="discription__detail">blablablablablablablablablablablablabla bla</p>
           </li>
         </ul>
         <div class="rwBtn mt-3 m-auto">返回列表</div>
       </div>
 
-      <div class="p-rewardCard__redeem hidden">
+      <div v-if="currentPage == 'redeem'" class="p-rewardCard__redeem">
         <div class="listBtn mt-3">
           <div class="listBtn__img grid-4">
-            <img src="../images/temp_prize.png" alt="">
+            <img src="../images/rewardCard/temp_prize.png" alt="">
           </div>
           <div class="listBtn__main grid-4">
             <p class="listBtn__name">Line Point 10點</p>
@@ -91,7 +98,7 @@
         </div>
         <div class="listBtn mt-3">
           <div class="listBtn__img grid-4">
-            <img src="../images/temp_prize.png" alt="">
+            <img src="../images/rewardCard/temp_prize.png" alt="">
           </div>
           <div class="listBtn__main grid-4">
             <p class="listBtn__name">Line Point 10點</p>
@@ -102,11 +109,12 @@
           <p class="listBtn__detail grid-4"><span>15</span>點</p>
         </div>
       </div>
-      <div class="p-rewardCard__record">
+
+      <div v-if="currentPage == 'record'" class="p-rewardCard__record">
         <div class="hidden">
           <table class="recordTable mt-3 w100" value="1"> 
             <tr class="recordTable__title">
-              <td class="w10"><img src="../images/temp_prize.png" alt=""></td>
+              <td class="w10"><img src="../images/rewardCard/temp_prize.png" alt=""></td>
               <td class="w30">2020-02-19</td>
               <td class="w30">2020-02-19</td>
               <td class="w30">已扣除8點</td>
@@ -123,7 +131,7 @@
           </table>
           <table class="recordTable mt-3 w100"> 
             <tr class="recordTable__title" value="2">
-              <td class="w10"><img src="../images/temp_prize2.png" alt=""></td>
+              <td class="w10"><img src="../images/rewardCard/temp_prize2.png" alt=""></td>
               <td class="w30">2020-02-19</td>
               <td class="w30">2020-02-19</td>
               <td class="w30">已扣除8點</td>
@@ -142,7 +150,7 @@
           </p>
         </div>
         <div class="noRecord">
-          <img src="../images/no-record.png" alt="">
+          <img src="../images/rewardCard/no-record.png" alt="">
           <p>目前尚無兌換紀錄</p>
         </div>
 
@@ -151,7 +159,6 @@
     </div>
 
   </div>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
   <script>
     try {
       let tableList = document.querySelectorAll('.recordTable__title')
@@ -169,6 +176,37 @@
     } catch (error) {
     }
 
+  </script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.16/vue.js"></script>
+  <script>
+    let app = new Vue({
+      el: '#app',
+      data: {
+        currentPage: 'rewardCard',
+        // 頁面上方tabs 
+        tabsList: [
+          {
+            value: 'rewardCard',
+            name: '滿額集點卡'
+          },
+          {
+            value: 'redeem',
+            name: '贈品列表'
+          },
+          {
+            value: 'record',
+            name: '兌換紀錄'
+          }
+        ]
+      },
+      methods: {
+        
+      },
+      mounted() {
+      
+      }
+    })
   </script>
 </body>
 </html>

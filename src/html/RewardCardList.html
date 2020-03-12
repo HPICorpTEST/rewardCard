@@ -7,24 +7,61 @@
   <title>LINE登錄發票集點換好禮</title>
 </head>
 <body>
-  <div class="p-rewardCardList">
+  <div id="app" class="p-rewardCardList">
     <div class="p-rewardCardList__header">
-      <img src="../images/bgList.png" alt="">
-      <h3>電子發票集點兌換禮</h3>
+      <img src="../images/rewardCard/bgList.jpg" alt="">
     </div>
     <div class="p-rewardCardList__content">
-      <div class="list">
-        <div class="list__img grid-4">
-          <img src="../images/temp_prize.png" alt="">
+      <div v-for="(item, index) in rewarcCardList" :key="index" 
+        class="list mb-3" :class="{'list--expiry': new Date() > new Date(item.endTime)}"
+        @click="goDetailPage">
+        <div class="list__img grid-4" :class=>
+          <img :src="`${bcs.bcsContextPath}/getResource/IMAGE/${item.rewardCardImage}`" alt="" onerror="this.src='../images/rewardCard/temp_prize.png'">
         </div>
-        <div class="list__main grid-7">
-          <p class="list__name">滿額活動集點卡</p>
-          <p class="list__discript">可用點數: 6點</p>
-          <p class="list__discript">兌換截止日 2020-01-31</p>
+        <div class="list__main grid-8">
+          <p class="list__name">{{item.rewardCardImage}}</p>
+          <p class="list__discript">可用點數: {{item.totalPoints - item.usedPoints}}點</p>
+          <p class="list__discript">兌換截止日 {{item.endTime}}</p>
         </div>
       </div>
     </div>
 
   </div>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.16/vue.js"></script>
+  <script>
+    let app = new Vue({
+      el: '#app',
+      data: {
+       bcs: '',
+       rewarcCardList: [{
+          title: 'dddd',
+          totalPoints: 0,
+          usedPoints: 0,
+          endTime: '2020-04-20',
+          rewardCardImage: 'dd'
+       },{
+          title: 'a',
+          totalPoints: 0,
+          usedPoints: 0,
+          endTime: '2020-04-20',
+          rewardCardImage: 'dd'
+       }, {
+          title: 'bb',
+          totalPoints: 0,
+          usedPoints: 0,
+          endTime: '2020-02-20',
+          rewardCardImage: 'dd'
+       }]
+      },
+      methods: {
+        goDetailPage() {
+          
+        }
+      },
+      mounted() {
+       
+      }
+    })
+  </script>
 </body>
 </html>
