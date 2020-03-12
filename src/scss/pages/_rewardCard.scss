@@ -103,7 +103,7 @@
     }
   }
 
-  .list {
+  .listBtn {
     display: flex;
     align-items: center;
     border: 1px solid $blue;
@@ -188,6 +188,61 @@
       text-align: center;
       font-size: 1.2rem;
     }
+  }
+}
+
+.p-rewardCardList {
+  width: 100%;
+  max-width: $max-width;
+  margin: auto;
+  min-height: 100vh;
+  &__header {
+    background: $blue;
+    padding: 1rem;
+    img {
+      width: 50%;
+      margin: auto;
+      background: #fff;
+      border-radius: 50%;
+    }
+    h3 {
+      color: #fff;
+      text-align: center;
+    }
+  }
+}
+
+.list {
+  display: flex;
+  align-items: center;
+  border-bottom: 4px solid $blue;
+
+  &__img {
+    padding: 1rem;
+    color: $gray-1;
+    img {
+      width: 20vw;
+      height: 20vw;
+      margin: auto;
+    }
+    &::after {
+      content: '';
+      @include ab-position(50%, 100%, translate(-50%, -50%) );
+      width: 2px;
+      height: 55%;
+      background: $blue;
+    }
+  }
+  &__main {
+    padding-left: 2rem;
+    line-height: 1.68;
+    letter-spacing: 1px;
+  }
+  &__name {
+    font-weight: bold;
+  }
+  &__discript {
+    font-size: 0.9rem;
   }
 }
 

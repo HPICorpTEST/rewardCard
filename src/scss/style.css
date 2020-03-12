@@ -692,7 +692,7 @@ img {
   color: #1b73a7;
 }
 
-.p-rewardCard .list {
+.p-rewardCard .listBtn {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -704,23 +704,23 @@ img {
   border-radius: 20px;
 }
 
-.p-rewardCard .list__img {
+.p-rewardCard .listBtn__img {
   padding: 1rem;
   color: #4a4a4a;
 }
 
-.p-rewardCard .list__main p {
+.p-rewardCard .listBtn__main p {
   font-size: 0.9rem;
   color: #4a4a4a;
   line-height: 2;
 }
 
-.p-rewardCard .list__detail {
+.p-rewardCard .listBtn__detail {
   text-align: right;
   color: #1b73a7;
 }
 
-.p-rewardCard .list__detail span {
+.p-rewardCard .listBtn__detail span {
   font-family: 'Avenir', '微軟正黑體';
   font-size: 4.5rem;
   line-height: 1.2;
@@ -794,5 +794,76 @@ img {
 .p-rewardCard .noRecord p {
   text-align: center;
   font-size: 1.2rem;
+}
+
+.p-rewardCardList {
+  width: 100%;
+  max-width: 800px;
+  margin: auto;
+  min-height: 100vh;
+}
+
+.p-rewardCardList__header {
+  background: #1b73a7;
+  padding: 1rem;
+}
+
+.p-rewardCardList__header img {
+  width: 50%;
+  margin: auto;
+  background: #fff;
+  border-radius: 50%;
+}
+
+.p-rewardCardList__header h3 {
+  color: #fff;
+  text-align: center;
+}
+
+.list {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  border-bottom: 4px solid #1b73a7;
+}
+
+.list__img {
+  padding: 1rem;
+  color: #4a4a4a;
+}
+
+.list__img img {
+  width: 20vw;
+  height: 20vw;
+  margin: auto;
+}
+
+.list__img::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 100%;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+  width: 2px;
+  height: 55%;
+  background: #1b73a7;
+}
+
+.list__main {
+  padding-left: 2rem;
+  line-height: 1.68;
+  letter-spacing: 1px;
+}
+
+.list__name {
+  font-weight: bold;
+}
+
+.list__discript {
+  font-size: 0.9rem;
 }
 /*# sourceMappingURL=style.css.map */
