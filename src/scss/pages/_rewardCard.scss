@@ -7,7 +7,6 @@
     width: 100%;
     height: 0;
     padding-bottom: 20%;
-    background-image: url('../images/rewardCard/blue-header.png'); //
     background-size: 20%;
     background-position: 6% bottom;
   }
@@ -21,14 +20,13 @@
         grid-template-rows: repeat(2, 1fr);
         grid-column-gap: 1rem;
         grid-row-gap: 1.2rem;
-        background: $blue; //
         border-radius: 15px;
         padding: 1.5rem 1rem;
         li {
           z-index: 2;
           justify-content: center;
           p {
-            color: #fff;
+            color: $white;
             width: 100%;
             height: 0;;
             padding-bottom: calc(100% - 4px);
@@ -36,12 +34,11 @@
             margin: auto;
             border-radius: 50%;
             line-height: 50%;
-            border: 2px solid #fff;
+            border: 2px solid $white;
             text-align: center;
-            color: $blue; //
             span {
               font-weight: bold;
-              font-size: 12px;
+              font-size: 1rem;
               @include ab-position(50%, 50%, translate(-50%, -50%) );
             }
             &::after {
@@ -50,7 +47,7 @@
               width: 60%;
               height: 60%;
               border-radius: 50%;
-              background: #fff;
+              background: $white;
               z-index: -1;
               @include ab-position(50%, 50%, translate(-50%, -50%) );
             }
@@ -65,7 +62,6 @@
           width: 0.5rem;
           height: 0.5rem;
           margin-right: 0.5rem;
-          background: $blue;
           opacity: 0.5;
           border-radius: 50%;
           &--active {
@@ -73,15 +69,39 @@
           }
         }
       }
+      &__discript {
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        margin-top: 5px;
+        .i-border-r50 {
+          display: flex;
+          align-items: center;
+          width: 1.4rem;
+          height:  1.4rem;
+          border: 2px solid $gray-4;
+          border-radius: 50%;
+          &:active {
+            background: $gray-2;
+          }
+          &:active > i{
+            opacity: 0.9;;
+          }
+        }
+        .i-arrow-left {
+          left: calc(50% - 0.2rem);
+        }
+        .i-arrow-right {
+          left: calc(50% - 0.4rem);
+        }
+      }
     }
     .discription {
       margin-top: 1rem;
       border-radius: 20px;
       padding: 1.4rem;
-      background-color: rgba(27,115,167, 0.3);
-      p {
-        color: $blue;
-      }
+      border: 1px solid $default;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, .2);
       li {
         padding-left: 2.5rem;
         img {
@@ -91,25 +111,22 @@
         }
       }
       &__title {
-        font-size: 14px;
+        font-size: 1.05rem;
         font-weight: bold;
         line-height: 1.68;
       }
       &__detail {
-        font-size: 13px;
-        color: $blue;
+        font-size:1.02rem;
       }
-     
     }
   }
 
   .listBtn {
     display: flex;
     align-items: center;
-    border: 1px solid $blue;
     padding-right: 0.6rem;
     border-radius: 20px;
-    
+    box-shadow: 0 1px 6px rgba(0, 0, 0, .2);
     &__img {
       padding: 1rem;
       color: $gray-1;
@@ -123,7 +140,6 @@
     }
     &__detail {
       text-align: right;
-      color: $blue;
       span {
         font-family: 'Avenir', '微軟正黑體';
         font-size: 4.5rem;
@@ -133,7 +149,7 @@
   }
   // 2. collapse
   .recordTable{
-    background: #fff;
+    background: $white;
     box-shadow: 0 2px 10px rgba(0, 0, 0, .15);
     padding: .2rem 1rem;
     border-radius: 18px;
@@ -145,8 +161,7 @@
       }
       td {
         padding: 2px;
-        font-size: 0.9rem;
-        text-align: right;
+        font-size: 0.8rem;
       }
     }
 
@@ -164,9 +179,6 @@
         padding: 10px;
       }
       td:first-of-type {
-        border-top: 0;
-      }
-      td:nth-of-type(2) {
         font-size: 0.8rem;
         color: $gray-2;
         text-align: right;
@@ -191,6 +203,245 @@
   }
 }
 
+.p-rewardCard {
+  &--blue {
+    td, p, h2 {
+      color: $blue;
+    }
+    .p-rewardCard__header {
+      background-image: url('../images/rewardCard/blue-header.png'); //
+    }
+    .rwBtn {
+      background: $blue;
+    }
+    .listBtn {
+      border: 1px solid $blue;
+      &__detail {
+        color: $blue;
+      }
+    }
+    .exchangeModal {
+      &__header {
+        background: $blue;
+        color: $white;
+      }
+      &__footer {
+        background: $blue;
+      }
+    }
+    .tabs__item {
+      color: $blue;
+      border: 1px solid $blue;
+      &--active {
+        background: $blue;
+      }
+    }
+    .recordTable{  
+      &__content{
+        td {
+          border-top: 1px dotted $gray-4;
+          padding: 10px;
+        }
+        td:first-of-type {
+          font-size: 0.8rem;
+          color: $gray-2;
+          text-align: right;
+        }
+        td:last-of-type {
+          padding: 10px;
+          font-size: 0.7rem;
+        }
+      }
+    }
+    .cards {
+      &__item {
+        background: $blue; //
+        li p {
+          color: $blue; //
+        }
+      }
+      &__dot {
+        li.dot {
+          background: $blue;
+        }
+      }
+    }
+    .discription {
+      p {
+        color: $blue;
+      }
+      &__detail {
+        color: $blue;
+      }
+    }
+  }
+  &--pink {
+    td, p, h2 {
+      color: $pink;
+    }
+    .p-rewardCard__header {
+      background-image: url('../images/rewardCard/pink-header.png'); //
+    }
+    .rwBtn {
+      background: $pink;
+    }
+    .listBtn {
+      border: 1px solid $pink;
+      &__detail {
+        color: $pink;
+      }
+    }
+    .exchangeModal {
+      &__header {
+        background: $pink;
+        color: $white;
+      }
+      &__footer {
+        background: $pink;
+      }
+    }
+    .tabs__item {
+      color: $pink;
+      border: 1px solid $pink;
+      &--active {
+        color: #fff;
+        background: $pink;
+      }
+    } 
+    .cards {
+      &__item {
+        background: $pink; //
+        li p {
+          color: $pink; //
+        }
+      }
+      &__dot {
+        li.dot {
+          background: $pink;
+        }
+      }
+    }
+    .discription {
+      p {
+        color: $pink;
+      }
+      &__detail {
+        color: $pink;
+      }
+    }
+  }
+  &--green {
+    td, p, h2 {
+      color: $green;
+    }
+    .p-rewardCard__header {
+      background-image: url('../images/rewardCard/green-header.png'); //
+    }
+    .rwBtn {
+      background: $green;
+    }
+    .listBtn {
+      border: 1px solid $green;
+      &__detail {
+        color: $green;
+      }
+    }
+    .exchangeModal {
+      &__header {
+        background: $green;
+        color: $white;
+      }
+      &__footer {
+        background: $green;
+      }
+    }
+    .tabs__item {
+      color: $green;
+      border: 1px solid $green;
+      &--active {
+        color: #fff;
+        background: $green;
+      }
+    } 
+    .cards {
+      &__item {
+        background: $green; //
+        li p {
+          color: $green; //
+        }
+      }
+      &__dot {
+        li.dot {
+          background: $green;
+        }
+      }
+    }
+    .discription {
+      p {
+        color: $green;
+      }
+      &__detail {
+        color: $green;
+      }
+    }
+  }
+  &--yellow {
+    td, p, h2 {
+      color: $yellow;
+    }
+    .p-rewardCard__header {
+      background-image: url('../images/rewardCard/yellow-header.png'); //
+    }
+    .rwBtn {
+      background: $yellow;
+    }
+    .listBtn {
+      border: 1px solid $yellow;
+      &__detail {
+        color: $yellow;
+      }
+    }
+    .exchangeModal {
+      &__header {
+        background: $yellow;
+        color: $white;
+      }
+      &__footer {
+        background: $yellow;
+      }
+    }
+    .tabs__item {
+      color: $yellow;
+      border: 1px solid $yellow;
+      &--active {
+        color: #fff;
+        background: $yellow;
+      }
+    } 
+    .cards {
+      &__item {
+        background: $yellow; //
+        li p {
+          color: $yellow; //
+        }
+      }
+      &__dot {
+        li.dot {
+          background: $yellow;
+        }
+      }
+    }
+    .discription {
+      p {
+        color: $yellow;
+      }
+      &__detail {
+        color: $yellow;
+      }
+    }
+  }
+}
+
 .p-rewardCardList {
   width: 100%;
   max-width: $max-width;
@@ -200,28 +451,28 @@
   color: $gray-1;
   &__header {
     background: $blue;
-    // position: fixed;
+    position: sticky;
+    top: 0;
     z-index: 2;
     width: 100%;
     img {
       margin: auto;
-      background: #fff;
+      background: $white;
     }
     h3 {
-      color: #fff;
+      color: $white;
       text-align: center;
     }
   }
   &__content {
-    // padding-top: 20rem;
     padding: 0.6rem;
   }
 }
-
+// components
 .list {
   display: flex;
   align-items: center;
-  background: #fff;
+  background: $white;
   &--expiry {
     position: relative;
     &::after {
@@ -267,5 +518,66 @@
     font-size: 1rem;
   }
 }
+// modal
+.exchangeModal {
+  width: 70%;
+  max-width: $max-width * 0.7;
+  margin: auto;
+  border-radius: 10px;;
+  &__header {
+    color: $white;
+    text-align: center;;
+    border-radius: 10px 10px  0 0 ;
+    padding: 0.5rem;
+  }
+  &__content {
+    align-items: center;
+    padding: 1rem;
+    background:$white;
 
-// 當最高為pink 以下... 就切換為... 
+    img {
+      padding: 0.5rem;
+      max-width: 80px;
+    }
+  }
+  &__select {
+      width: 85%;
+      -webkit-appearance: none;
+         -moz-appearance: none;
+              appearance: none;
+      background-image: url(../images/rewardCard/arrow.png);
+      background-repeat: no-repeat !important;
+      background-size: 16px !important;
+      background-position: 94% 50% !important;
+      background-color: $white;
+      color: #555 !important;
+      padding: 4px 0.4rem;
+      outline: none;
+      line-height: normal;
+      border-radius: 12px;
+      border: 1px solid #ced2db;
+
+  }
+  &__input {
+    border: 1px solid #ced2db;
+    line-height: normal;
+    border-radius: 12px;
+    padding: 6px 0.4rem;
+    width: 100%;
+  }
+
+  &__footer {
+    display: flex;
+    color: $white;
+    border-radius: 0 0 10px 10px;
+    padding: 0.5rem;
+    justify-content: space-around;
+    p {
+      text-align: center;
+      &:active {
+        opacity: 0.9;
+        font-weight: bolder;
+      }
+    }
+  }
+}

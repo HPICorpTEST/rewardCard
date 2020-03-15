@@ -1,192 +1,288 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="../scss/style.css">
   <title>LINE登錄發票集點換好禮</title>
 </head>
+
 <body>
-  <div id="app" class="p-rewardCard">
-    <header class="p-rewardCard__header"></header>
-    <div class="p-rewardCard__content">
-      <ul class="tabs">
-        <li v-for="(item, index) in tabsList" :key="index"
-          class="tabs__item" :class="{'tabs__item--active': currentPage == item.value}"
-          @click="currentPage = item.value">
-          {{item.name}}
-        </li>
-      </ul>
-      <div v-if="currentPage == 'rewardCard'" class="p-rewardCard__rewardCard">
-        <div class="wrapCard">
-          <div class="cards">
-            <ul class="cards__item">
-              <li>
-                <p><span>1</span></p>
-              </li>
-              <li>
-                <p><span>2</span></p>
-              </li>
-              <li>
-                <p><span>3</span></p>
-              </li>
-              <li>
-                <p><span>4</span></p>
-              </li>
-              <li>
-                <p><span>5</span></p>
-              </li>
-              <li>
-                <p><span>6</span></p>
-              </li>
-              <li>
-                <p><span>7</span></p>
-              </li>
-              <li>
-                <p><span>8</span></p>
-              </li>
-              <li>
-                <p><span>9</span></p>
-              </li>
-              <li>
-                <p><span>10</span></p>
-              </li>
-            </ul>
-          </div>
-          <ul class="cards__dot">
-            <li class="dot dot--active"></li>
-            <li class="dot"></li>
-          </ul>
-        </div>
-        <ul class="discription">
-          <li>
-            <img src="../images/rewardCard/icon-blue-point.png" alt="">
-            <p class="discription__title">可用點數 <span>0</span> 點</p>
-            <p class="discription__detail">還差兩點就能兌換商品啦！加油！</p>
-          </li>
-          <li class="mt-3">
-            <img src="../images/rewardCard/icon-blue-date.png" alt="">
-            <p class="discription__title">兌換期限</p>
-            <p class="discription__detail">2020-01-01 ~ 2020-01-31</p>
-          </li>
-          <li class="mt-3">
-            <img src="../images/rewardCard/icon-blue-doc.png" alt="">
-            <p class="discription__title">活動說明</p>
-            <p class="discription__detail">blablablablablablablablablablablablabla bla</p>
-          </li>
-          <li class="mt-3">
-            <img src="../images/rewardCard/icon-blue-notice.png" alt="">
-            <p class="discription__title">注意事項</p>
-            <p class="discription__detail">blablablablablablablablablablablablabla bla</p>
+  <div id="app">
+    <div class="p-rewardCard" :class="hexChangeName" v-if="isload">
+      <header class="p-rewardCard__header"></header>
+      <div class="p-rewardCard__content">
+        <ul class="tabs">
+          <li v-for="(item, index) in tabsList" :key="index" class="tabs__item"
+            :class="{'tabs__item--active': currentPage == item.value}" @click="currentPage = item.value">
+            {{item.name}}
           </li>
         </ul>
-        <div class="rwBtn mt-3 m-auto">返回列表</div>
+        <div v-show="currentPage == 'rewardCard'" class="p-rewardCard__rewardCard">
+          <div class="wrapCard">
+            <div class="cards">
+              <ul class="cards__item">
+                <li>
+                  <p><span>1</span></p>
+                </li>
+                <li>
+                  <p><span>2</span></p>
+                </li>
+                <li>
+                  <p><span>3</span></p>
+                </li>
+                <li>
+                  <p><span>4</span></p>
+                </li>
+                <li>
+                  <p><span>5</span></p>
+                </li>
+                <li>
+                  <p><span>6</span></p>
+                </li>
+                <li>
+                  <p><span>7</span></p>
+                </li>
+                <li>
+                  <p><span>8</span></p>
+                </li>
+                <li>
+                  <p><span>9</span></p>
+                </li>
+                <li>
+                  <p><span>10</span></p>
+                </li>
+              </ul>
+            </div>
+            <div class="cards__discript">
+              <p class="i-border-r50">
+                <i class="i-arrow-left"></i>
+              </p>
+
+              <p><b>1</b>/2</p>
+              <p class="i-border-r50">
+                <i class="i-arrow-right"></i>
+              </p>
+            </div>
+          </div>
+
+          <ul class="discription">
+            <li>
+              <img src="../Mobile/images/rewardCard/icon-blue-point.png" alt="">
+              <p class="discription__title">可用點數{{rewardCard.totalPoints - rewardCard.usedPoints}}點</p>
+              <p class="discription__detail">還差兩點就能兌換商品啦！加油！</p>
+            </li>
+            <li class="mt-3">
+              <img src="../Mobile/images/rewardCard/icon-blue-date.png" alt="">
+              <p class="discription__title">兌換期限</p>
+              <p class="discription__detail">{{rewardCard.startTime}} ~ {{rewardCard.endTime}}</p>
+            </li>
+            <li class="mt-3">
+              <img src="../Mobile/images/rewardCard/icon-blue-doc.png" alt="">
+              <p class="discription__title">活動說明</p>
+              <p class="discription__detail">{{rewardCard.description}}</p>
+            </li>
+            <li class="mt-3">
+              <img src="../Mobile/images/rewardCard/icon-blue-notice.png" alt="">
+              <p class="discription__title">注意事項</p>
+              <p class="discription__detail">{{rewardCard.attention}}</p>
+            </li>
+          </ul>
+          <div class="rwBtn mt-3 m-auto">返回列表</div>
+        </div>
+
+        <div v-show="currentPage == 'redeem'" class="p-rewardCard__redeem">
+          <div class="listBtn mt-3" v-for="redeem in redeems" :key="redeem.rid" @click="exchangePrize(redeem)">
+            <div class="listBtn__img grid-4">
+              <img :src="redeem.image | listImage" alt="">
+            </div>
+            <div class="listBtn__main grid-4">
+              <p class="listBtn__name">{{redeem.title}}</p>
+              <p class="listBtn__point">剩餘數量: {{redeem.quantity}}</p>
+
+              <p v-if="rewardCard.remainsPoints > redeem.exchangePoint" class="listBtn__status success">可兌換</!-->
+              <p v-else class="listBtn__status danger">未達到</p>
+            </div>
+            <p class="listBtn__detail grid-4"><span>{{redeem.exchangePoint}}</span>點</p>
+          </div>
+        </div>
+
+        <div v-show="currentPage == 'record'" class="p-rewardCard__record">
+          <div v-if="exchangeRecord.length > 0">
+            <table class="recordTable mt-3 w100" 
+              v-for="(record, index) in exchangeRecord"
+              @click="switchRecord(index)">
+              <tr class="recordTable__title">
+                <td class="w25">{{record.redeemTime}}</td>
+                <td class="w35">{{record.title}}</td>
+                <td class="w15">{{record.numRedeemed}}份</td>
+                <td class="w25">已扣除{{record.usedPoints}}點</td>
+              </tr>
+              <tr class="recordTable__content">
+                <td class="w30">{{record.type === 'gift' ?'收件資訊' : '贈品序號'}}</td>
+                <td colspan="3" class="w70">
+                  <template v-if="record.type === 'gift'">
+                    <p>{{record.phone}}</p>
+                    <p>{{record.email}}</p>
+                    <p>{{record.name}}</p>
+                  </template>
+
+                  <template v-else>
+                    <p v-for="code in record.codes">
+                      {{code}}
+                    </p>
+                  </template>
+
+                </td>
+              </tr>
+            </table>
+
+            <p class="mt-4 align-c">
+              *點擊項目能展開看更多兌獎詳情
+            </p>
+          </div>
+          <div v-else class="noRecord">
+            <img src="../Mobile/images/rewardCard/no-record.png" alt="">
+            <p>目前尚無兌換紀錄</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- modal -->
+    <div class="coverArea" :class="{isload: showModal}">
+      <!-- 選擇數量 -->
+      <div v-if="modal.isExchangePrize" class="exchangeModal top25">
+        <p class="exchangeModal__header">請選擇兌換數量</p>
+        <div class="exchangeModal__content">
+          <div class="flex">
+            <div class="img w50">
+              <img class="m-auto" src="../images/rewardCard/temp_prize2.png" alt="">
+            </div>
+            
+            <div class="exchangeModal__main w50">
+              <p>{{selectedPrize.title}}</p>
+              <select class="exchangeModal__select mt-1 mb-1" v-model="selectedPrize.exchangeNumber">
+                <option v-for="num in 10" :value="num">{{num}}</option>
+              </select>
+              <p>需扣除點數{{selectedPrize.exchangeNumber *selectedPrize.exchangePoint }}點</p>
+            </div>
+          </div>
+        </div>
+        <div class="exchangeModal__footer">
+          <p class="exchangeModal_confirm w50 border-right" @click="isload = true">取消</p>
+          <p class="exchangeModal_confirm w50" @click="orderPrize">確定</p>
+        </div>
+      </div>
+      <!-- 兌換成功 -->
+      <div v-if="modal.isFinished" class="exchangeModal top25">
+        <p class="exchangeModal__header">兌換成功</p>
+        <div class="exchangeModal__content">
+
+          <div class="flex">
+            <div class="img w50">
+              <img class="m-auto" src="../images/rewardCard/temp_prize2.png" alt="">
+            </div>
+            
+            <div class="exchangeModal__main w50">
+              <p>LINE Point 10點</p>
+              <p>本次兌換: 1份</p>
+              <p>使用點數: 2點</p>
+            </div>
+          </div>
+
+        </div>
+        <div class="exchangeModal__footer">
+          <p class="exchangeModal_confirm w50" @click="finishExchangePrize">確定</p>
+        </div>
       </div>
 
-      <div v-if="currentPage == 'redeem'" class="p-rewardCard__redeem">
-        <div class="listBtn mt-3">
-          <div class="listBtn__img grid-4">
-            <img src="../images/rewardCard/temp_prize.png" alt="">
+      <!-- 請填寫收件資訊 -->
+      <div v-if="modal.isFillUserInfo" class="exchangeModal top25">
+        <p class="exchangeModal__header">請填寫收件資訊</p>
+        <div class="exchangeModal__content">
+          <div class="flex w100">
+            <input type="text" class="exchangeModal__input mt-1 mb-2 mr-2" placeholder="收件人姓名">
+            <select class="exchangeModal__select mt-1 mb-2">
+              <option value="稱謂">稱謂</option>
+              <option value="1">1</option>
+              <option value="2">2</option>
+            </select>
           </div>
-          <div class="listBtn__main grid-4">
-            <p class="listBtn__name">Line Point 10點</p>
-            <p class="listBtn__point">剩餘數量: 1,000</p>
-            <p class="listBtn__status success">可兌換</p>
+          <input type="text" class="exchangeModal__input mb-2" placeholder="聯絡電話">
+          <input type="text" class="exchangeModal__input mb-2" placeholder="電子郵件">
+          <div class="flex w100 mb-2">
+            <select class="exchangeModal__select mt-1 mb-1 mr-2">
+              <option value="1">縣市</option>
+              <option value="2">2</option>
+            </select>
+            <select class="exchangeModal__select mt-1 mb-1">
+              <option value="1">鄉鎮</option>
+              <option value="2">鄉鎮</option>
+            </select>
           </div>
-          
-          <p class="listBtn__detail grid-4"><span>5</span>點</p>
+          <input type="text" class="exchangeModal__input" placeholder="詳細收件人地址">
         </div>
-        <div class="listBtn mt-3">
-          <div class="listBtn__img grid-4">
-            <img src="../images/rewardCard/temp_prize.png" alt="">
-          </div>
-          <div class="listBtn__main grid-4">
-            <p class="listBtn__name">Line Point 10點</p>
-            <p class="listBtn__point">剩餘數量: 1,000</p>
-            <p class="listBtn__status danger">未達到</p>
-          </div>
-          
-          <p class="listBtn__detail grid-4"><span>15</span>點</p>
+        <div class="exchangeModal__footer">
+          <p class="exchangeModal_confirm w50 border-right" @click="isload = true">取消</p>
+          <p class="exchangeModal_confirm w50" @click="isload = true">確定</p>
         </div>
       </div>
 
-      <div v-if="currentPage == 'record'" class="p-rewardCard__record">
-        <div class="hidden">
-          <table class="recordTable mt-3 w100" value="1"> 
-            <tr class="recordTable__title">
-              <td class="w10"><img src="../images/rewardCard/temp_prize.png" alt=""></td>
-              <td class="w30">2020-02-19</td>
-              <td class="w30">2020-02-19</td>
-              <td class="w30">已扣除8點</td>
-            </tr>
-            <tr class="recordTable__content">
-              <td class="w10"></td>
-              <td class="w30">收件資訊</td>
-              <td colspan="2" class="w60">
-                <p>09123456</p>
-                <p>00@gmail.com</p>
-                <p>王小明</p>
-              </td>
-            </tr>
-          </table>
-          <table class="recordTable mt-3 w100"> 
-            <tr class="recordTable__title" value="2">
-              <td class="w10"><img src="../images/rewardCard/temp_prize2.png" alt=""></td>
-              <td class="w30">2020-02-19</td>
-              <td class="w30">2020-02-19</td>
-              <td class="w30">已扣除8點</td>
-            </tr>
-            <tr class="recordTable__content">
-              <td class="w10"></td>
-              <td class="w30">贈品序號</td>
-              <td colspan="2" class="w60">
-                <p>http://points.line.me/?code=hahahaha</p>
-              </td>
-            </tr>
-          </table>
-  
-          <p class="mt-4 align-c">
-            *點擊項目能展開看更多兌獎詳情
-          </p>
+      <!-- 請填寫收件資訊 -->
+      <div v-if="modal.isConfirmUserInfo" class="exchangeModal top25">
+        <p class="exchangeModal__header">確認收件資訊</p>
+        <div class="exchangeModal__content">
+          <div class="p-2">
+            <div class="flex mb-3">
+              <p class="mr-1">收件人:</p>
+              <p class="gray-1">王小明</p>
+            </div>
+            <div class="flex mb-3">
+              <p class="mr-1">稱謂: </p>
+              <p class="gray-1">先生</p>
+            </div>
+            <div class="flex mb-3">
+              <p class="mr-1">聯絡電話: </p>
+              <p class="gray-1">0912345678</p>
+            </div>
+            <div class="flex mb-3">
+              <p class="mr-1">電子郵件: </p>
+              <p class="gray-1">blabla</p>
+            </div>
+            <div class="flex">
+              <p class="mr-1">收件地址: </p>
+              <p class="gray-1">blabla</p>
+            </div>
+          </div>
         </div>
-        <div class="noRecord">
-          <img src="../images/rewardCard/no-record.png" alt="">
-          <p>目前尚無兌換紀錄</p>
+        <div class="exchangeModal__footer">
+          <p class="exchangeModal_confirm w50 border-right" @click="isload = true">取消</p>
+          <p class="exchangeModal_confirm w50" @click="isload = true">確定</p>
         </div>
-
-
       </div>
     </div>
 
   </div>
-  <script>
-    try {
-      let tableList = document.querySelectorAll('.recordTable__title')
-      let showCollapse = 'recordTable__content--collapse'
-      for (let i = 0; i < tableList.length; i++) {
-        tableList[i].addEventListener('click', function () {
-          if (this.parentNode.children[1].classList.contains(showCollapse)) {
-            this.parentNode.children[1].classList.remove(showCollapse)
-          } else {
-            this.parentNode.children[1].classList.add(showCollapse)
-            currentValue = this.getAttribute('value')
-          }
-        })
-      } 
-    } catch (error) {
-    }
-
-  </script>
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.16/vue.js"></script>
   <script>
     let app = new Vue({
       el: '#app',
       data: {
+        isload: false,
+        showModal: true,
         currentPage: 'rewardCard',
+        modal: {
+          isExchangePrize: false,
+          isFinished: false,
+          isFillUserInfo: false,
+          isConfirmUserInfo: false
+        },
+        // 選擇禮物
+        selectedPrize: null,
         // 頁面上方tabs 
-        tabsList: [
-          {
+        tabsList: [{
             value: 'rewardCard',
             name: '滿額集點卡'
           },
@@ -198,15 +294,126 @@
             value: 'record',
             name: '兌換紀錄'
           }
-        ]
+        ],
+        // 贈品
+        redeems: [],
+        // 兌換紀錄
+        exchangeRecord: [],
+        rewardCard: null
       },
       methods: {
-        
+        // [API]: 取得集點卡明細
+        getProfile(id) {
+          // let url = `rewardCard/profile?mid=${this.uid}`
+          let url = '../js/profile.json'
+          return new Promise((resolve, reject) => {
+            fetch(url, {
+              method: 'GET'
+            }).then(response => {
+              return response.json()
+            }).then(response => {
+              console.log(response)
+              setTimeout(() => {
+                resolve(response)
+              }, 100)
+            }).catch(e => {
+              reject('somthing wrong')
+            })
+          })
+        },
+        // [API]: 送出獎品
+        sendPrizeRequest () {
+          //
+        },
+        // 兌換商品
+        exchangePrize(item) {
+          if (item.exchangePoint < this.rewardCard.remainsPoints) {
+            this.showModal = false
+            this.selectedPrize = {
+              ...item,
+              exchangeNumber: 1
+            }
+            this.modal.isExchangePrize = true
+          }
+        },
+        //
+        orderPrize() {
+          this.closeAllModal()
+          if (this.selectedPrize.type === 'gift') {
+            //
+            this.modal.isFinished = true
+          } else {
+            //
+            this.modal.isFillUserInfo = true
+          }
+          // this.closeAllModal()
+          // this.modal.isFinished = true
+          // console.log(this.selectedPrize)
+        },
+        closeAllModal () {
+          Object.keys(this.modal).forEach(item => {
+            this.modal[item] = false
+          });
+        },
+        finishExchangePrize() {
+          this.closeAllModal()
+          this.showModal = true
+        },
+        // [UI]: 切換記錄顯示
+        switchRecord (index) {
+          try {
+            let tableList = document.querySelectorAll('.recordTable')
+            let showCollapse = 'recordTable__content--collapse'
+            let targetElemant = tableList[index].children[0].children[1].classList
+            if (targetElemant.contains(showCollapse)) {
+              targetElemant.remove(showCollapse)
+            } else {
+              targetElemant.add(showCollapse)
+            }
+          } catch (error) {}
+        }
       },
-      mounted() {
-      
+      filters: {
+        // 轉換圖片
+        listImage (item) {
+          return `../bcs/getResource/IMAGE/${item}`
+        }
+      },
+      computed: {
+        // 16進位顏色轉換名字
+        hexChangeName: function() {
+          let bgColor = this.rewardCard.backgroundColor
+          switch (bgColor) {
+            case '#1B73A7':
+              return 'p-rewardCard--blue'
+            case '#EA3C6E':
+              return 'p-rewardCard--pink'
+            case '#2C946E':
+              return 'p-rewardCard--green'
+            case '#FFC000':
+              return 'p-rewardCard--yellow'
+          }
+        },
+      },
+      created() {
+        // this.isload = true
+        this.getProfile().then(profile => {
+          // // 贈品列表
+          this.redeems = profile.redeems
+          // 兌換紀錄
+          this.exchangeRecord = profile.records
+          // 滿額集點卡
+          this.rewardCard = {
+            ...profile,
+            'remainsPoints': profile.totalPoints - profile.usedPoints
+          }
+          delete this.rewardCard['redeems']
+          delete this.rewardCard['records']
+          this.isload = true
+        })      
       }
     })
   </script>
 </body>
+
 </html>

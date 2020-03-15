@@ -1,0 +1,57 @@
+{
+  "id": 94,
+  "title": "hsuifang___不要刪",
+  "pointImage": "69615d25-778f-4d5d-9ba9-c47ef760c21c",
+  "backgroundImage": "b13a2190-d565-4a22-9a4a-fddce59a2434",
+  "backgroundColor": "#FFC000",
+  "startTime": "2020-03-24",
+  "endTime": "2020-03-31",
+  "description": "dFADFASD",
+  "attention": "d",
+  "totalPoints": 100,
+  "usedPoints": 16,
+  "status": "ACTIVE",
+  "redeems": [
+      {
+          "rid": 60,
+          "title": "fff",
+          "image": "693747f3-4a43-4e58-bea1-edb4e54d4395",
+          "type": "gift",
+          "exchangePoint": 3,
+          "remainingQuantity": 1
+      },
+      {
+          "rid": 61,
+          "title": "序號測試",
+          "image": "65d6fb07-842f-4f04-971c-a698f7a599fa",
+          "type": "code",
+          "exchangePoint": 5,
+          "remainingQuantity": 3
+      }
+  ],
+  "records": [
+      {
+          "title": "fff",
+          "type": "gift",
+          "usedPoints": 6,
+          "numRedeemed": 2,
+          "redeemTime": "2020-03-13",
+          "name": "Jason",
+          "sex": "male",
+          "phone": "0987654321",
+          "address": "松山區東興路28號七樓",
+          "email": "xxxxxxx@gamil.com"
+      },
+      {
+          "title": "序號測試",
+          "type": "code",
+          "usedPoints": 10,
+          "numRedeemed": 2,
+          "redeemTime": "2020-03-13",
+          "codes": [
+              "44",
+              "55"
+          ]
+      }
+  ]
+}
