@@ -22,6 +22,9 @@
         grid-row-gap: 1.2rem;
         border-radius: 15px;
         padding: 1.5rem 1rem;
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center;
         li {
           z-index: 2;
           justify-content: center;
@@ -104,15 +107,18 @@
       box-shadow: 0 1px 3px rgba(0, 0, 0, .2);
       li {
         padding-left: 2.5rem;
-        img {
-          width: 30px;
+        .discription__img {
+          width: 1.8rem;
+          height: 1.8rem;
           position: absolute;
           left: 0;
+          background-size: cover;
+          background-repeat: no-repeat;
         }
       }
       &__title {
         font-size: 1.05rem;
-        font-weight: bold;
+        font-weight: 500;
         line-height: 1.68;
       }
       &__detail {
@@ -142,6 +148,7 @@
       text-align: right;
       span {
         font-family: 'Avenir', '微軟正黑體';
+        font-weight: bold;
         font-size: 4.5rem;
         line-height: 1.2;
       }
@@ -209,7 +216,7 @@
       color: $blue;
     }
     .p-rewardCard__header {
-      background-image: url('../images/rewardCard/blue-header.png'); //
+      background-image: url('../Mobile/images/rewardCard/blue-header.png'); //
     }
     .rwBtn {
       background: $blue;
@@ -255,14 +262,14 @@
     }
     .cards {
       &__item {
-        background: $blue; //
+        background-color: $blue; //
         li p {
           color: $blue; //
         }
       }
       &__dot {
         li.dot {
-          background: $blue;
+          background-color: $blue;
         }
       }
     }
@@ -273,6 +280,28 @@
       &__detail {
         color: $blue;
       }
+      li {
+        &:first-of-type {
+          .discription__img {
+            background-image: url('../Mobile/images/rewardCard/icon-blue-point.png');
+          }
+        }
+        &:nth-of-type(2) {
+          .discription__img {
+            background-image: url('../Mobile/images/rewardCard/icon-blue-date.png');
+          }
+        }
+        &:nth-of-type(3) {
+          .discription__img {
+            background-image: url('../Mobile/images/rewardCard/icon-blue-doc.png');
+          }
+        }
+        &:last-of-type {
+          .discription__img {
+            background-image: url('../Mobile/images/rewardCard/icon-blue-notice.png');
+          }
+        }
+      }
     }
   }
   &--pink {
@@ -280,10 +309,10 @@
       color: $pink;
     }
     .p-rewardCard__header {
-      background-image: url('../images/rewardCard/pink-header.png'); //
+      background-image: url('../Mobile/images/rewardCard/pink-header.png'); //
     }
     .rwBtn {
-      background: $pink;
+      background-color: $pink;
     }
     .listBtn {
       border: 1px solid $pink;
@@ -293,11 +322,11 @@
     }
     .exchangeModal {
       &__header {
-        background: $pink;
+        background-color: $pink;
         color: $white;
       }
       &__footer {
-        background: $pink;
+        background-color: $pink;
       }
     }
     .tabs__item {
@@ -305,19 +334,19 @@
       border: 1px solid $pink;
       &--active {
         color: #fff;
-        background: $pink;
+        background-color: $pink;
       }
     } 
     .cards {
       &__item {
-        background: $pink; //
+        background-color: $pink; //
         li p {
           color: $pink; //
         }
       }
       &__dot {
         li.dot {
-          background: $pink;
+          background-color: $pink;
         }
       }
     }
@@ -328,6 +357,28 @@
       &__detail {
         color: $pink;
       }
+      li {
+        &:first-of-type {
+          .discription__img {
+            background-image: url('../Mobile/images/rewardCard/icon-pink-point.png');
+          }
+        }
+        &:nth-of-type(2) {
+          .discription__img {
+            background-image: url('../Mobile/images/rewardCard/icon-pink-date.png');
+          }
+        }
+        &:nth-of-type(3) {
+          .discription__img {
+            background-image: url('../Mobile/images/rewardCard/icon-pink-doc.png');
+          }
+        }
+        &:last-of-type {
+          .discription__img {
+            background-image: url('../Mobile/images/rewardCard/icon-pink-notice.png');
+          }
+        }
+      }
     }
   }
   &--green {
@@ -335,7 +386,7 @@
       color: $green;
     }
     .p-rewardCard__header {
-      background-image: url('../images/rewardCard/green-header.png'); //
+      background-image: url('../Mobile/images/rewardCard/green-header.png'); //
     }
     .rwBtn {
       background: $green;
@@ -348,11 +399,11 @@
     }
     .exchangeModal {
       &__header {
-        background: $green;
+        background-color: $green;
         color: $white;
       }
       &__footer {
-        background: $green;
+        background-color: $green;
       }
     }
     .tabs__item {
@@ -360,19 +411,19 @@
       border: 1px solid $green;
       &--active {
         color: #fff;
-        background: $green;
+        background-color: $green;
       }
     } 
     .cards {
       &__item {
-        background: $green; //
+        background-color: $green; //
         li p {
           color: $green; //
         }
       }
       &__dot {
         li.dot {
-          background: $green;
+          background-color: $green;
         }
       }
     }
@@ -383,6 +434,28 @@
       &__detail {
         color: $green;
       }
+      li {
+        &:first-of-type {
+          .discription__img {
+            background-image: url('../Mobile/images/rewardCard/icon-green-point.png');
+          }
+        }
+        &:nth-of-type(2) {
+          .discription__img {
+            background-image: url('../Mobile/images/rewardCard/icon-green-date.png');
+          }
+        }
+        &:nth-of-type(3) {
+          .discription__img {
+            background-image: url('../Mobile/images/rewardCard/icon-green-doc.png');
+          }
+        }
+        &:last-of-type {
+          .discription__img {
+            background-image: url('../Mobile/images/rewardCard/icon-green-notice.png');
+          }
+        }
+      }
     }
   }
   &--yellow {
@@ -390,7 +463,7 @@
       color: $yellow;
     }
     .p-rewardCard__header {
-      background-image: url('../images/rewardCard/yellow-header.png'); //
+      background-image: url('../Mobile/images/rewardCard/yellow-header.png'); //
     }
     .rwBtn {
       background: $yellow;
@@ -403,11 +476,11 @@
     }
     .exchangeModal {
       &__header {
-        background: $yellow;
+        background-color: $yellow;
         color: $white;
       }
       &__footer {
-        background: $yellow;
+        background-color: $yellow;
       }
     }
     .tabs__item {
@@ -415,19 +488,19 @@
       border: 1px solid $yellow;
       &--active {
         color: #fff;
-        background: $yellow;
+        background-color: $yellow;
       }
     } 
     .cards {
       &__item {
-        background: $yellow; //
+        background-color: $yellow; //
         li p {
           color: $yellow; //
         }
       }
       &__dot {
         li.dot {
-          background: $yellow;
+          background-color: $yellow;
         }
       }
     }
@@ -438,6 +511,28 @@
       &__detail {
         color: $yellow;
       }
+      li {
+        &:first-of-type {
+          .discription__img {
+            background-image: url('../Mobile/images/rewardCard/icon-yellow-point.png');
+          }
+        }
+        &:nth-of-type(2) {
+          .discription__img {
+            background-image: url('../Mobile/images/rewardCard/icon-yellow-date.png');
+          }
+        }
+        &:nth-of-type(3) {
+          .discription__img {
+            background-image: url('../Mobile/images/rewardCard/icon-yellow-doc.png');
+          }
+        }
+        &:last-of-type {
+          .discription__img {
+            background-image: url('../Mobile/images/rewardCard/icon-yellow-notice.png');
+          }
+        }
+      }
     }
   }
 }
@@ -447,17 +542,17 @@
   max-width: $max-width;
   margin: auto;
   min-height: 100vh;
-  background: $default;
+  background-color: $default;
   color: $gray-1;
   &__header {
-    background: $blue;
+    background-color: $blue;
     position: sticky;
     top: 0;
     z-index: 2;
     width: 100%;
     img {
       margin: auto;
-      background: $white;
+      background-color: $white;
     }
     h3 {
       color: $white;
@@ -479,7 +574,7 @@
       content: '';
       width: 25%;
       height: 100%;
-      background-image: url('../images/rewardCard/end.png');
+      background-image: url('../Mobile/images/rewardCard/end.png');
       background-repeat: no-repeat;
       background-size: 100%;
       opacity: 0.4;
@@ -545,7 +640,7 @@
       -webkit-appearance: none;
          -moz-appearance: none;
               appearance: none;
-      background-image: url(../images/rewardCard/arrow.png);
+      background-image: url(../Mobile/images/rewardCard/arrow.png);
       background-repeat: no-repeat !important;
       background-size: 16px !important;
       background-position: 94% 50% !important;
@@ -568,11 +663,11 @@
 
   &__footer {
     display: flex;
-    color: $white;
     border-radius: 0 0 10px 10px;
     padding: 0.5rem;
     justify-content: space-around;
     p {
+      color: $white;
       text-align: center;
       &:active {
         opacity: 0.9;

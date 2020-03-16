@@ -636,6 +636,9 @@ i.i-arrow-right {
   grid-row-gap: 1.2rem;
   border-radius: 15px;
   padding: 1.5rem 1rem;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
 }
 
 .p-rewardCard__content .cards__item li {
@@ -759,15 +762,18 @@ i.i-arrow-right {
   padding-left: 2.5rem;
 }
 
-.p-rewardCard__content .discription li img {
-  width: 30px;
+.p-rewardCard__content .discription li .discription__img {
+  width: 1.8rem;
+  height: 1.8rem;
   position: absolute;
   left: 0;
+  background-size: cover;
+  background-repeat: no-repeat;
 }
 
 .p-rewardCard__content .discription__title {
   font-size: 1.05rem;
-  font-weight: bold;
+  font-weight: 500;
   line-height: 1.68;
 }
 
@@ -805,6 +811,7 @@ i.i-arrow-right {
 
 .p-rewardCard .listBtn__detail span {
   font-family: 'Avenir', '微軟正黑體';
+  font-weight: bold;
   font-size: 4.5rem;
   line-height: 1.2;
 }
@@ -879,7 +886,7 @@ i.i-arrow-right {
 }
 
 .p-rewardCard--blue .p-rewardCard__header {
-  background-image: url("../images/rewardCard/blue-header.png");
+  background-image: url("../Mobile/images/rewardCard/blue-header.png");
 }
 
 .p-rewardCard--blue .rwBtn {
@@ -929,7 +936,7 @@ i.i-arrow-right {
 }
 
 .p-rewardCard--blue .cards__item {
-  background: #1b73a7;
+  background-color: #1b73a7;
 }
 
 .p-rewardCard--blue .cards__item li p {
@@ -937,7 +944,7 @@ i.i-arrow-right {
 }
 
 .p-rewardCard--blue .cards__dot li.dot {
-  background: #1b73a7;
+  background-color: #1b73a7;
 }
 
 .p-rewardCard--blue .discription p {
@@ -948,16 +955,32 @@ i.i-arrow-right {
   color: #1b73a7;
 }
 
+.p-rewardCard--blue .discription li:first-of-type .discription__img {
+  background-image: url("../Mobile/images/rewardCard/icon-blue-point.png");
+}
+
+.p-rewardCard--blue .discription li:nth-of-type(2) .discription__img {
+  background-image: url("../Mobile/images/rewardCard/icon-blue-date.png");
+}
+
+.p-rewardCard--blue .discription li:nth-of-type(3) .discription__img {
+  background-image: url("../Mobile/images/rewardCard/icon-blue-doc.png");
+}
+
+.p-rewardCard--blue .discription li:last-of-type .discription__img {
+  background-image: url("../Mobile/images/rewardCard/icon-blue-notice.png");
+}
+
 .p-rewardCard--pink td, .p-rewardCard--pink p, .p-rewardCard--pink h2 {
   color: #EA3C6E;
 }
 
 .p-rewardCard--pink .p-rewardCard__header {
-  background-image: url("../images/rewardCard/pink-header.png");
+  background-image: url("../Mobile/images/rewardCard/pink-header.png");
 }
 
 .p-rewardCard--pink .rwBtn {
-  background: #EA3C6E;
+  background-color: #EA3C6E;
 }
 
 .p-rewardCard--pink .listBtn {
@@ -969,12 +992,12 @@ i.i-arrow-right {
 }
 
 .p-rewardCard--pink .exchangeModal__header {
-  background: #EA3C6E;
+  background-color: #EA3C6E;
   color: #fff;
 }
 
 .p-rewardCard--pink .exchangeModal__footer {
-  background: #EA3C6E;
+  background-color: #EA3C6E;
 }
 
 .p-rewardCard--pink .tabs__item {
@@ -984,11 +1007,11 @@ i.i-arrow-right {
 
 .p-rewardCard--pink .tabs__item--active {
   color: #fff;
-  background: #EA3C6E;
+  background-color: #EA3C6E;
 }
 
 .p-rewardCard--pink .cards__item {
-  background: #EA3C6E;
+  background-color: #EA3C6E;
 }
 
 .p-rewardCard--pink .cards__item li p {
@@ -996,7 +1019,7 @@ i.i-arrow-right {
 }
 
 .p-rewardCard--pink .cards__dot li.dot {
-  background: #EA3C6E;
+  background-color: #EA3C6E;
 }
 
 .p-rewardCard--pink .discription p {
@@ -1007,12 +1030,28 @@ i.i-arrow-right {
   color: #EA3C6E;
 }
 
+.p-rewardCard--pink .discription li:first-of-type .discription__img {
+  background-image: url("../Mobile/images/rewardCard/icon-pink-point.png");
+}
+
+.p-rewardCard--pink .discription li:nth-of-type(2) .discription__img {
+  background-image: url("../Mobile/images/rewardCard/icon-pink-date.png");
+}
+
+.p-rewardCard--pink .discription li:nth-of-type(3) .discription__img {
+  background-image: url("../Mobile/images/rewardCard/icon-pink-doc.png");
+}
+
+.p-rewardCard--pink .discription li:last-of-type .discription__img {
+  background-image: url("../Mobile/images/rewardCard/icon-pink-notice.png");
+}
+
 .p-rewardCard--green td, .p-rewardCard--green p, .p-rewardCard--green h2 {
   color: #2C946E;
 }
 
 .p-rewardCard--green .p-rewardCard__header {
-  background-image: url("../images/rewardCard/green-header.png");
+  background-image: url("../Mobile/images/rewardCard/green-header.png");
 }
 
 .p-rewardCard--green .rwBtn {
@@ -1028,12 +1067,12 @@ i.i-arrow-right {
 }
 
 .p-rewardCard--green .exchangeModal__header {
-  background: #2C946E;
+  background-color: #2C946E;
   color: #fff;
 }
 
 .p-rewardCard--green .exchangeModal__footer {
-  background: #2C946E;
+  background-color: #2C946E;
 }
 
 .p-rewardCard--green .tabs__item {
@@ -1043,11 +1082,11 @@ i.i-arrow-right {
 
 .p-rewardCard--green .tabs__item--active {
   color: #fff;
-  background: #2C946E;
+  background-color: #2C946E;
 }
 
 .p-rewardCard--green .cards__item {
-  background: #2C946E;
+  background-color: #2C946E;
 }
 
 .p-rewardCard--green .cards__item li p {
@@ -1055,7 +1094,7 @@ i.i-arrow-right {
 }
 
 .p-rewardCard--green .cards__dot li.dot {
-  background: #2C946E;
+  background-color: #2C946E;
 }
 
 .p-rewardCard--green .discription p {
@@ -1066,12 +1105,28 @@ i.i-arrow-right {
   color: #2C946E;
 }
 
+.p-rewardCard--green .discription li:first-of-type .discription__img {
+  background-image: url("../Mobile/images/rewardCard/icon-green-point.png");
+}
+
+.p-rewardCard--green .discription li:nth-of-type(2) .discription__img {
+  background-image: url("../Mobile/images/rewardCard/icon-green-date.png");
+}
+
+.p-rewardCard--green .discription li:nth-of-type(3) .discription__img {
+  background-image: url("../Mobile/images/rewardCard/icon-green-doc.png");
+}
+
+.p-rewardCard--green .discription li:last-of-type .discription__img {
+  background-image: url("../Mobile/images/rewardCard/icon-green-notice.png");
+}
+
 .p-rewardCard--yellow td, .p-rewardCard--yellow p, .p-rewardCard--yellow h2 {
   color: #FFC000;
 }
 
 .p-rewardCard--yellow .p-rewardCard__header {
-  background-image: url("../images/rewardCard/yellow-header.png");
+  background-image: url("../Mobile/images/rewardCard/yellow-header.png");
 }
 
 .p-rewardCard--yellow .rwBtn {
@@ -1087,12 +1142,12 @@ i.i-arrow-right {
 }
 
 .p-rewardCard--yellow .exchangeModal__header {
-  background: #FFC000;
+  background-color: #FFC000;
   color: #fff;
 }
 
 .p-rewardCard--yellow .exchangeModal__footer {
-  background: #FFC000;
+  background-color: #FFC000;
 }
 
 .p-rewardCard--yellow .tabs__item {
@@ -1102,11 +1157,11 @@ i.i-arrow-right {
 
 .p-rewardCard--yellow .tabs__item--active {
   color: #fff;
-  background: #FFC000;
+  background-color: #FFC000;
 }
 
 .p-rewardCard--yellow .cards__item {
-  background: #FFC000;
+  background-color: #FFC000;
 }
 
 .p-rewardCard--yellow .cards__item li p {
@@ -1114,7 +1169,7 @@ i.i-arrow-right {
 }
 
 .p-rewardCard--yellow .cards__dot li.dot {
-  background: #FFC000;
+  background-color: #FFC000;
 }
 
 .p-rewardCard--yellow .discription p {
@@ -1125,17 +1180,33 @@ i.i-arrow-right {
   color: #FFC000;
 }
 
+.p-rewardCard--yellow .discription li:first-of-type .discription__img {
+  background-image: url("../Mobile/images/rewardCard/icon-yellow-point.png");
+}
+
+.p-rewardCard--yellow .discription li:nth-of-type(2) .discription__img {
+  background-image: url("../Mobile/images/rewardCard/icon-yellow-date.png");
+}
+
+.p-rewardCard--yellow .discription li:nth-of-type(3) .discription__img {
+  background-image: url("../Mobile/images/rewardCard/icon-yellow-doc.png");
+}
+
+.p-rewardCard--yellow .discription li:last-of-type .discription__img {
+  background-image: url("../Mobile/images/rewardCard/icon-yellow-notice.png");
+}
+
 .p-rewardCardList {
   width: 100%;
   max-width: 800px;
   margin: auto;
   min-height: 100vh;
-  background: #efefef;
+  background-color: #efefef;
   color: #4a4a4a;
 }
 
 .p-rewardCardList__header {
-  background: #1b73a7;
+  background-color: #1b73a7;
   position: -webkit-sticky;
   position: sticky;
   top: 0;
@@ -1145,7 +1216,7 @@ i.i-arrow-right {
 
 .p-rewardCardList__header img {
   margin: auto;
-  background: #fff;
+  background-color: #fff;
 }
 
 .p-rewardCardList__header h3 {
@@ -1175,7 +1246,7 @@ i.i-arrow-right {
   content: '';
   width: 25%;
   height: 100%;
-  background-image: url("../images/rewardCard/end.png");
+  background-image: url("../Mobile/images/rewardCard/end.png");
   background-repeat: no-repeat;
   background-size: 100%;
   opacity: 0.4;
@@ -1255,7 +1326,7 @@ i.i-arrow-right {
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
-  background-image: url(../images/rewardCard/arrow.png);
+  background-image: url(../Mobile/images/rewardCard/arrow.png);
   background-repeat: no-repeat !important;
   background-size: 16px !important;
   background-position: 94% 50% !important;
@@ -1280,7 +1351,6 @@ i.i-arrow-right {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  color: #fff;
   border-radius: 0 0 10px 10px;
   padding: 0.5rem;
   -ms-flex-pack: distribute;
@@ -1288,6 +1358,7 @@ i.i-arrow-right {
 }
 
 .exchangeModal__footer p {
+  color: #fff;
   text-align: center;
 }
 
