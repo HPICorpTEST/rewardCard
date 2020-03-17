@@ -24,45 +24,19 @@
             <div class="cards">
               <!-- ../Mobile/images/rewardCard/bgList.jpg' -->
               <ul class="cards__item">
-                <li>
-                  <p><span>1</span></p>
-                </li>
-                <li>
-                  <p><span>2</span></p>
-                </li>
-                <li>
-                  <p><span>3</span></p>
-                </li>
-                <li>
-                  <p><span>4</span></p>
-                </li>
-                <li>
-                  <p><span>5</span></p>
-                </li>
-                <li>
-                  <p><span>6</span></p>
-                </li>
-                <li>
-                  <p><span>7</span></p>
-                </li>
-                <li>
-                  <p><span>8</span></p>
-                </li>
-                <li>
-                  <p><span>9</span></p>
-                </li>
-                <li>
-                  <p><span>10</span></p>
+                <li v-for="(item, index) in showPoints" 
+                  :class="[{'cards__item__point': item == 'used' || item == 'unused' }, {'cards__item__point--used': item == 'used' }]">
+                  <p><span>{{index + 1}}</span></p>
                 </li>
               </ul>
             </div>
-            <div class="cards__discript">
-              <p class="i-border-r50">
+            <div v-if="rewardCard.totalPoints > 10" class="cards__discript">
+              <p class="i-border-r50" @click="changeCardPage('minus')">
                 <i class="i-arrow-left"></i>
               </p>
 
-              <p><b>{{currentCardNum}}</b>/{{rewardCard.totalPoints / 10}}</p>
-              <p class="i-border-r50">
+              <p><b>{{currentCardNum}}</b>/{{Math.ceil(rewardCard.totalPoints / 10)}}</p>
+              <p class="i-border-r50" @click="changeCardPage('plus')">
                 <i class="i-arrow-right"></i>
               </p>
             </div>
@@ -72,7 +46,7 @@
             <li>
               <div class="discription__img"></div>
               <p class="discription__title">可用點數{{rewardCard.totalPoints - rewardCard.usedPoints}}點</p>
-              <p class="discription__detail">還差兩點就能兌換商品啦！加油！</p>
+              <!-- <p class="discription__detail">還差兩點就能兌換商品啦！加油！</p> -->
             </li>
             <li class="mt-3">
               <div class="discription__img"></div>
@@ -271,13 +245,16 @@
         isload: false,
         closeModal: true,
         currentPage: 'rewardCard',
-        currentCardNum: 1,
+        
         modal: {
           isExchangePrize: false,
           isFinished: false,
           isFillUserInfo: false,
           isConfirmUserInfo: false
         },
+        // 集點卡
+        rewardCardPoints: [],
+        currentCardNum: 1,
         // 選擇禮物
         selectedPrize: null,
         // 頁面上方tabs 
@@ -311,7 +288,6 @@
             }).then(response => {
               return response.json()
             }).then(response => {
-              console.log(response)
               setTimeout(() => {
                 resolve(response)
               }, 100)
@@ -396,6 +372,26 @@
               targetElemant.add(showCollapse)
             }
           } catch (error) {}
+        },
+        cardPoints (totalPoints, usedPoints) {
+          let eachCard = 10
+          let usePointsCard = Math.ceil(usedPoints / eachCard)
+          let cardNum = Math.ceil(totalPoints / eachCard)
+          for (let i = 0 ; i < cardNum; i++) {
+            let currentTotalCardPoints = eachCard * (i + 1)
+            this.rewardCardPoints.push({
+              total: totalPoints / currentTotalCardPoints >= 1 ? eachCard : totalPoints % eachCard,
+              used: usedPoints / currentTotalCardPoints >= 1 ? eachCard : (usePointsCard >= (i + 1) ? usedPoints % eachCard : 0) 
+            })
+          }
+        },
+        // 切換頁碼        
+        changeCardPage (status) {
+          if (status == 'minus' && this.currentCardNum !== 1) {
+            this.currentCardNum = this.currentCardNum - 1
+          } else if (status == 'plus' && this.currentCardNum !== this.rewardCardPoints.length) {
+            this.currentCardNum = this.currentCardNum + 1
+          }
         }
       },
       filters: {
@@ -419,6 +415,15 @@
               return 'p-rewardCard--yellow'
           }
         },
+        showPoints: function () {
+          let currentCard = this.rewardCardPoints[this.currentCardNum - 1]
+          let pointArray = []
+          pointArray.length = 10
+          pointArray.fill('used', 0, currentCard.used)
+          pointArray.fill('unused', currentCard.used, currentCard.total)
+          pointArray.fill('valid', currentCard.total)
+          return pointArray
+        }
       },
       created() {
         this.rewardCardId = new URL(location.href).searchParams.get("id")
@@ -434,6 +439,11 @@
           }
           delete this.rewardCard['redeems']
           delete this.rewardCard['records']
+
+          // 組裝
+          this.cardPoints(profile.totalPoints, profile.usedPoints)
+
+          this.currentCardNum = this.rewardCardPoints.length
           this.isload = true
         }).catch(e => {
 

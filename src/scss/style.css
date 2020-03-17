@@ -641,6 +641,32 @@ i.i-arrow-right {
   background-position: center;
 }
 
+.p-rewardCard__content .cards__item__point:before {
+  content: '';
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  background-image: url(../Mobile/images/rewardCard/temp_prize2.png);
+  background-size: contain;
+  background-position: center;
+  border-radius: 50%;
+}
+
+.p-rewardCard__content .cards__item__point--used::after {
+  content: '';
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  background-image: url(../Mobile/images/rewardCard/dotUsed.png);
+  background-size: contain;
+  background-position: center;
+  border-radius: 50%;
+  background-repeat: no-repeat;
+  background-position: 2px 24px;
+}
+
 .p-rewardCard__content .cards__item li {
   z-index: 2;
   -webkit-box-pack: center;
@@ -917,6 +943,7 @@ i.i-arrow-right {
 
 .p-rewardCard--blue .tabs__item--active {
   background: #1b73a7;
+  color: #fff;
 }
 
 .p-rewardCard--blue .recordTable__content td {
