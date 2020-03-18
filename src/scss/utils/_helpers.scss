@@ -113,7 +113,7 @@ i {
 // other
 //
 .coverArea {
-  position: fixed;
+  position: absolute;
   width: 100%;
   height: 100%;
   background: rgba(0, 0, 0, .8);
@@ -133,4 +133,7 @@ i {
     border-radius: 50%;
     border: 1px solid $gray-4;
   }
+}
+.border-red {
+  border-color: $danger !important;
 }

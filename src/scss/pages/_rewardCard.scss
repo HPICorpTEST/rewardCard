@@ -25,13 +25,11 @@
         background-size: cover;
         background-repeat: no-repeat;
         background-position: center;
-        &__point:before {
-          content: '';
+        &__point {
           width: 100%;
           height: 100%;
           position: absolute;
           top: 0;
-          background-image: url(../Mobile/images/rewardCard/temp_prize2.png);
           background-size: contain;
           background-position: center;
           border-radius: 50%;
@@ -49,7 +47,6 @@
           background-repeat: no-repeat;
           background-position: 2px 24px;
         }
-        &
         li {
           z-index: 2;
           justify-content: center;
@@ -673,18 +670,18 @@
       background-position: 94% 50% !important;
       background-color: $white;
       color: #555 !important;
-      padding: 4px 0.4rem;
+      padding: 0.3rem 0.4rem;
       outline: none;
       line-height: normal;
-      border-radius: 12px;
+      border-radius: 1rem;
       border: 1px solid #ced2db;
 
   }
   &__input {
     border: 1px solid #ced2db;
     line-height: normal;
-    border-radius: 12px;
-    padding: 6px 0.4rem;
+    border-radius: 1rem;
+    padding: 0.3rem 0.4rem;
     width: 100%;
   }
 

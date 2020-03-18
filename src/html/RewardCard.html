@@ -22,10 +22,12 @@
         <div v-show="currentPage == 'rewardCard'" class="p-rewardCard__rewardCard">
           <div class="wrapCard">
             <div class="cards">
-              <!-- ../Mobile/images/rewardCard/bgList.jpg' -->
-              <ul class="cards__item">
-                <li v-for="(item, index) in showPoints" 
-                  :class="[{'cards__item__point': item == 'used' || item == 'unused' }, {'cards__item__point--used': item == 'used' }]">
+              <ul class="cards__item" :style="`background-image: url(${bgImageUrl})`">
+                <li v-for="(item, index) in showPoints">
+                  <div
+                    :class="[{'cards__item__point': item == 'used' || item == 'unused' }, {'cards__item__point--used': item == 'used' }]"
+                    :style="`background-image: url(${rewardCard.pointImage});`">
+                  </div>
                   <p><span>{{index + 1}}</span></p>
                 </li>
               </ul>
@@ -122,6 +124,9 @@
         </div>
       </div>
       <!-- modal -->
+      <!--  -->
+      <!--  -->
+      <!--  -->
       <div class="coverArea" :class="{isload: closeModal}">
         <!-- 選擇數量 -->
         <div v-if="modal.isExchangePrize" class="exchangeModal top25">
@@ -137,7 +142,7 @@
                 <select class="exchangeModal__select mt-1 mb-1" v-model="selectedPrize.exchangeNumber">
                   <option v-for="num in 10" :value="num">{{num}}</option>
                 </select>
-                <p>需扣除點數{{selectedPrize.exchangeNumber *selectedPrize.exchangePoint }}點</p>
+                <p>需扣除點數{{selectedPrize.exchangeNumber * selectedPrize.exchangePoint }}點</p>
               </div>
             </div>
           </div>
@@ -157,9 +162,9 @@
               </div>
 
               <div class="exchangeModal__main w50">
-                <p>LINE Point 10點</p>
-                <p>本次兌換: 1份</p>
-                <p>使用點數: 2點</p>
+                <p>{{selectedPrize.title}}</p>
+                <p>本次兌換: {{selectedPrize.exchangeNumber}}份</p>
+                <p>使用點數: {{selectedPrize.exchangeNumber * selectedPrize.exchangePoint}}點</p>
               </div>
             </div>
 
@@ -174,26 +179,29 @@
           <p class="exchangeModal__header">請填寫收件資訊</p>
           <div class="exchangeModal__content">
             <div class="flex w100">
-              <input type="text" class="exchangeModal__input mt-1 mb-2 mr-2" placeholder="收件人姓名">
-              <select class="exchangeModal__select mt-1 mb-2">
-                <option value="稱謂">稱謂</option>
-                <option value="1">1</option>
-                <option value="2">2</option>
+              <input type="text" class="exchangeModal__input mt-1 mb-2 mr-2" :class="{'border-red': uiUserInfoValidate['name'] == false}" placeholder="收件人姓名" v-model="uiUserInfoTemp.name" @blur="checkValid(uiUserInfoTemp.name, 'uiUserInfoValidate', 'name')">
+              <select class="exchangeModal__select mt-1 mb-2" v-model="uiUserInfoTemp.sex">
+                <option value="male">先生</option>
+                <option value="female">小姐</option>
               </select>
             </div>
-            <input type="text" class="exchangeModal__input mb-2" placeholder="聯絡電話">
-            <input type="text" class="exchangeModal__input mb-2" placeholder="電子郵件">
+            <input type="tel" maxlength="10" class="exchangeModal__input mb-2" :class="{'border-red': uiUserInfoValidate['phone'] == false}"  placeholder="聯絡電話 (0912345678)" v-model="uiUserInfoTemp.phone" @blur="checkPhone(uiUserInfoTemp.phone, 'uiUserInfoValidate', 'phone')">
+            <input type="text" maxlength="40" class="exchangeModal__input mb-2" :class="{'border-red': uiUserInfoValidate['email'] == false}" placeholder="電子郵件" v-model="uiUserInfoTemp.email" @blur="checkEmail(uiUserInfoTemp.email, 'uiUserInfoValidate', 'email')">
             <div class="flex w100 mb-2">
-              <select class="exchangeModal__select mt-1 mb-1 mr-2">
-                <option value="1">縣市</option>
-                <option value="2">2</option>
+              <select class="exchangeModal__select mt-1 mb-1 mr-2" v-model="uiUserInfoTemp.selectedCountry" :class="{'border-red': uiUserInfoValidate['selectedCountry'] == false}">
+                <option value="" selected disabled>縣市</option>
+                <option v-for="item in cityCountry" :value="item.CityName">{{item.CityName}}</option>
               </select>
-              <select class="exchangeModal__select mt-1 mb-1">
-                <option value="1">鄉鎮</option>
-                <option value="2">鄉鎮</option>
+              
+              <select class="exchangeModal__select mt-1 mb-1" v-model="uiUserInfoTemp.selectedCity" :class="{'border-red': uiUserInfoValidate['selectedCity'] == false}">
+                <option value="" selected disabled>鄉鎮</option>
+                <option v-for="item in cityName" :value="item.AreaName">{{item.AreaName}}</option>
               </select>
             </div>
-            <input type="text" class="exchangeModal__input" placeholder="詳細收件人地址">
+            <input type="text" maxlength="40" class="exchangeModal__input" placeholder="詳細收件人地址"
+              :class="{'border-red': uiUserInfoValidate['inputAddress'] == false}"
+              v-model="uiUserInfoTemp.inputAddress"
+              @blur="checkValid(uiUserInfoTemp.inputAddress, 'uiUserInfoValidate', 'inputAddress')">
           </div>
           <div class="exchangeModal__footer">
             <p class="exchangeModal_confirm w50 border-right" @click="closeAllModal">取消</p>
@@ -208,23 +216,23 @@
             <div class="p-2">
               <div class="flex mb-3">
                 <p class="mr-1">收件人:</p>
-                <p class="gray-1">王小明</p>
+                <p class="gray-1">{{userInfo.name}}</p>
               </div>
               <div class="flex mb-3">
                 <p class="mr-1">稱謂: </p>
-                <p class="gray-1">先生</p>
+                <p class="gray-1">{{userInfo.sex == 'female' ? '小姐' : '先生'}}</p>
               </div>
               <div class="flex mb-3">
                 <p class="mr-1">聯絡電話: </p>
-                <p class="gray-1">0912345678</p>
+                <p class="gray-1">{{userInfo.phone}}</p>
               </div>
               <div class="flex mb-3">
                 <p class="mr-1">電子郵件: </p>
-                <p class="gray-1">blabla</p>
+                <p class="gray-1">{{userInfo.email}}</p>
               </div>
               <div class="flex">
                 <p class="mr-1">收件地址: </p>
-                <p class="gray-1">blabla</p>
+                <p class="gray-1">{{userInfo.address}}</p>
               </div>
             </div>
           </div>
@@ -242,23 +250,13 @@
     let app = new Vue({
       el: '#app',
       data: {
-        isload: false,
-        closeModal: true,
+        mid: '',
+        rewardCardId: null,
+        bgImageUrl: '../Mobile/images/rewardCard/bgList.jpg',
         currentPage: 'rewardCard',
-        
-        modal: {
-          isExchangePrize: false,
-          isFinished: false,
-          isFillUserInfo: false,
-          isConfirmUserInfo: false
-        },
-        // 集點卡
-        rewardCardPoints: [],
-        currentCardNum: 1,
-        // 選擇禮物
-        selectedPrize: null,
         // 頁面上方tabs 
-        tabsList: [{
+        tabsList: [
+          {
             value: 'rewardCard',
             name: '集點卡'
           },
@@ -271,12 +269,47 @@
             name: '兌換紀錄'
           }
         ],
-        // 贈品
-        redeems: [],
-        // 兌換紀錄
-        exchangeRecord: [],
+        // 集點卡點數
+        rewardCardPoints: [],
+        currentCardNum: 1,
+        // tab1:: 集點卡
         rewardCard: null,
-        rewardCardId: null
+        // tab2::贈品
+        redeems: [],
+        // tab3:: 兌換紀錄
+        exchangeRecord: [],
+        // 選擇禮物
+        selectedPrize: null,
+        uiUserInfoTemp: {
+          name: '',
+          sex: 'male',
+          phone: '',
+          email: '',
+          selectedCountry: '',
+          selectedCity: '',
+          inputAddress: '',
+        },
+        uiUserInfoValidate: {
+          name: null,
+          sex: null,
+          phone: null,
+          email: null,
+          selectedCountry: null,
+          selectedCity: null,
+          inputAddress: null
+        },
+        // 鄉鎮市區
+        cityCountry: [],
+        // 用戶資訊
+        userInfo: null,
+        isload: false,
+        closeModal: true,
+        modal: {
+          isExchangePrize: false,
+          isFinished: false,
+          isFillUserInfo: false,
+          isConfirmUserInfo: false
+        }
       },
       methods: {
         // [API]: 取得集點卡明細
@@ -305,7 +338,6 @@
             }).then(response => {
               return response.json()
             }).then(response => {
-              console.log(response)
               setTimeout(() => {
                 resolve(response)
               }, 100)
@@ -315,8 +347,22 @@
           })
         },
         // [API]: 送出獎品
-        sendPrizeRequest() {
-          //
+        sendPrizeRequest(type, data) {
+          let url = `rewardCard/redeem?type=${type}`
+          return new Promise((resolve, reject) => { 
+            fetch(url, {
+              method: 'POST',
+              body: JSON.stringify(data)
+            }).then(response => {
+              return response.json()
+            }).then(response => {
+              setTimeout(() => {
+                resolve(response)
+              }, 100)
+            }).catch(e => {
+              reject('somthing wrong')
+            })
+          })
         },
         // 兌換商品
         exchangePrize(item) {
@@ -329,11 +375,23 @@
             this.modal.isExchangePrize = true
           }
         },
-        //
+        // 兌換商品
         orderPrize() {
-          if (this.selectedPrize.type === 'gift') {
+          if (this.selectedPrize.type === 'code') {
             this.modal.isExchangePrize = false
-            this.modal.isFinished = true
+            let data = {
+              mid: this.mid,
+              rewardCardId: this.rewardCardId,
+              redeemRid: this.selectedPrize.id,
+              redeemQuantity: this.selectedPrize.exchangeNumber
+            }
+            // 送出資料
+            this.sendPrizeRequest('gift', data).then(response => {
+              this.modal.isFinished = true
+            }).catch(e => {
+              this.closeAllModal()
+              alert(e)
+            })
           } else {
             this.modal.isExchangePrize = false
             this.modal.isFillUserInfo = true
@@ -347,18 +405,46 @@
             isConfirmUserInfo: false
           }
           this.closeModal = true
+          this.selectedPrize = {}
         },
         returnUserInfo () {
           this.modal.isConfirmUserInfo = false
           this.modal.isFillUserInfo = true
         },
+        // 確認資料
         confirmUserInfo () {
-          this.modal.isConfirmUserInfo = true
-          this.modal.isFillUserInfo = false
+          // 檢查格式是否正確
+          Object.keys(this.uiUserInfoTemp).forEach(item => {
+            this.uiUserInfoValidate[item] = Boolean(this.uiUserInfoTemp[item])
+          })
+          if (Object.values(this.uiUserInfoValidate).every(x => Boolean(x))) {
+            this.userInfo = {
+              name: this.uiUserInfoTemp['name'],
+              sex: this.uiUserInfoTemp['sex'],
+              phone: this.uiUserInfoTemp['phone'],
+              address: `${this.uiUserInfoTemp['selectedCountry']}${this.uiUserInfoTemp['selectedCity']}${this.uiUserInfoTemp['inputAddress']}`,
+              email: this.uiUserInfoTemp['email']
+            }
+            this.modal.isConfirmUserInfo = true
+            this.modal.isFillUserInfo = false
+          }
         },
+        // 送出填寫獎項的資料
         sendUserInfo () {
-          this.modal.isFinished = true
+          let data = {
+            mid: this.mid,
+            redeemRid: this.selectedPrize.id,
+            redeemQuantity: this.selectedPrize.exchangeNumber,
+            ...this.userInfo
+          }
           this.modal.isConfirmUserInfo = false
+          // 送出資料
+          this.sendPrizeRequest('gift', data).then(response => {
+            this.modal.isFinished = true
+          }).catch(e => {
+            this.closeAllModal()
+            alert(e)
+          })
         },
         // [UI]: 切換記錄顯示
         switchRecord(index) {
@@ -392,6 +478,41 @@
           } else if (status == 'plus' && this.currentCardNum !== this.rewardCardPoints.length) {
             this.currentCardNum = this.currentCardNum + 1
           }
+        },
+        // 取得鄉鎮市區
+        fetchCityCountryData() {
+          let url = '../js/CityCountyData.json'
+            fetch(url, {
+              method: 'GET'
+            }).then(response => {
+              return response.json()
+            }).then(response => {
+              this.cityCountry = response
+            }).catch(e => {
+              console.log('something wrong')
+            })
+        },
+        // 檢查email
+        checkEmail(email, validate, item) {
+          var emailRule = /^\w+((-\w+)|(\.\w+))*\@[A-Za-z0-9]+((\.|-)[A-Za-z0-9]+)*\.[A-Za-z]+$/
+          if (email.search(emailRule) !== -1) {
+            this[validate][item] = true
+          } else {
+            this[validate][item] = false
+          }
+        },
+        // 檢查電話
+        checkPhone(phone, validate, item) {
+          var regx = /^[09]{2}[0-9]{8}$/
+          if (!regx.test(phone)) {
+            this[validate][item] = false
+          } else {
+            this[validate][item] =  true
+          }
+        },
+        // 檢查空白
+        checkValid(value, validate, item) {
+          this[validate][item] = Boolean(value)
         }
       },
       filters: {
@@ -402,7 +523,7 @@
       },
       computed: {
         // 16進位顏色轉換名字
-        hexChangeName: function () {
+        hexChangeName () {
           let bgColor = this.rewardCard.backgroundColor
           switch (bgColor) {
             case '#1B73A7':
@@ -415,7 +536,8 @@
               return 'p-rewardCard--yellow'
           }
         },
-        showPoints: function () {
+        // 集點卡點數
+        showPoints () {
           let currentCard = this.rewardCardPoints[this.currentCardNum - 1]
           let pointArray = []
           pointArray.length = 10
@@ -423,10 +545,16 @@
           pointArray.fill('unused', currentCard.used, currentCard.total)
           pointArray.fill('valid', currentCard.total)
           return pointArray
+        },
+        // 鄉鎮名稱
+        cityName () {
+          let [area] = [...this.cityCountry.filter(item => item.CityName === this.uiUserInfoTemp.selectedCountry)]
+          return area ? area.AreaList : []
         }
       },
       created() {
         this.rewardCardId = new URL(location.href).searchParams.get("id")
+        this.fetchCityCountryData()
         this.getProfileTest(this.rewardCardId).then(profile => {
           //  贈品列表
           this.redeems = profile.redeems
@@ -445,6 +573,7 @@
 
           this.currentCardNum = this.rewardCardPoints.length
           this.isload = true
+
         }).catch(e => {
 
         })

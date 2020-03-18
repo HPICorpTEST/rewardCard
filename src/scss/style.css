@@ -46,6 +46,10 @@ img {
   width: 100%;
 }
 
+input, select {
+  outline: none;
+}
+
 .pointer {
   cursor: pointer;
 }
@@ -102,6 +106,22 @@ img {
 
 .bg-danger {
   background-color: #ff4c4c !important;
+}
+
+.default {
+  color: #efefef !important;
+}
+
+.bg-default {
+  background-color: #efefef !important;
+}
+
+.white {
+  color: #fff !important;
+}
+
+.bg-white {
+  background-color: #fff !important;
 }
 
 .gray-1 {
@@ -542,7 +562,7 @@ i.i-arrow-right {
 }
 
 .coverArea {
-  position: fixed;
+  position: absolute;
   width: 100%;
   height: 100%;
   background: rgba(0, 0, 0, 0.8);
@@ -561,6 +581,10 @@ i.i-arrow-right {
 .border-r50 {
   border-radius: 50%;
   border: 1px solid #aaa;
+}
+
+.border-red {
+  border-color: #ff4c4c !important;
 }
 
 .tabs {
@@ -641,13 +665,11 @@ i.i-arrow-right {
   background-position: center;
 }
 
-.p-rewardCard__content .cards__item__point:before {
-  content: '';
+.p-rewardCard__content .cards__item__point {
   width: 100%;
   height: 100%;
   position: absolute;
   top: 0;
-  background-image: url(../Mobile/images/rewardCard/temp_prize2.png);
   background-size: contain;
   background-position: center;
   border-radius: 50%;
@@ -1359,18 +1381,18 @@ i.i-arrow-right {
   background-position: 94% 50% !important;
   background-color: #fff;
   color: #555 !important;
-  padding: 4px 0.4rem;
+  padding: 0.3rem 0.4rem;
   outline: none;
   line-height: normal;
-  border-radius: 12px;
+  border-radius: 1rem;
   border: 1px solid #ced2db;
 }
 
 .exchangeModal__input {
   border: 1px solid #ced2db;
   line-height: normal;
-  border-radius: 12px;
-  padding: 6px 0.4rem;
+  border-radius: 1rem;
+  padding: 0.3rem 0.4rem;
   width: 100%;
 }
 
