@@ -15,7 +15,7 @@
         </div>
         <div class="p-rewardCardList__content">
             <div v-for="(item, index) in rewarcCardList" :key="index" class="list mb-3"
-                :class="{'list--expiry': new Date() > new Date(item.endTime)}" @click="goDetailPage(item.id)">
+                :class="{'list--expiry': new Date() > new Date(`${item.endTime} 23:59:59`)}" @click="goDetailPage(item.id)">
                 <div class="list__img grid-4">
                     <img :src="item.rewardCardImage | listImage" alt=""
                         onerror="this.src='../Mobile/images/rewardCard/temp_prize2.png'">
@@ -27,43 +27,91 @@
                 </div>
             </div>
         </div>
+        <div class="coverArea" :class="{isload: isload}"></div>
     </div>
+    <script src="https://static.line-scdn.net/liff/edge/2.1/sdk.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.16/vue.js"></script>
     <script>
         let app = new Vue({
             el: '#app',
             data: {
-                uid: '',
+                mid: '',
+                isload: false,
                 rewarcCardList: []
             },
             methods: {
                 // 顯示集點卡列表
                 showRewardList() {
-                    let url = `rewardCard/list?mid=${this.uid}`
+                    // let url = `rewardCard/list?mid=${this.mid}`
+                    let url = '../js/list.json'
                     fetch(url, {
-                        method: 'POST'
+                        method: 'GET'
                     }).then(response => {
                         return response.json()
                     }).then(response => {
                         this.rewarcCardList = response
+                        this.isload = true
+                        if (this.rewarcCardList.length == 1) {
+                            this.goDetailPage(this.rewarcCardList[0].id)
+                        }
                     }).catch(e => {
                         console.log(e)
                     })
                 },
                 // 前往明細頁面
                 goDetailPage(id) {
-                    location.assign(`rewardCardPage?mid=${this.uid}&id=${id}`)
+                    location.assign(`RewardCard.html?mid=${this.uid}&id=${id}`)
+                },
+                // [LIFF]:: liff init 
+                liffInit(myLiffId) {
+                    return new Promise((resolve, reject) => {
+                        liff.init({
+                                liffId: myLiffId
+                            })
+                            .then(() => {
+                                resolve('success')
+                            })
+                            .catch((err) => {
+                                reject(new Error(`Error: ${err}`))
+                            })
+                    })
+                },
+                // [LIFF]:: get profile call
+                getLIFFProfile() {
+                    return new Promise((resolve, reject) => {
+                        liff.getProfile().then(function (profile) {
+                            resolve(profile)
+                        }).catch(function (error) {
+                            reject(new Error(error))
+                        })
+                    })
                 }
             },
             filters: {
                 // 轉換圖片
                 listImage(item) {
-                    console.log(item)
                     return `../bcs/getResource/IMAGE/${item}`
                 }
             },
-            mounted() {
-                this.showRewardList()
+            created() {
+                // liff Init - 取得profile
+                let liffId = '1629910250-nKOEWYgg'
+                this.liffInit(liffId)
+                  .then((data) => {
+                    if (!liff.isLoggedIn()) {    
+                      liff.login()
+                    } else {
+                      // 取得登入者資訊
+                      return this.getLIFFProfile().then(profile => profile)
+                    }
+                  }).then((profile) => {
+                    this.mid = profile.userId
+                    alert(`your MID: \n${profile.userId}, \n讓您看看 ：）`)
+                    this.showRewardList()
+                }).catch(msg => {
+                    alert(msg)
+                    location.assign('https://manager.line.biz/')
+                })
             }
         })
     </script>

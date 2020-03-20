@@ -1,21 +1,21 @@
 {
   "id": 94,
   "title": "hsuifang___不要刪",
-  "pointImage": "icon-green-doc.png",
+  "pointImage": "../Mobile/images/rewardCard/temp_prize2.png",
   "backgroundImage": "bgList.png",
   "backgroundColor": "#EA3C6E",
-  "startTime": "2020-03-24",
-  "endTime": "2020-03-31",
+  "startTime": "2020-02-20",
+  "endTime": "2020-03-20",
   "description": "",
   "attention": "d",
-  "totalPoints": 100,
-  "usedPoints": 16,
+  "totalPoints": 19,
+  "usedPoints": 12,
   "status": "ACTIVE",
   "redeems": [
       {
           "rid": 60,
           "title": "fff",
-          "image": "693747f3-4a43-4e58-bea1-edb4e54d4395",
+          "image": "",
           "type": "gift",
           "exchangePoint": 3,
           "remainingQuantity": 1
@@ -23,7 +23,7 @@
       {
           "rid": 61,
           "title": "序號測試",
-          "image": "65d6fb07-842f-4f04-971c-a698f7a599fa",
+          "image": "",
           "type": "code",
           "exchangePoint": 5,
           "remainingQuantity": 3

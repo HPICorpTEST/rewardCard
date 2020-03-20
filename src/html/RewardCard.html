@@ -22,11 +22,11 @@
         <div v-show="currentPage == 'rewardCard'" class="p-rewardCard__rewardCard">
           <div class="wrapCard">
             <div class="cards">
-              <ul class="cards__item" :style="`background-image: url(${bgImageUrl})`">
+              <ul class="cards__item" :style="`background-image: url(../bcs/getResource/IMAGE/${rewardCard.backgroundImage})`">
                 <li v-for="(item, index) in showPoints">
                   <div
                     :class="[{'cards__item__point': item == 'used' || item == 'unused' }, {'cards__item__point--used': item == 'used' }]"
-                    :style="`background-image: url(${rewardCard.pointImage});`">
+                    :style="`background-image: url(../bcs/getResource/IMAGE/${rewardCard.pointImage});`">
                   </div>
                   <p><span>{{index + 1}}</span></p>
                 </li>
@@ -36,7 +36,6 @@
               <p class="i-border-r50" @click="changeCardPage('minus')">
                 <i class="i-arrow-left"></i>
               </p>
-
               <p><b>{{currentCardNum}}</b>/{{Math.ceil(rewardCard.totalPoints / 10)}}</p>
               <p class="i-border-r50" @click="changeCardPage('plus')">
                 <i class="i-arrow-right"></i>
@@ -48,7 +47,6 @@
             <li>
               <div class="discription__img"></div>
               <p class="discription__title">可用點數{{rewardCard.totalPoints - rewardCard.usedPoints}}點</p>
-              <!-- <p class="discription__detail">還差兩點就能兌換商品啦！加油！</p> -->
             </li>
             <li class="mt-3">
               <div class="discription__img"></div>
@@ -77,8 +75,10 @@
             <div class="listBtn__main grid-4">
               <p class="listBtn__name">{{redeem.title}}</p>
               <p class="listBtn__point">剩餘數量: {{redeem.remainingQuantity}}</p>
-
-              <p v-if="rewardCard.remainsPoints > redeem.exchangePoint" class="listBtn__status success">可兌換</p>
+              <!-- todo 過期 -->
+              <p v-if="new Date() > new Date(`${rewardCard.endTime} 23:59:59`)">已過期</p>
+              <p v-else-if="rewardCard.remainsPoints >= redeem.exchangePoint && redeem.remainingQuantity > 0" class="listBtn__status success">可兌換</p>
+              <p v-else-if="redeem.remainingQuantity == 0" class="listBtn__status danger">數量不足</p>
               <p v-else class="listBtn__status danger">未達到</p>
             </div>
             <p class="listBtn__detail grid-4"><span>{{redeem.exchangePoint}}</span>點</p>
@@ -86,7 +86,7 @@
         </div>
 
         <div v-show="currentPage == 'record'" class="p-rewardCard__record">
-          <div v-if="exchangeRecord > 0">
+          <div v-if="exchangeRecord.length > 0">
             <table class="recordTable mt-3 w100" v-for="(record, index) in exchangeRecord" @click="switchRecord(index)">
               <tr class="recordTable__title">
                 <td class="w25">{{record.redeemTime}}</td>
@@ -124,9 +124,6 @@
         </div>
       </div>
       <!-- modal -->
-      <!--  -->
-      <!--  -->
-      <!--  -->
       <div class="coverArea" :class="{isload: closeModal}">
         <!-- 選擇數量 -->
         <div v-if="modal.isExchangePrize" class="exchangeModal top25">
@@ -134,13 +131,16 @@
           <div class="exchangeModal__content">
             <div class="flex">
               <div class="img w50">
-                <img class="m-auto" src="../images/rewardCard/temp_prize2.png" alt="">
+                <img class="m-auto" :src="selectedPrize.image | listImage"alt="">
               </div>
 
               <div class="exchangeModal__main w50">
                 <p>{{selectedPrize.title}}</p>
-                <select class="exchangeModal__select mt-1 mb-1" v-model="selectedPrize.exchangeNumber">
+                <select v-if="selectedPrize.remainingQuantity > 10" class="exchangeModal__select mt-1 mb-1" v-model="selectedPrize.exchangeNumber">
                   <option v-for="num in 10" :value="num">{{num}}</option>
+                </select>
+                <select v-else class="exchangeModal__select mt-1 mb-1" v-model="selectedPrize.exchangeNumber">
+                  <option v-for="num in selectedPrize.remainingQuantity" :value="num">{{num}}</option>
                 </select>
                 <p>需扣除點數{{selectedPrize.exchangeNumber * selectedPrize.exchangePoint }}點</p>
               </div>
@@ -170,7 +170,7 @@
 
           </div>
           <div class="exchangeModal__footer">
-            <p class="exchangeModal_confirm w50" @click="closeAllModal">確定</p>
+            <p class="exchangeModal_confirm w50" @click="finishExchangePrize">確定</p>
           </div>
         </div>
 
@@ -244,15 +244,15 @@
       </div>
     </div>
   </div>
-
+  <script src="https://static.line-scdn.net/liff/edge/2.1/sdk.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.16/vue.js"></script>
   <script>
     let app = new Vue({
       el: '#app',
       data: {
-        mid: '',
+        mid: 'Ua7d36f6dbc1b31fe3fbe0a95ea02c9a1',
         rewardCardId: null,
-        bgImageUrl: '../Mobile/images/rewardCard/bgList.jpg',
+        bgImageUrl: '',
         currentPage: 'rewardCard',
         // 頁面上方tabs 
         tabsList: [
@@ -331,10 +331,13 @@
         },
         // [API]: 取得集點卡明細
         getProfile(id) {
-          let url = `rewardCard/profile?mid=${this.uid}&rewardCardId=${id}`
+          let url = `rewardCard/profile?mid=${this.mid}&rewardCardId=${id}`
           return new Promise((resolve, reject) => {
             fetch(url, {
-              method: 'POST'
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json'
+              }
             }).then(response => {
               return response.json()
             }).then(response => {
@@ -352,21 +355,43 @@
           return new Promise((resolve, reject) => { 
             fetch(url, {
               method: 'POST',
+              headers: {
+                'Content-Type': 'application/json'
+              },
               body: JSON.stringify(data)
             }).then(response => {
               return response.json()
             }).then(response => {
-              setTimeout(() => {
-                resolve(response)
-              }, 100)
+              if (response.status === 'ok') {
+                setTimeout(() => {
+                  resolve(response)
+                }, 100)
+              } else {
+                reject(response.message)
+              }
             }).catch(e => {
-              reject('somthing wrong')
+              reject('系統發生異常，請重新操作')
             })
           })
         },
+        // [API]: 取得用戶先前的資料
+        userAddress () {
+          let url = `rewardCard/user/profile?mid=${this.mid}`
+            fetch(url, {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/x-www-form-urlencoded'
+              }
+            }).then(response => {
+              return response.json()
+            }).then(response => {
+              console.log(response)
+            }).catch(e => {
+            })
+        },
         // 兌換商品
         exchangePrize(item) {
-          if (item.exchangePoint < this.rewardCard.remainsPoints) {
+          if (this.rewardCard.remainsPoints >=item.exchangePoint && item.remainingQuantity > 0 && new Date(`${this.rewardCard.endTime} 23:59:59`) >= new Date()) {
             this.closeModal = false
             this.selectedPrize = {
               ...item,
@@ -382,21 +407,32 @@
             let data = {
               mid: this.mid,
               rewardCardId: this.rewardCardId,
-              redeemRid: this.selectedPrize.id,
+              redeemRid: this.selectedPrize.rid,
               redeemQuantity: this.selectedPrize.exchangeNumber
             }
             // 送出資料
-            this.sendPrizeRequest('gift', data).then(response => {
+            this.sendPrizeRequest('code', data).then(response => {
+              // 發送成功訊息
+              let {title, exchangeNumber, exchangePoint } = this.selectedPrize
+              let msg = `你已花費「${exchangeNumber * exchangePoint}」點，兌換「${title}」虛擬序號「${exchangeNumber}」份，下列是您所兌換的序號: ${response.data.codes}.join("\n")`
+              this.liffSendMesaage(msg).then(response => {this.selectedPrize = {}})
+              // 開啟成功頁面
               this.modal.isFinished = true
-            }).catch(e => {
+            }).catch(msg => {
+              alert(msg)
               this.closeAllModal()
-              alert(e)
             })
           } else {
             this.modal.isExchangePrize = false
             this.modal.isFillUserInfo = true
           }
         },
+        // 兌換成功
+        finishExchangePrize(msg) {
+          this.fetchProfileData(this.rewardCardId)
+          this.closeAllModal()
+        },
+        // 關閉modal
         closeAllModal() {
           this.modal = {
             isExchangePrize: false,
@@ -433,17 +469,24 @@
         sendUserInfo () {
           let data = {
             mid: this.mid,
-            redeemRid: this.selectedPrize.id,
+            rewardCardId: this.rewardCardId,
+            redeemRid: this.selectedPrize.rid,
             redeemQuantity: this.selectedPrize.exchangeNumber,
             ...this.userInfo
           }
           this.modal.isConfirmUserInfo = false
           // 送出資料
           this.sendPrizeRequest('gift', data).then(response => {
+            // 發送成功訊息
+            let {title, type, exchangeNumber, exchangePoint } = this.selectedPrize
+            let msg = `你已花費「${exchangeNumber * exchangePoint}」點，兌換了「${title}」實體贈品「${exchangeNumber}」份，贈品將 依活動相關辦法寄出!`
+            this.liffSendMesaage(msg).then(response => {
+              this.selectedPrize = {}
+            })
             this.modal.isFinished = true
-          }).catch(e => {
+          }).catch(msg => {
+            alert(msg)
             this.closeAllModal()
-            alert(e)
           })
         },
         // [UI]: 切換記錄顯示
@@ -459,6 +502,7 @@
             }
           } catch (error) {}
         },
+        // 點數
         cardPoints (totalPoints, usedPoints) {
           let eachCard = 10
           let usePointsCard = Math.ceil(usedPoints / eachCard)
@@ -492,6 +536,29 @@
               console.log('something wrong')
             })
         },
+        // 取集點卡用戶資料
+        fetchProfileData (id) {
+          this.getProfileTest(id).then(profile => {
+            //  贈品列表
+            this.redeems = profile.redeems
+            // 兌換紀錄
+            this.exchangeRecord = profile.records ? profile.records : []
+            // 滿額集點卡
+            this.rewardCard = {
+              ...profile,
+              'remainsPoints': profile.totalPoints - profile.usedPoints
+            }
+            delete this.rewardCard['redeems']
+            delete this.rewardCard['records']
+
+            // 組裝
+            this.cardPoints(profile.totalPoints, profile.usedPoints)
+
+            this.currentCardNum = this.rewardCardPoints.length
+            this.isload = true
+          }).catch(e => {
+          })
+        },
         // 檢查email
         checkEmail(email, validate, item) {
           var emailRule = /^\w+((-\w+)|(\.\w+))*\@[A-Za-z0-9]+((\.|-)[A-Za-z0-9]+)*\.[A-Za-z]+$/
@@ -513,6 +580,47 @@
         // 檢查空白
         checkValid(value, validate, item) {
           this[validate][item] = Boolean(value)
+        },
+        // [LIFF]:: liff init 
+        liffInit (myLiffId) {
+          return new Promise ((resolve, reject) => {
+            liff.init({
+              liffId: myLiffId
+            })
+            .then(() => {
+              resolve('success')
+            })
+            .catch((err) => {
+              reject(new Error(`Error: ${err}`))
+            })
+          })
+        },
+        // [LIFF]:: get profile call
+        getLIFFProfile () {
+          return new Promise ((resolve, reject) => {
+            liff.getProfile().then(function(profile) {
+              resolve(profile)
+            }).catch(function(error) {
+              reject(new Error(error))
+            })
+          })
+        },
+        // [LIFF]:: 送出liff 訊息
+        liffSendMesaage (msgContent) {
+          return new Promise ((resolve, reject) => {
+            try {
+              liff.sendMessages([{
+                'type': 'text',
+                'text': msgContent
+              }]).then(function() {
+                resolve('success')
+              }).catch(function(error) {
+                reject(new Error(error))
+              })
+            } catch (error) {
+              reject(new Error(error))
+            }
+          })
         }
       },
       filters: {
@@ -540,10 +648,13 @@
         showPoints () {
           let currentCard = this.rewardCardPoints[this.currentCardNum - 1]
           let pointArray = []
-          pointArray.length = 10
-          pointArray.fill('used', 0, currentCard.used)
-          pointArray.fill('unused', currentCard.used, currentCard.total)
-          pointArray.fill('valid', currentCard.total)
+          try {
+            pointArray.length = 10
+            pointArray.fill('used', 0, currentCard.used)
+            pointArray.fill('unused', currentCard.used, currentCard.total)
+            pointArray.fill('valid', currentCard.total)
+          } catch (error) {
+          }
           return pointArray
         },
         // 鄉鎮名稱
@@ -553,30 +664,31 @@
         }
       },
       created() {
-        this.rewardCardId = new URL(location.href).searchParams.get("id")
-        this.fetchCityCountryData()
-        this.getProfileTest(this.rewardCardId).then(profile => {
-          //  贈品列表
-          this.redeems = profile.redeems
-          // 兌換紀錄
-          this.exchangeRecord = profile.records
-          // 滿額集點卡
-          this.rewardCard = {
-            ...profile,
-            'remainsPoints': profile.totalPoints - profile.usedPoints
-          }
-          delete this.rewardCard['redeems']
-          delete this.rewardCard['records']
-
-          // 組裝
-          this.cardPoints(profile.totalPoints, profile.usedPoints)
-
-          this.currentCardNum = this.rewardCardPoints.length
-          this.isload = true
-
-        }).catch(e => {
-
-        })
+        let liffId = '1629910250-nKOEWYgg'
+        // liff Init - 取得profile
+        this.liffInit(liffId)
+          .then((data) => {
+            if (!liff.isLoggedIn()) {    
+              liff.login()
+            } else {
+              // 取得登入者資訊
+              return this.getLIFFProfile().then(profile => profile)
+            }
+          }).then((profile) => {
+            // 取得使用者的mid
+            this.mid = profile.userId
+            // 取得集點卡id
+            this.rewardCardId = new URL(location.href).searchParams.get("id")
+            // fetch台灣縣市鄉鎮
+            this.fetchCityCountryData()
+            // 取得集點卡的資訊
+            this.fetchProfileData(this.rewardCardId)
+            // 取得使用者過去填寫資料
+            this.userAddress()
+          }).catch(msg => {
+            alert(msg)
+            location.assign('https://manager.line.biz/')
+          })
       }
     })
   </script>
