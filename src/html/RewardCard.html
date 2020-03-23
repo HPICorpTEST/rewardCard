@@ -53,13 +53,13 @@
               <p class="discription__title">兌換期限</p>
               <p class="discription__detail">{{rewardCard.startTime}} ~ {{rewardCard.endTime}}</p>
             </li>
-            <li class="mt-3" v-if="rewardCard.description">
+            <li class="mt-3" v-show="rewardCard.description">
               <div class="discription__img"></div>
               <p class="discription__title">活動說明</p>
               <p class="discription__detail">{{rewardCard.description}}</p>
             </li>
-            <li class="mt-3">
-              <div class="discription__img" v-if="rewardCard.attention"></div>
+            <li class="mt-3" v-show="rewardCard.attention">
+              <div class="discription__img"></div>
               <p class="discription__title">注意事項</p>
               <p class="discription__detail">{{rewardCard.attention}}</p>
             </li>
@@ -131,7 +131,7 @@
           <div class="exchangeModal__content">
             <div class="flex">
               <div class="img w50">
-                <img class="m-auto" :src="selectedPrize.image | listImage"alt="">
+                <img class="m-auto" :src="selectedPrize.image | listImage" alt="">
               </div>
 
               <div class="exchangeModal__main w50">
