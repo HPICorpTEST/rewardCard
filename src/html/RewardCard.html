@@ -376,6 +376,28 @@
         },
         // [API]: 取得用戶先前的資料
         userAddress () {
+          // let url = '../js/address.json'
+          // fetch(url, {
+          //     method: 'GET'
+          //   }).then(response => {
+          //     console.log(response)
+          //     return response.json()
+          //   }).then(response => {
+              
+          //     // 先取得地址前三碼
+          //     let addressCode = response.address.slice(0, 3)
+          //     let showUserData = this.showAddressData('ZipCode', addressCode)
+          //     if (Object.keys(showUserData).length) {
+          //       this.uiUserInfoTemp.selectedCountry = showUserData.CityName
+          //       this.uiUserInfoTemp.selectedCity = showUserData.AreaName
+          //       this.uiUserInfoTemp.inputAddress = response.address.replace(`${addressCode}${showUserData.CityName}${showUserData.AreaName}`, '')
+          //     } else {
+          //       this.uiUserInfoTemp.inputAddress = response
+          //     }
+          //   }).catch(e => {
+          //     console.log(e)
+          //     console.log('something wrong')
+          //   })
           let url = `rewardCard/user/profile?mid=${this.mid}`
             fetch(url, {
               method: 'POST',
@@ -385,9 +407,19 @@
             }).then(response => {
               return response.json()
             }).then(response => {
-              console.log(response)
+              // 先取得地址前三碼
+              let addressCode = response.address.slice(0, 3)
+              let showUserData = this.showAddressData('ZipCode', addressCode)
+              if (Object.keys(showUserData).length) {
+                this.uiUserInfoTemp.selectedCountry = showUserData.CityName
+                this.uiUserInfoTemp.selectedCity = showUserData.AreaName
+                this.uiUserInfoTemp.inputAddress = response.address.replace(`${addressCode}${showUserData.CityName}${showUserData.AreaName}`, '')
+              } else {
+                this.uiUserInfoTemp.inputAddress = response
+              }
             }).catch(e => {
-            })
+            console.log(e)
+          })
         },
         // 兌換商品
         exchangePrize(item) {
@@ -453,12 +485,14 @@
           Object.keys(this.uiUserInfoTemp).forEach(item => {
             this.uiUserInfoValidate[item] = Boolean(this.uiUserInfoTemp[item])
           })
+          // 確認資料是否都有填寫
           if (Object.values(this.uiUserInfoValidate).every(x => Boolean(x))) {
+            let zipCode = this.showAddressData('AreaName', this.uiUserInfoTemp['selectedCity']).ZipCode
             this.userInfo = {
               name: this.uiUserInfoTemp['name'],
               sex: this.uiUserInfoTemp['sex'],
               phone: this.uiUserInfoTemp['phone'],
-              address: `${this.uiUserInfoTemp['selectedCountry']}${this.uiUserInfoTemp['selectedCity']}${this.uiUserInfoTemp['inputAddress']}`,
+              address: `${zipCode}${this.uiUserInfoTemp['selectedCountry']}${this.uiUserInfoTemp['selectedCity']}${this.uiUserInfoTemp['inputAddress']}`,
               email: this.uiUserInfoTemp['email']
             }
             this.modal.isConfirmUserInfo = true
@@ -522,19 +556,23 @@
           } else if (status == 'plus' && this.currentCardNum !== this.rewardCardPoints.length) {
             this.currentCardNum = this.currentCardNum + 1
           }
-        },
+        },      
         // 取得鄉鎮市區
         fetchCityCountryData() {
           let url = '../js/CityCountyData.json'
+          return new Promise((resolve, reject) => {
             fetch(url, {
               method: 'GET'
             }).then(response => {
               return response.json()
             }).then(response => {
-              this.cityCountry = response
+              setTimeout(() => {
+                resolve(response)
+              }, 100)
             }).catch(e => {
-              console.log('something wrong')
+              reject('something wrong')
             })
+          }) 
         },
         // 取集點卡用戶資料
         fetchProfileData (id) {
@@ -558,6 +596,22 @@
             this.isload = true
           }).catch(e => {
           })
+        },
+        /**
+         * Search 地址完整資訊
+         * @param {String} key 搜尋的key Ex: 鄉鎮市區 or Code
+         * @param {String} val 搜尋得值
+         */
+        showAddressData (key, val) {
+          let modifyCityCountryAddress = this.cityCountry.reduce((acc, current) => {
+            let data = current.AreaList.map(x => ({
+              'CityName': current.CityName,
+              ...x
+            }))
+            return [...acc, ...data]
+          }, [])
+
+          return modifyCityCountryAddress.find(item => item[key] === val)
         },
         // 檢查email
         checkEmail(email, validate, item) {
@@ -664,31 +718,38 @@
         }
       },
       created() {
-        let liffId = '1629910250-nKOEWYgg'
-        // liff Init - 取得profile
-        this.liffInit(liffId)
-          .then((data) => {
-            if (!liff.isLoggedIn()) {    
-              liff.login()
-            } else {
-              // 取得登入者資訊
-              return this.getLIFFProfile().then(profile => profile)
-            }
-          }).then((profile) => {
+        // let liffId = '1629910250-pMnyE9oo'
+        // // liff Init - 取得profile
+        // this.liffInit(liffId)
+        //   .then((data) => {
+        //     if (!liff.isLoggedIn()) {    
+        //       liff.login()
+        //     } else {
+        //       // 取得登入者資訊
+        //       return this.getLIFFProfile().then(profile => profile)
+        //     }
+        //   }).then((profile) => {
             // 取得使用者的mid
-            this.mid = profile.userId
+            // this.mid = profile.userId
             // 取得集點卡id
             this.rewardCardId = new URL(location.href).searchParams.get("id")
-            // fetch台灣縣市鄉鎮
-            this.fetchCityCountryData()
+
             // 取得集點卡的資訊
             this.fetchProfileData(this.rewardCardId)
-            // 取得使用者過去填寫資料
-            this.userAddress()
-          }).catch(msg => {
-            alert(msg)
-            location.assign('https://manager.line.biz/')
-          })
+
+            // fetch台灣縣市鄉鎮
+            this.fetchCityCountryData().then(response => {
+              this.cityCountry = response
+              // 取得使用者過去填寫資料
+              this.userAddress()
+            }).catch(e => {
+              console.log(e)
+            })
+
+          // }).catch(msg => {
+          //   alert(msg)
+          //   location.assign('https://manager.line.biz/')
+          // })
       }
     })
   </script>
