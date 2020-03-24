@@ -77,7 +77,7 @@
               <p class="listBtn__name">{{redeem.title}}</p>
               <p class="listBtn__point">剩餘數量: {{redeem.remainingQuantity}}</p>
               <!-- todo 過期 -->
-              <p v-if="new Date() > new Date(`${rewardCard.endTime} 23:59:59`)">已過期</p>
+              <p v-if="isExpiry(rewardCard.endTime)">已過期</p>
               <p v-else-if="rewardCard.remainsPoints >= redeem.exchangePoint && redeem.remainingQuantity > 0" class="listBtn__status success">可兌換</p>
               <p v-else-if="redeem.remainingQuantity == 0" class="listBtn__status danger">數量不足</p>
               <p v-else class="listBtn__status danger">未達到</p>
@@ -425,7 +425,7 @@
         },
         // 兌換商品
         exchangePrize(item) {
-          if (this.rewardCard.remainsPoints >=item.exchangePoint && item.remainingQuantity > 0 && new Date(`${this.rewardCard.endTime} 23:59:59`) >= new Date()) {
+          if (this.rewardCard.remainsPoints >= item.exchangePoint && item.remainingQuantity > 0 && !this.isExpiry(this.rewardCard.endTime)) {
             this.closeModal = false
             this.selectedPrize = {
               ...item,
@@ -636,6 +636,13 @@
         // 檢查空白
         checkValid(value, validate, item) {
           this[validate][item] = Boolean(value)
+        },
+        // 確認是否已過期，今日 > endtime
+        isExpiry (date) {
+          let mm = new Date().getMonth() + 1 >= 10 ? new Date().getMonth() + 1 : `0${new Date().getMonth() + 1}`
+          let dd = new Date().getDate() >= 10 ? new Date().getDate() : `0${new Date().getDate()}`
+          let today = `${new Date().getFullYear()}-${mm}-${dd}}`
+          return today > date
         },
         // [LIFF]:: liff init 
         liffInit (myLiffId) {

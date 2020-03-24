@@ -15,7 +15,7 @@
         </div>
         <div class="p-rewardCardList__content">
             <div v-for="(item, index) in rewarcCardList" :key="index" class="list"
-                :class="{'list--expiry': new Date() > new Date(`${item.endTime} 23:59:59`)}" @click="goDetailPage(item.id)">
+                :class="{'list--expiry': isExpiry(item.endTime)}" @click="goDetailPage(item.id)">
                 <div class="list__img grid-4">
                     <img :src="item.rewardCardImage | listImage" alt=""
                         onerror="this.src='../Mobile/images/rewardCard/temp_prize2.png'">
@@ -62,6 +62,13 @@
                 // 前往明細頁面
                 goDetailPage(id) {
                     location.assign(`RewardCard.html?mid=${this.uid}&id=${id}`)
+                },
+                // 確認是否已過期，今日 > endtime
+                isExpiry(date) {
+                    let mm = new Date().getMonth() + 1 >= 10 ? new Date().getMonth() + 1 : `0${new Date().getMonth() + 1}`
+                    let dd = new Date().getDate() >= 10 ? new Date().getDate() : `0${new Date().getDate()}`
+                    let today = `${new Date().getFullYear()}-${mm}-${dd}}`
+                    return today > date
                 },
                 // [LIFF]:: liff init 
                 liffInit(myLiffId) {
