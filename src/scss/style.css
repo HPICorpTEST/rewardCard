@@ -1292,6 +1292,7 @@ i.i-arrow-right {
 }
 
 .list {
+  margin: 0 0 0.6rem;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;

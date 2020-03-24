@@ -14,16 +14,17 @@
             <img src="../Mobile/images/rewardCard/bgList.jpg" alt="">
         </div>
         <div class="p-rewardCardList__content">
-            <div v-for="(item, index) in rewarcCardList" :key="index" class="list mb-3"
+            <div v-for="(item, index) in rewarcCardList" :key="index" class="list"
                 :class="{'list--expiry': new Date() > new Date(`${item.endTime} 23:59:59`)}" @click="goDetailPage(item.id)">
                 <div class="list__img grid-4">
                     <img :src="item.rewardCardImage | listImage" alt=""
                         onerror="this.src='../Mobile/images/rewardCard/temp_prize2.png'">
                 </div>
                 <div class="list__main grid-8">
-                    <p class="list__name">{{item.title}}</p>
-                    <p class="list__discript">可用點數: {{item.totalPoints - item.usedPoints}}點</p>
-                    <p class="list__discript">兌換截止日 {{item.endTime}}</p>
+                    <!-- <p class="list__name">{{item.title}}</p> -->
+                    <p class="list__name">{{limitTitleCharacters(item.title)}}</p>
+                    <p class="list__discript">可用點數：{{item.totalPoints - item.usedPoints}} 點</p>
+                    <p class="list__discript">兌換截止日：{{item.endTime}}</p>
                 </div>
             </div>
         </div>
@@ -40,6 +41,9 @@
                 rewarcCardList: []
             },
             methods: {
+                limitTitleCharacters(originTitle) {
+                  return originTitle.length <= 15 ? originTitle : originTitle.slice(0,15).concat('...')
+                },
                 // 顯示集點卡列表
                 showRewardList() {
                     // let url = `rewardCard/list?mid=${this.mid}`

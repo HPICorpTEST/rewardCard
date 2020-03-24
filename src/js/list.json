@@ -1,17 +1,17 @@
 [
-    {
-        "id": 67,
-        "title": "集點卡測3試",
-        "totalPoints": 33,
-        "usedPoints": 12,
-        "rewardCardImage": "d6ab0e9a-5963-49b3-bb9d-9be52cd09666",
-        "startTime": "2020-03-20",
-        "endTime": "2020-04-20",
-        "status": "ACTIVE",
-        "createTime": "2020-03-06 15:28:51",
-        "modifyUser": "test"
-    },
-    {
+  {
+      "id": 67,
+      "title": "集點卡測3試",
+      "totalPoints": 33,
+      "usedPoints": 12,
+      "rewardCardImage": "d6ab0e9a-5963-49b3-bb9d-9be52cd09666",
+      "startTime": "2020-03-20",
+      "endTime": "2020-04-20",
+      "status": "ACTIVE",
+      "createTime": "2020-03-06 15:28:51",
+      "modifyUser": "test"
+  },
+  {
       "id": 69,
       "title": "集點卡測試集點卡測試集點卡測試",
       "totalPoints": 33,
@@ -33,6 +33,18 @@
       "endTime": "2020-03-20",
       "status": "ACTIVE",
       "createTime": "2020-03-06 15:30:31",
+      "modifyUser": "test"
+  },
+  {
+      "id": 66,
+      "title": "集點卡測試集點卡測試集點卡測試超過15個字",
+      "totalPoints": 33,
+      "usedPoints": 12,
+      "rewardCardImage": "d6ab0e9a-5963-49b3-bb9d-9be52cd09666",
+      "startTime": "2020-02-20",
+      "endTime": "2020-03-20",
+      "status": "ACTIVE",
+      "createTime": "2020-03-06 15:30:02",
       "modifyUser": "test"
   }
 ]
