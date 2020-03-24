@@ -22,7 +22,7 @@
                 </div>
                 <div class="list__main grid-8">
                     <!-- <p class="list__name">{{item.title}}</p> -->
-                    <p class="list__name">{{limitTitleCharacters(item.title)}}</p>
+                    <p class="list__name">{{item.title}}</p>
                     <p class="list__discript">可用點數：{{item.totalPoints - item.usedPoints}} 點</p>
                     <p class="list__discript">兌換截止日：{{item.endTime}}</p>
                 </div>
@@ -41,9 +41,6 @@
                 rewarcCardList: []
             },
             methods: {
-                limitTitleCharacters(originTitle) {
-                  return originTitle.length <= 15 ? originTitle : originTitle.slice(0,15).concat('...')
-                },
                 // 顯示集點卡列表
                 showRewardList() {
                     // let url = `rewardCard/list?mid=${this.mid}`
