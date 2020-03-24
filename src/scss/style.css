@@ -629,8 +629,15 @@ i.i-arrow-right {
 .p-rewardCard {
   width: 100%;
   max-width: 800px;
+  height: 100vh;
   margin: auto;
-  min-height: 100vh;
+  overflow: hidden;
+}
+
+.p-rewardCard__rewardCard {
+  height: 90%;
+  margin-top: 1rem;
+  overflow-y: auto;
 }
 
 .p-rewardCard__header {
@@ -642,11 +649,9 @@ i.i-arrow-right {
 }
 
 .p-rewardCard__content {
+  height: 87%;
   padding: 1.2rem;
-}
-
-.p-rewardCard__content .cards {
-  margin-top: 1rem;
+  overflow-y: hidden;
 }
 
 .p-rewardCard__content .cards__item {
@@ -760,12 +765,14 @@ i.i-arrow-right {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  -ms-flex-pack: distribute;
-      justify-content: space-around;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
   margin-top: 5px;
+  font-size: 1.2rem;
 }
 
 .p-rewardCard__content .cards__discript .i-border-r50 {
@@ -775,9 +782,10 @@ i.i-arrow-right {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  width: 1.4rem;
-  height: 1.4rem;
-  border: 2px solid #aaa;
+  width: 2.3rem;
+  height: 2.3rem;
+  margin: 0 0.6rem;
+  border: 1px solid #aaa;
   border-radius: 50%;
 }
 
@@ -798,7 +806,7 @@ i.i-arrow-right {
 }
 
 .p-rewardCard__content .discription {
-  margin-top: 1rem;
+  margin: 1rem 0;
   border-radius: 20px;
   padding: 1.4rem;
   border: 1px solid #efefef;
@@ -821,12 +829,17 @@ i.i-arrow-right {
 
 .p-rewardCard__content .discription__title {
   font-size: 1.05rem;
-  font-weight: 500;
+  font-weight: 700;
   line-height: 1.68;
 }
 
 .p-rewardCard__content .discription__detail {
   font-size: 1.02rem;
+}
+
+.p-rewardCard__content .discription__credit {
+  font-size: 1.3rem;
+  font-weight: 700;
 }
 
 .p-rewardCard .listBtn {
@@ -1415,4 +1428,3 @@ i.i-arrow-right {
   opacity: 0.9;
   font-weight: bolder;
 }
-/*# sourceMappingURL=style.css.map */

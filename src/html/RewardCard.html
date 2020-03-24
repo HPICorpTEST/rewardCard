@@ -46,7 +46,8 @@
           <ul class="discription">
             <li>
               <div class="discription__img"></div>
-              <p class="discription__title">可用點數{{rewardCard.totalPoints - rewardCard.usedPoints}}點</p>
+              <p class="discription__title">可用點數</p>
+              <p class="discription__detail">共 <span class="discription__credit">{{rewardCard.totalPoints - rewardCard.usedPoints}}</span> 點</p>
             </li>
             <li class="mt-3">
               <div class="discription__img"></div>
@@ -64,7 +65,7 @@
               <p class="discription__detail">{{rewardCard.attention}}</p>
             </li>
           </ul>
-          <div class="rwBtn mt-3 m-auto">返回列表</div>
+          <!-- <div class="rwBtn mt-3 m-auto">返回列表</div> -->
         </div>
 
         <div v-show="currentPage == 'redeem'" class="p-rewardCard__redeem">
