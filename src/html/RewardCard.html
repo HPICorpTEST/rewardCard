@@ -19,7 +19,7 @@
             {{item.name}}
           </li>
         </ul>
-        <div v-show="currentPage == 'rewardCard'" class="p-rewardCard__rewardCard">
+        <div v-show="currentPage == 'rewardCard'" class="p-rewardCard__rewardCard p-rewardCard__cardBlock">
           <div class="wrapCard">
             <div class="cards">
               <ul class="cards__item" :style="`background-image: url(../bcs/getResource/IMAGE/${rewardCard.backgroundImage})`">
@@ -68,7 +68,7 @@
           <!-- <div class="rwBtn mt-3 m-auto">返回列表</div> -->
         </div>
 
-        <div v-show="currentPage == 'redeem'" class="p-rewardCard__redeem">
+        <div v-show="currentPage == 'redeem'" class="p-rewardCard__redeem p-rewardCard__cardBlock">
           <div class="listBtn mt-3" v-for="redeem in redeems" :key="redeem.rid" @click="exchangePrize(redeem)">
             <div class="listBtn__img grid-4">
               <img :src="redeem.image | listImage" alt="">
@@ -86,7 +86,7 @@
           </div>
         </div>
 
-        <div v-show="currentPage == 'record'" class="p-rewardCard__record">
+        <div v-show="currentPage == 'record'" class="p-rewardCard__record p-rewardCard__cardBlock">
           <div v-if="exchangeRecord.length > 0">
             <table class="recordTable mt-3 w100" v-for="(record, index) in exchangeRecord" @click="switchRecord(index)">
               <tr class="recordTable__title">
@@ -124,6 +124,7 @@
           </div>
         </div>
       </div>
+
       <!-- modal -->
       <div class="coverArea" :class="{isload: closeModal}">
         <!-- 選擇數量 -->

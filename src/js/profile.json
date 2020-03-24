@@ -13,6 +13,46 @@
   "status": "ACTIVE",
   "redeems": [
       {
+          "rid": 61,
+          "title": "序號測試",
+          "image": "",
+          "type": "code",
+          "exchangePoint": 5,
+          "remainingQuantity": 3
+      },
+      {
+          "rid": 60,
+          "title": "fff",
+          "image": "",
+          "type": "gift",
+          "exchangePoint": 3,
+          "remainingQuantity": 1
+      },
+      {
+          "rid": 61,
+          "title": "序號測試",
+          "image": "",
+          "type": "code",
+          "exchangePoint": 5,
+          "remainingQuantity": 3
+      },
+      {
+          "rid": 60,
+          "title": "fff",
+          "image": "",
+          "type": "gift",
+          "exchangePoint": 3,
+          "remainingQuantity": 1
+      },
+      {
+          "rid": 61,
+          "title": "序號測試",
+          "image": "",
+          "type": "code",
+          "exchangePoint": 5,
+          "remainingQuantity": 3
+      },
+      {
           "rid": 60,
           "title": "fff",
           "image": "",
@@ -52,6 +92,112 @@
               "44",
               "55"
           ]
+      },
+      {
+          "title": "fff",
+          "type": "gift",
+          "usedPoints": 6,
+          "numRedeemed": 2,
+          "redeemTime": "2020-03-13",
+          "name": "Jason",
+          "sex": "male",
+          "phone": "0987654321",
+          "address": "松山區東興路28號七樓",
+          "email": "xxxxxxx@gamil.com"
+      },
+      {
+          "title": "fff",
+          "type": "gift",
+          "usedPoints": 6,
+          "numRedeemed": 2,
+          "redeemTime": "2020-03-13",
+          "name": "Jason",
+          "sex": "male",
+          "phone": "0987654321",
+          "address": "松山區東興路28號七樓",
+          "email": "xxxxxxx@gamil.com"
+      },
+      {
+          "title": "序號測試",
+          "type": "code",
+          "usedPoints": 10,
+          "numRedeemed": 2,
+          "redeemTime": "2020-03-13",
+          "codes": [
+              "44",
+              "55"
+          ]
+      },
+      {
+          "title": "fff",
+          "type": "gift",
+          "usedPoints": 6,
+          "numRedeemed": 2,
+          "redeemTime": "2020-03-13",
+          "name": "Jason",
+          "sex": "male",
+          "phone": "0987654321",
+          "address": "松山區東興路28號七樓",
+          "email": "xxxxxxx@gamil.com"
+      },
+      {
+          "title": "fff",
+          "type": "gift",
+          "usedPoints": 6,
+          "numRedeemed": 2,
+          "redeemTime": "2020-03-13",
+          "name": "Jason",
+          "sex": "male",
+          "phone": "0987654321",
+          "address": "松山區東興路28號七樓",
+          "email": "xxxxxxx@gamil.com"
+      },
+      {
+          "title": "fff",
+          "type": "gift",
+          "usedPoints": 6,
+          "numRedeemed": 2,
+          "redeemTime": "2020-03-13",
+          "name": "Jason",
+          "sex": "male",
+          "phone": "0987654321",
+          "address": "松山區東興路28號七樓",
+          "email": "xxxxxxx@gamil.com"
+      },
+      {
+          "title": "序號測試",
+          "type": "code",
+          "usedPoints": 10,
+          "numRedeemed": 2,
+          "redeemTime": "2020-03-13",
+          "codes": [
+              "44",
+              "55"
+          ]
+      },
+      {
+          "title": "fff",
+          "type": "gift",
+          "usedPoints": 6,
+          "numRedeemed": 2,
+          "redeemTime": "2020-03-13",
+          "name": "Jason",
+          "sex": "male",
+          "phone": "0987654321",
+          "address": "松山區東興路28號七樓",
+          "email": "xxxxxxx@gamil.com"
+      },
+      {
+          "title": "fff",
+          "type": "gift",
+          "usedPoints": 6,
+          "numRedeemed": 2,
+          "redeemTime": "2020-03-13",
+          "name": "Jason",
+          "sex": "male",
+          "phone": "0987654321",
+          "address": "松山區東興路28號七樓",
+          "email": "xxxxxxx@gamil.com"
       }
   ]
 }
