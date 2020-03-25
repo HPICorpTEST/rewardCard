@@ -37,7 +37,7 @@ img {
 input, select {
   outline: none;
 }
-input[type=text] {   
+input[type=text], input[type=tel] {   
   -webkit-appearance: none !important;
   -moz-appearance: none !important;
   appearance: none !important;
