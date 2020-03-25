@@ -663,7 +663,7 @@
 }
 // modal
 .exchangeModal {
-  width: 70%;
+  width: 72%;
   max-width: $max-width * 0.7;
   margin: auto;
   border-radius: 10px;;
@@ -675,7 +675,7 @@
   }
   &__content {
     align-items: center;
-    padding: 1rem;
+    padding: 0.9rem;
     background:$white;
 
     img {
