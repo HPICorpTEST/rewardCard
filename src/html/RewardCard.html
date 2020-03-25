@@ -134,7 +134,7 @@
           <div class="exchangeModal__content">
             <div class="flex">
               <div class="img w50">
-                <img class="m-auto" :src="selectedPrize.image | listImage" alt="">
+                <img :src="selectedPrize.image | listImage" alt="">
               </div>
 
               <div class="exchangeModal__main w50">
@@ -166,8 +166,8 @@
 
               <div class="exchangeModal__main w50">
                 <p>{{selectedPrize.title}}</p>
-                <p>本次兌換: {{selectedPrize.exchangeNumber}}份</p>
-                <p>使用點數: {{selectedPrize.exchangeNumber * selectedPrize.exchangePoint}}點</p>
+                <p>本次兌換：{{selectedPrize.exchangeNumber}} 份</p>
+                <p>使用點數：<span class="exchangeModal__main__credit">{{selectedPrize.exchangeNumber * selectedPrize.exchangePoint}}</span> 點</p>
               </div>
             </div>
 
@@ -700,7 +700,9 @@
       filters: {
         // 轉換圖片
         listImage(item) {
-          return `../bcs/getResource/IMAGE/${item}`
+          // TODO 測試完記得改回來
+          // return `../bcs/getResource/IMAGE/${item}`
+          return `../mobile/images/rewardCard/${item}`
         },
       },
       computed: {

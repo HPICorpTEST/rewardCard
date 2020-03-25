@@ -693,17 +693,18 @@
     background:$white;
 
     .img {
+      padding: 0 0.9rem 0 0;
       display: flex;
       justify-content: center;
       align-items: center;
       img {
-        padding: 0.5rem;
         max-width: 80px;
       }
     }
   }
   &__main {
     > p {
+      margin: 4px 0;
       color: $gray-1;
     }
     &__credit {

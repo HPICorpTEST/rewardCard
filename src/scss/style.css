@@ -1398,6 +1398,7 @@ i.i-arrow-right {
 }
 
 .exchangeModal__content .img {
+  padding: 0 0.9rem 0 0;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -1410,11 +1411,11 @@ i.i-arrow-right {
 }
 
 .exchangeModal__content .img img {
-  padding: 0.5rem;
   max-width: 80px;
 }
 
 .exchangeModal__main > p {
+  margin: 4px 0;
   color: #4a4a4a;
 }
 
