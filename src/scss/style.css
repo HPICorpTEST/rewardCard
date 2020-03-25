@@ -50,6 +50,12 @@ input, select {
   outline: none;
 }
 
+input[type=text] {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+}
+
 .pointer {
   cursor: pointer;
 }
@@ -1454,4 +1460,3 @@ i.i-arrow-right {
   opacity: 0.9;
   font-weight: bolder;
 }
-/*# sourceMappingURL=style.css.map */
