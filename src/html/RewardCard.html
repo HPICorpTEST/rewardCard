@@ -92,21 +92,22 @@
               <tr class="recordTable__title">
                 <td class="w25">{{record.redeemTime}}</td>
                 <td class="w35">{{record.title}}</td>
-                <td class="w15">{{record.numRedeemed}}份</td>
-                <td class="w25">已扣除{{record.usedPoints}}點</td>
+                <td class="w15">{{record.numRedeemed}} 份</td>
+                <td class="w25">共 {{record.usedPoints}} 點</td>
               </tr>
               <tr class="recordTable__content">
                 <td class="w30">{{record.type === 'gift' ?'收件資訊' : '贈品序號'}}</td>
                 <td colspan="3" class="w70">
                   <template v-if="record.type === 'gift'">
+                    <p>{{record.name}}</p>
                     <p>{{record.phone}}</p>
                     <p>{{record.email}}</p>
-                    <p>{{record.name}}</p>
+                    <p v-show="record.address">{{record.address}}</p>
                   </template>
 
                   <template v-else>
-                    <p v-for="code in record.codes">
-                      {{code}}
+                    <p v-for="(code, i) in record.codes" v-html="addHrefToCode(i, record.codes)">
+                      <!-- {{code}} -->
                     </p>
                   </template>
 
@@ -684,13 +685,21 @@
               reject(new Error(error))
             }
           })
+        },
+        // 如果序號是網址則加上連結
+        addHrefToCode(index, codes) {
+          if (codes.length > 1) {
+            return codes[index].match('https') ? `${index+1}. <a href="${codes[index]}" target="_blank" rel="noopener">${codes[index]}</a>` : `${index+1}. ${codes[index]}`
+          } else {
+            return codes[index].match('https') ? `<a href="${codes[index]}" target="_blank" rel="noopener">${codes[index]}</a>` : codes[index]
+          }
         }
       },
       filters: {
         // 轉換圖片
         listImage(item) {
           return `../bcs/getResource/IMAGE/${item}`
-        }
+        },
       },
       computed: {
         // 16進位顏色轉換名字
