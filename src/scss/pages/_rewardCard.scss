@@ -145,7 +145,7 @@
       border-radius: 20px;
       padding: 1.4rem;
       border: 1px solid $default;
-      box-shadow: 0 1px 3px rgba(0, 0, 0, .2);
+      box-shadow: $box-shadow;
       li {
         padding-left: 2.5rem;
         .discription__img {
@@ -178,7 +178,7 @@
     align-items: center;
     padding-right: 0.6rem;
     border-radius: 20px;
-    box-shadow: 0 1px 6px rgba(0, 0, 0, .2);
+    box-shadow: $box-shadow;
     &__img {
       padding: 1rem;
       color: $gray-1;
@@ -203,7 +203,7 @@
   // 2. collapse
   .recordTable{
     background: $white;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, .15);
+    box-shadow: $box-shadow;
     padding: .2rem 1rem;
     border-radius: 18px;
     cursor: pointer;
@@ -229,7 +229,7 @@
       }
       td {
         border-top: 1px dotted $gray-4;
-        padding: 10px;
+        padding: 8px;
       }
       td:first-of-type {
         font-size: 0.8rem;
@@ -237,7 +237,6 @@
         text-align: right;
       }
       td:last-of-type {
-        padding: 10px;
         font-size: 0.7rem;
       }
     }
@@ -268,7 +267,6 @@
       background: $blue;
     }
     .listBtn {
-      border: 1px solid $blue;
       &__detail {
         color: $blue;
       }
@@ -365,7 +363,6 @@
       background-color: $pink;
     }
     .listBtn {
-      border: 1px solid $pink;
       &__detail {
         color: $pink;
       }
@@ -445,7 +442,6 @@
       background: $green;
     }
     .listBtn {
-      border: 1px solid $green;
       &__detail {
         color: $green;
       }
@@ -525,7 +521,6 @@
       background: $yellow;
     }
     .listBtn {
-      border: 1px solid $yellow;
       &__detail {
         color: $yellow;
       }

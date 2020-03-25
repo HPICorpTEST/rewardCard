@@ -69,20 +69,26 @@
         </div>
 
         <div v-show="currentPage == 'redeem'" class="p-rewardCard__redeem p-rewardCard__cardBlock">
-          <div class="listBtn mt-3" v-for="redeem in redeems" :key="redeem.rid" @click="exchangePrize(redeem)">
-            <div class="listBtn__img grid-4">
-              <img :src="redeem.image | listImage" alt="">
+          <template v-if="redeems.length > 0">
+            <div class="listBtn mt-3" v-for="redeem in redeems" :key="redeem.rid" @click="exchangePrize(redeem)">
+              <div class="listBtn__img grid-4">
+                <img :src="redeem.image | listImage" alt="">
+              </div>
+              <div class="listBtn__main grid-4">
+                <p class="listBtn__name">{{redeem.title}}</p>
+                <p class="listBtn__point">剩餘數量: {{redeem.remainingQuantity}}</p>
+                <!-- todo 過期 -->
+                <p v-if="isExpiry(rewardCard.endTime)" class="listBtn__status danger">已逾期</p>
+                <p v-else-if="rewardCard.remainsPoints >= redeem.exchangePoint && redeem.remainingQuantity > 0" class="listBtn__status success">可兌換</p>
+                <p v-else-if="redeem.remainingQuantity == 0" class="listBtn__status danger">數量不足</p>
+                <p v-else class="listBtn__status danger">未達到</p>
+              </div>
+              <p class="listBtn__detail grid-4"><span>{{redeem.exchangePoint}}</span>點</p>
             </div>
-            <div class="listBtn__main grid-4">
-              <p class="listBtn__name">{{redeem.title}}</p>
-              <p class="listBtn__point">剩餘數量: {{redeem.remainingQuantity}}</p>
-              <!-- todo 過期 -->
-              <p v-if="isExpiry(rewardCard.endTime)">已過期</p>
-              <p v-else-if="rewardCard.remainsPoints >= redeem.exchangePoint && redeem.remainingQuantity > 0" class="listBtn__status success">可兌換</p>
-              <p v-else-if="redeem.remainingQuantity == 0" class="listBtn__status danger">數量不足</p>
-              <p v-else class="listBtn__status danger">未達到</p>
-            </div>
-            <p class="listBtn__detail grid-4"><span>{{redeem.exchangePoint}}</span>點</p>
+          </template>
+          <div v-else class="noRecord">
+            <img src="../Mobile/images/rewardCard/no-record.png" alt="">
+            <p>目前尚無可兌換的贈品</p>
           </div>
         </div>
 
@@ -96,8 +102,8 @@
                 <td class="w25">共 {{record.usedPoints}} 點</td>
               </tr>
               <tr class="recordTable__content">
-                <td class="w30">{{record.type === 'gift' ?'收件資訊' : '贈品序號'}}</td>
-                <td colspan="3" class="w70">
+                <td>{{record.type === 'gift' ?'收件資訊' : '贈品序號'}}</td>
+                <td colspan="3">
                   <template v-if="record.type === 'gift'">
                     <p>{{record.name}}</p>
                     <p>{{record.phone}}</p>
