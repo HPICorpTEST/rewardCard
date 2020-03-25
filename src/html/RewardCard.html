@@ -218,30 +218,32 @@
           <div class="exchangeModal__content">
             <div class="p-2">
               <div class="flex mb-3">
-                <p class="mr-1">收件人:</p>
+                <p class="mr-1">收件人：</p>
                 <p class="gray-1">{{userInfo.name}}</p>
               </div>
               <div class="flex mb-3">
-                <p class="mr-1">稱謂: </p>
+                <p class="mr-1">稱謂：</p>
                 <p class="gray-1">{{userInfo.sex == 'female' ? '小姐' : '先生'}}</p>
               </div>
               <div class="flex mb-3">
-                <p class="mr-1">聯絡電話: </p>
+                <p class="mr-1">聯絡電話：</p>
                 <p class="gray-1">{{userInfo.phone}}</p>
               </div>
               <div class="flex mb-3">
-                <p class="mr-1">電子郵件: </p>
-                <p class="gray-1">{{userInfo.email}}</p>
+                <!-- <p class="mr-1">電子郵件：</p>
+                <p class="gray-1">{{userInfo.email}}</p> -->
+                <p>電子郵件：<span class="gray-1">{{userInfo.email}}</span></p>
               </div>
               <div class="flex">
-                <p class="mr-1">收件地址: </p>
-                <p class="gray-1">{{userInfo.address}}</p>
+                <!-- <p class="mr-1">收件地址：</p>
+                <p class="gray-1">{{userInfo.address}}</p> -->
+                <p>收件地址：<span class="gray-1">{{userInfo.address}}</span></p>
               </div>
             </div>
           </div>
           <div class="exchangeModal__footer">
-            <p class="exchangeModal_confirm w50 border-right" @click="returnUserInfo">取消</p>
-            <p class="exchangeModal_confirm w50" @click="sendUserInfo">確定</p>
+            <p class="exchangeModal_confirm w50 border-right" @click="returnUserInfo">返回修改</p>
+            <p class="exchangeModal_confirm w50" @click="sendUserInfo">完成送出</p>
           </div>
         </div>
       </div>
@@ -416,7 +418,7 @@
               if (Object.keys(showUserData).length) {
                 this.uiUserInfoTemp.selectedCountry = showUserData.CityName
                 this.uiUserInfoTemp.selectedCity = showUserData.AreaName
-                this.uiUserInfoTemp.inputAddress = response.address.replace(`${addressCode}${showUserData.CityName}${showUserData.AreaName}`, '')
+                this.uiUserInfoTemp.inputAddress = response.address.replace(`${addressCode} ${showUserData.CityName}${showUserData.AreaName}`, '')
               } else {
                 this.uiUserInfoTemp.inputAddress = response
               }
@@ -495,7 +497,7 @@
               name: this.uiUserInfoTemp['name'],
               sex: this.uiUserInfoTemp['sex'],
               phone: this.uiUserInfoTemp['phone'],
-              address: `${zipCode}${this.uiUserInfoTemp['selectedCountry']}${this.uiUserInfoTemp['selectedCity']}${this.uiUserInfoTemp['inputAddress']}`,
+              address: `${zipCode} ${this.uiUserInfoTemp['selectedCountry']}${this.uiUserInfoTemp['selectedCity']}${this.uiUserInfoTemp['inputAddress']}`,
               email: this.uiUserInfoTemp['email']
             }
             this.modal.isConfirmUserInfo = true

@@ -1384,6 +1384,7 @@ i.i-arrow-right {
 .exchangeModal__header {
   color: #fff;
   text-align: center;
+  font-weight: 700;
   border-radius: 10px 10px  0 0;
   padding: 0.5rem;
 }
