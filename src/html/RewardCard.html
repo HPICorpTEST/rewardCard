@@ -138,20 +138,20 @@
               </div>
 
               <div class="exchangeModal__main w50">
-                <p>{{selectedPrize.title}}</p>
+                <p class="">{{selectedPrize.title}}</p>
                 <select v-if="selectedPrize.remainingQuantity > 10" class="exchangeModal__select mt-1 mb-1" v-model="selectedPrize.exchangeNumber">
                   <option v-for="num in 10" :value="num">{{num}}</option>
                 </select>
                 <select v-else class="exchangeModal__select mt-1 mb-1" v-model="selectedPrize.exchangeNumber">
                   <option v-for="num in selectedPrize.remainingQuantity" :value="num">{{num}}</option>
                 </select>
-                <p>需扣除點數{{selectedPrize.exchangeNumber * selectedPrize.exchangePoint }}點</p>
+                <p>共 <span class="exchangeModal__main__credit">{{selectedPrize.exchangeNumber * selectedPrize.exchangePoint }}</span> 點</p>
               </div>
             </div>
           </div>
           <div class="exchangeModal__footer">
             <p class="exchangeModal_confirm w50 border-right" @click="closeAllModal">取消</p>
-            <p class="exchangeModal_confirm w50" @click="orderPrize">確定</p>
+            <p class="exchangeModal_confirm w50" @click="orderPrize">兌換</p>
           </div>
         </div>
         <!-- 兌換成功 -->

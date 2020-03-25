@@ -281,6 +281,9 @@
       &__footer {
         background: $blue;
       }
+      &__main__credit {
+        color: $blue;
+      }
     }
     .tabs__item {
       color: $blue;
@@ -375,6 +378,9 @@
       &__footer {
         background-color: $pink;
       }
+      &__main__credit {
+        color: $pink;
+      }
     }
     .tabs__item {
       color: $pink;
@@ -452,6 +458,9 @@
       &__footer {
         background-color: $green;
       }
+      &__main__credit {
+        color: $green;
+      }
     }
     .tabs__item {
       color: $green;
@@ -528,6 +537,9 @@
       }
       &__footer {
         background-color: $yellow;
+      }
+      &__main__credit {
+        color: $yellow;
       }
     }
     .tabs__item {
@@ -667,10 +679,10 @@
   width: 72%;
   max-width: $max-width * 0.7;
   margin: auto;
-  border-radius: 10px;;
+  border-radius: 10px;
   &__header {
     color: $white;
-    text-align: center;;
+    text-align: center;
     border-radius: 10px 10px  0 0 ;
     padding: 0.5rem;
   }
@@ -679,9 +691,23 @@
     padding: 0.9rem;
     background:$white;
 
-    img {
-      padding: 0.5rem;
-      max-width: 80px;
+    .img {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      img {
+        padding: 0.5rem;
+        max-width: 80px;
+      }
+    }
+  }
+  &__main {
+    > p {
+      color: $gray-1;
+    }
+    &__credit {
+      font-size: 1.2rem;
+      font-weight: 700;
     }
   }
   &__select {
@@ -708,6 +734,7 @@
     border-radius: 1rem;
     padding: 0.3rem 0.4rem;
     width: 100%;
+    box-shadow: none;
   }
 
   &__footer {

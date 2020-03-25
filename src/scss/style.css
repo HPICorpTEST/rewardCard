@@ -972,6 +972,10 @@ i.i-arrow-right {
   background: #1b73a7;
 }
 
+.p-rewardCard--blue .exchangeModal__main__credit {
+  color: #1b73a7;
+}
+
 .p-rewardCard--blue .tabs__item {
   color: #1b73a7;
   border: 1px solid #1b73a7;
@@ -1063,6 +1067,10 @@ i.i-arrow-right {
   background-color: #EA3C6E;
 }
 
+.p-rewardCard--pink .exchangeModal__main__credit {
+  color: #EA3C6E;
+}
+
 .p-rewardCard--pink .tabs__item {
   color: #EA3C6E;
   border: 1px solid #EA3C6E;
@@ -1138,6 +1146,10 @@ i.i-arrow-right {
   background-color: #2C946E;
 }
 
+.p-rewardCard--green .exchangeModal__main__credit {
+  color: #2C946E;
+}
+
 .p-rewardCard--green .tabs__item {
   color: #2C946E;
   border: 1px solid #2C946E;
@@ -1211,6 +1223,10 @@ i.i-arrow-right {
 
 .p-rewardCard--yellow .exchangeModal__footer {
   background-color: #FFC000;
+}
+
+.p-rewardCard--yellow .exchangeModal__main__credit {
+  color: #FFC000;
 }
 
 .p-rewardCard--yellow .tabs__item {
@@ -1380,9 +1396,30 @@ i.i-arrow-right {
   background: #fff;
 }
 
-.exchangeModal__content img {
+.exchangeModal__content .img {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.exchangeModal__content .img img {
   padding: 0.5rem;
   max-width: 80px;
+}
+
+.exchangeModal__main > p {
+  color: #4a4a4a;
+}
+
+.exchangeModal__main__credit {
+  font-size: 1.2rem;
+  font-weight: 700;
 }
 
 .exchangeModal__select {
@@ -1409,6 +1446,8 @@ i.i-arrow-right {
   border-radius: 1rem;
   padding: 0.3rem 0.4rem;
   width: 100%;
+  -webkit-box-shadow: none;
+          box-shadow: none;
 }
 
 .exchangeModal__footer {

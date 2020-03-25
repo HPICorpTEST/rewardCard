@@ -13,15 +13,15 @@
   "status": "ACTIVE",
   "redeems": [
       {
-          "rid": 61,
+          "rid": 60,
           "title": "序號測試",
-          "image": "",
+          "image": "https://wuz.com.tw/images/201903/goods_img/14658_G_1553825022886.jpg",
           "type": "code",
           "exchangePoint": 5,
           "remainingQuantity": 3
       },
       {
-          "rid": 60,
+          "rid": 61,
           "title": "fff",
           "image": "",
           "type": "gift",
@@ -29,7 +29,7 @@
           "remainingQuantity": 1
       },
       {
-          "rid": 61,
+          "rid": 62,
           "title": "序號測試",
           "image": "",
           "type": "code",
@@ -37,7 +37,7 @@
           "remainingQuantity": 3
       },
       {
-          "rid": 60,
+          "rid": 63,
           "title": "fff",
           "image": "",
           "type": "gift",
@@ -45,7 +45,7 @@
           "remainingQuantity": 1
       },
       {
-          "rid": 61,
+          "rid": 64,
           "title": "序號測試",
           "image": "",
           "type": "code",
@@ -53,7 +53,7 @@
           "remainingQuantity": 3
       },
       {
-          "rid": 60,
+          "rid": 65,
           "title": "fff",
           "image": "",
           "type": "gift",
@@ -61,7 +61,7 @@
           "remainingQuantity": 1
       },
       {
-          "rid": 61,
+          "rid": 66,
           "title": "序號測試",
           "image": "",
           "type": "code",
