@@ -286,22 +286,7 @@
         // tab3:: 兌換紀錄
         exchangeRecord: [],
         // 選擇禮物
-        // selectedPrize: null,
-        // TODO 測試: 寫死禮物內容
-        selectedPrize: [
-          {
-            "title": "fff",
-            "type": "gift",
-            "usedPoints": 6,
-            "numRedeemed": 2,
-            "redeemTime": "2020-03-13",
-            "name": "Jason",
-            "sex": "male",
-            "phone": "0987654321",
-            "address": "松山區東興路28號七樓",
-            "email": "xxxxxxx@gamil.com"
-          }
-        ],
+        selectedPrize: null,
         uiUserInfoTemp: {
           name: '',
           sex: 'male',
@@ -468,7 +453,8 @@
             this.sendPrizeRequest('code', data).then(response => {
               // 發送成功訊息
               let {title, exchangeNumber, exchangePoint } = this.selectedPrize
-              let msg = `你已花費「${exchangeNumber * exchangePoint}」點，兌換「${title}」虛擬序號「${exchangeNumber}」份，下列是您所兌換的序號: ${response.data.codes}.join("\n")`
+              // let msg = `你已花費「${exchangeNumber * exchangePoint}」點，兌換「${title}」虛擬序號「${exchangeNumber}」份，下列是您所兌換的序號: ${response.data.codes}.join("\n")`
+              let msg = `在${this.rewardCard.title}中，使用 ${exchangePoint} 點，兌換${title} ${exchangeNumber}」份`
               this.liffSendMesaage(msg).then(response => { console.log(response) })
               // 開啟成功頁面
               this.modal.isFinished = true
@@ -535,7 +521,8 @@
           this.sendPrizeRequest('gift', data).then(response => {
             // 發送成功訊息
             let { title, type, exchangeNumber, exchangePoint } = this.selectedPrize
-            let msg = `你已花費「${exchangeNumber * exchangePoint}」點，兌換了「${title}」實體贈品「${exchangeNumber}」份，贈品將 依活動相關辦法寄出!`
+            // let msg = `你已花費「${exchangeNumber * exchangePoint}」點，兌換了「${title}」實體贈品「${exchangeNumber}」份，贈品將 依活動相關辦法寄出!`
+            let msg = `在${this.rewardCard.title}中，使用 ${exchangePoint} 點，兌換${title} ${exchangeNumber}」份`
             this.liffSendMesaage(msg).then(response => { console.log(response) })
             this.modal.isFinished = true
           }).catch(msg => {
