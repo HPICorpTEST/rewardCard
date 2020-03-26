@@ -460,14 +460,15 @@
               redeemRid: this.selectedPrize.rid,
               redeemQuantity: this.selectedPrize.exchangeNumber
             }
+
             // 送出資料
             this.sendPrizeRequest('code', data).then(response => {
-              let { codes } = this.selectedPrize.data
+              let { codes } = this.response.data
               // 發送成功訊息
-              let {title, exchangeNumber, exchangePoint } = this.selectedPrize
+              let { title, exchangeNumber, exchangePoint } = this.selectedPrize
               // let msg = `你已花費「${exchangeNumber * exchangePoint}」點，兌換「${title}」虛擬序號「${exchangeNumber}」份，下列是您所兌換的序號: ${response.data.codes}.join("\n")`
-              let codeList = ``
-              let msg = `在${this.rewardCard.title}中，使用 ${exchangePoint} 點，兌換${title} ${exchangeNumber}」份`
+              let codeList = codes.length === 1 ? codes[0] : codes.map((code, i) => `${i+1}. ${code}`).join('\n')
+              let msg = `在${rewardCard.title}中，使用 ${exchangePoint} 點，兌換${title} ${exchangeNumber}份\n${codeList}`
               this.liffSendMesaage(msg).then(response => { console.log(response) })
               // 開啟成功頁面
               this.modal.isFinished = true
@@ -535,7 +536,7 @@
             // 發送成功訊息
             let { title, type, exchangeNumber, exchangePoint } = this.selectedPrize
             // let msg = `你已花費「${exchangeNumber * exchangePoint}」點，兌換了「${title}」實體贈品「${exchangeNumber}」份，贈品將 依活動相關辦法寄出!`
-            let msg = `在${this.rewardCard.title}中，使用 ${exchangePoint} 點，兌換${title} ${exchangeNumber}」份`
+            let msg = `在${this.rewardCard.title}中，使用 ${exchangePoint} 點，兌換${title} ${exchangeNumber}份`
             this.liffSendMesaage(msg).then(response => { console.log(response) })
             this.modal.isFinished = true
           }).catch(msg => {
@@ -712,44 +713,44 @@
           }
         },
         // 假資料
-        fakeMsg() {
-          let selectedPrize = {
-            "rid": 60,
-            "title": "序號測試",
-            "image": "temp_prize.png",
-            "type": "code",
-            "exchangePoint": 5,
-            "exchangeNumber": 3,
-            "remainingQuantity": 3
-          }
+        // fakeMsg() {
+        //   let selectedPrize = {
+        //     "rid": 60,
+        //     "title": "序號測試",
+        //     "image": "temp_prize.png",
+        //     "type": "code",
+        //     "exchangePoint": 5,
+        //     "exchangeNumber": 3,
+        //     "remainingQuantity": 3
+        //   }
 
-          // 假低
-          let res = {
-            "status": "ok",
-            "message": "success",
-            "data": {
-              "title": "序號測試",
-              "type": "code",
-              "usedPoints": 5,
-              "numRedeemed": 1,
-              "codes": [
-                "333",
-                "https://www.google.com",
-                "111"
-              ]
-            }
-          }
-          let rewardCard = { 'title': 'hello' }
-          let { codes } = res.data
-          let {title, exchangeNumber, exchangePoint } = selectedPrize
-          // 送出資料
-          let codeList = codes.length === 1 ? codes[0] : codes.map((code, i) => `${i+1}. ${code}`).join('\n')
-          let msg = `在${rewardCard.title}中，使用 ${exchangePoint} 點，兌換${title} ${exchangeNumber}」份\n${codeList}`
-          this.liffSendMesaage(msg)
-            .then(response => { console.log(response) })
-            .catch(e => alert(e))
+        //   // 假低
+        //   let res = {
+        //     "status": "ok",
+        //     "message": "success",
+        //     "data": {
+        //       "title": "序號測試",
+        //       "type": "code",
+        //       "usedPoints": 5,
+        //       "numRedeemed": 1,
+        //       "codes": [
+        //         "333",
+        //         "https://www.google.com",
+        //         "111"
+        //       ]
+        //     }
+        //   }
+        //   let rewardCard = { 'title': 'hello' }
+        //   let { codes } = res.data
+        //   let {title, exchangeNumber, exchangePoint } = selectedPrize
+        //   // 送出資料
+        //   let codeList = codes.length === 1 ? codes[0] : codes.map((code, i) => `${i+1}. ${code}`).join('\n')
+        //   let msg = `在${rewardCard.title}中，使用 ${exchangePoint} 點，兌換${title} ${exchangeNumber}份\n${codeList}`
+        //   this.liffSendMesaage(msg)
+        //     .then(response => { console.log(response) })
+        //     .catch(e => alert(e))
             
-        }
+        // }
       },
       filters: {
         // 轉換圖片
@@ -792,8 +793,7 @@
         }
       },
       created() {
-        // let liffId = '1629910250-pMnyE9oo'
-        let liffId = '1629910250-GxmvrJnn'
+        let liffId = '1629910250-pMnyE9oo'
         // liff Init - 取得profile
         this.liffInit(liffId)
           .then((data) => {
@@ -820,7 +820,6 @@
             }).catch(e => {
               console.log(e)
             })
-            this.fakeMsg()
 
           }).catch(msg => {
             alert(msg)
