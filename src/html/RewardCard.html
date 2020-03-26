@@ -741,16 +741,17 @@
       },
       created() {
         // let liffId = '1629910250-pMnyE9oo'
-        // // liff Init - 取得profile
-        // this.liffInit(liffId)
-        //   .then((data) => {
-        //     if (!liff.isLoggedIn()) {    
-        //       liff.login()
-        //     } else {
-        //       // 取得登入者資訊
-        //       return this.getLIFFProfile().then(profile => profile)
-        //     }
-        //   }).then((profile) => {
+        let liffId = '1629910250-GxmvrJnn'
+        // liff Init - 取得profile
+        this.liffInit(liffId)
+          .then((data) => {
+            if (!liff.isLoggedIn()) {    
+              liff.login()
+            } else {
+              // 取得登入者資訊
+              return this.getLIFFProfile().then(profile => profile)
+            }
+          }).then((profile) => {
             // 取得使用者的mid
             // this.mid = profile.userId
             // 取得集點卡id
@@ -768,10 +769,10 @@
               console.log(e)
             })
 
-          // }).catch(msg => {
-          //   alert(msg)
-          //   location.assign('https://manager.line.biz/')
-          // })
+          }).catch(msg => {
+            alert(msg)
+            location.assign('https://manager.line.biz/')
+          })
       },
       mounted() {
         // this.orderPrize()
