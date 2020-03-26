@@ -104,22 +104,23 @@
             mounted() {
                 // liff Init - 取得profile
                 // let liffId = '1629910250-pMnyE9oo'
-                // this.liffInit(liffId)
-                //   .then((data) => {
-                    // if (!liff.isLoggedIn()) {    
-                    //   liff.login()
-                    // } else {
+                let liffId = '1629910250-GxmvrJnn'
+                this.liffInit(liffId)
+                  .then((data) => {
+                    if (!liff.isLoggedIn()) {    
+                      liff.login()
+                    } else {
                       // 取得登入者資訊
-                    //   return this.getLIFFProfile().then(profile => profile)
-                    // }
-                //   }).then((profile) => {
-                    // this.mid = profile.userId
-                //     alert(`[TEST]-your MID: \n${profile.userId}`)
+                      return this.getLIFFProfile().then(profile => profile)
+                    }
+                  }).then((profile) => {
+                    this.mid = profile.userId
+                    alert(`[TEST]-your MID: \n${profile.userId}`)
                     this.showRewardList()
-                // }).catch(msg => {
-                //     alert(msg)
-                //     location.assign('https://manager.line.biz/')
-                // })
+                }).catch(msg => {
+                    alert(msg)
+                    location.assign('https://manager.line.biz/')
+                })
             }
         })
     </script>
