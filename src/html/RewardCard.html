@@ -713,7 +713,7 @@
         },
         // 假資料
         fakeMsg() {
-          let = selectedPrize = {
+          let selectedPrize = {
             "rid": 60,
             "title": "序號測試",
             "image": "temp_prize.png",
@@ -745,7 +745,10 @@
           // 送出資料
           let codeList = codes.length === 1 ? codes[0] : codes.map((code, i) => `${i+1}. ${code}`).join('\n')
           let msg = `在${rewardCard.title}中，使用 ${exchangePoint} 點，兌換${title} ${exchangeNumber}」份\n${codeList}`
-          this.liffSendMesaage(msg).then(response => { console.log(response) })
+          this.liffSendMesaage(msg)
+            .then(response => { console.log(response) })
+            .catch(e => alert(e))
+            
         }
       },
       filters: {
