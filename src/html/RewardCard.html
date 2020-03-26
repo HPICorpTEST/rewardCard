@@ -224,26 +224,22 @@
           <div class="exchangeModal__content">
             <div class="p-2">
               <div class="flex mb-3">
-                <p class="mr-1">收件人：</p>
-                <p class="gray-1">{{userInfo.name}}</p>
+                <p class="fw-700 mr-1">收件人：</p>
+                <p class="fw-400 gray-1">{{userInfo.name}}</p>
               </div>
               <div class="flex mb-3">
-                <p class="mr-1">稱謂：</p>
-                <p class="gray-1">{{userInfo.sex == 'female' ? '小姐' : '先生'}}</p>
+                <p class="fw-700 mr-1">稱謂：</p>
+                <p class="fw-400 gray-1">{{userInfo.sex == 'female' ? '小姐' : '先生'}}</p>
               </div>
               <div class="flex mb-3">
-                <p class="mr-1">聯絡電話：</p>
-                <p class="gray-1">{{userInfo.phone}}</p>
+                <p class="fw-700 mr-1">聯絡電話：</p>
+                <p class="fw-400 gray-1">{{userInfo.phone}}</p>
               </div>
               <div class="flex mb-3">
-                <!-- <p class="mr-1">電子郵件：</p>
-                <p class="gray-1">{{userInfo.email}}</p> -->
-                <p>電子郵件：<span class="gray-1">{{userInfo.email}}</span></p>
+                <p class="fw-700">電子郵件：<span class="fw-400 gray-1">{{userInfo.email}}</span></p>
               </div>
               <div class="flex">
-                <!-- <p class="mr-1">收件地址：</p>
-                <p class="gray-1">{{userInfo.address}}</p> -->
-                <p>收件地址：<span class="gray-1">{{userInfo.address}}</span></p>
+                <p class="fw-700">收件地址：<span class="fw-400 gray-1">{{userInfo.address}}</span></p>
               </div>
             </div>
           </div>
@@ -290,7 +286,22 @@
         // tab3:: 兌換紀錄
         exchangeRecord: [],
         // 選擇禮物
-        selectedPrize: null,
+        // selectedPrize: null,
+        // TODO 測試: 寫死禮物內容
+        selectedPrize: [
+          {
+            "title": "fff",
+            "type": "gift",
+            "usedPoints": 6,
+            "numRedeemed": 2,
+            "redeemTime": "2020-03-13",
+            "name": "Jason",
+            "sex": "male",
+            "phone": "0987654321",
+            "address": "松山區東興路28號七樓",
+            "email": "xxxxxxx@gamil.com"
+          }
+        ],
         uiUserInfoTemp: {
           name: '',
           sex: 'male',
@@ -774,6 +785,9 @@
           //   alert(msg)
           //   location.assign('https://manager.line.biz/')
           // })
+      },
+      mounted() {
+        // this.orderPrize()
       }
     })
   </script>

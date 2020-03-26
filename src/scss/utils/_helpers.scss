@@ -137,3 +137,10 @@ i {
 .border-red {
   border-color: $danger !important;
 }
+
+// font-weight
+@for $i from 100 to 900 {
+  .fw-#{$i} {
+    font-weight: $i;
+  }
+}
