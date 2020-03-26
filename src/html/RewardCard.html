@@ -730,12 +730,29 @@
               redeemRid: this.selectedPrize.rid,
               redeemQuantity: this.selectedPrize.exchangeNumber
             }
+
+            // 假低
+            let res = {
+              "status": "ok",
+              "message": "success",
+              "data": {
+                "title": "序號測試",
+                "type": "code",
+                "usedPoints": 5,
+                "numRedeemed": 1,
+                "codes": [
+                  "333",
+                  "https://www.google.com",
+                  "111"
+                ]
+              }
+            }
             
-            let { codes } = this.selectedPrize.data
+            let { codes } = res.data
             let {title, exchangeNumber, exchangePoint } = this.selectedPrize
             // 送出資料
-            let codeList = code.length === 1 ? codes[0] : codes.map((code, i) => `${i+1}. ${code}<br>`).join('')
-            let msg = `在${this.rewardCard.title}中，使用 ${exchangePoint} 點，兌換${title} ${exchangeNumber}」份<br>${codeList}`
+            let codeList = codes.length === 1 ? codes[0] : codes.map((code, i) => `${i+1}. ${code}`).join('\n')
+            let msg = `在${this.rewardCard.title}中，使用 ${exchangePoint} 點，兌換${title} ${exchangeNumber}」份\n${codeList}`
             this.liffSendMesaage(msg).then(response => { console.log(response) })
           }
         }
@@ -784,15 +801,15 @@
         // let liffId = '1629910250-pMnyE9oo'
         let liffId = '1629910250-GxmvrJnn'
         // liff Init - 取得profile
-        this.liffInit(liffId)
-          .then((data) => {
-            if (!liff.isLoggedIn()) {    
-              liff.login()
-            } else {
-              // 取得登入者資訊
-              return this.getLIFFProfile().then(profile => profile)
-            }
-          }).then((profile) => {
+        // this.liffInit(liffId)
+        //   .then((data) => {
+        //     if (!liff.isLoggedIn()) {    
+        //       liff.login()
+        //     } else {
+        //       // 取得登入者資訊
+        //       return this.getLIFFProfile().then(profile => profile)
+        //     }
+        //   }).then((profile) => {
             // 取得使用者的mid
             // this.mid = profile.userId
             // 取得集點卡id
@@ -811,10 +828,10 @@
             })
             this.fakeMsg()
 
-          }).catch(msg => {
-            alert(msg)
-            location.assign('https://manager.line.biz/')
-          })
+          // }).catch(msg => {
+          //   alert(msg)
+          //   location.assign('https://manager.line.biz/')
+          // })
       }
     })
   </script>
