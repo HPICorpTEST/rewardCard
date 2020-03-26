@@ -3,7 +3,7 @@
 
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
   <link rel="stylesheet" href="../scss/style.css">
   <title>LINE登錄發票集點換好禮</title>
 </head>
@@ -286,7 +286,18 @@
         // tab3:: 兌換紀錄
         exchangeRecord: [],
         // 選擇禮物
-        selectedPrize: null,
+        // selectedPrize: null,
+        selectedPrize: {
+          "title": "序號測試",
+          "type": "code",
+          "usedPoints": 10,
+          "numRedeemed": 2,
+          "redeemTime": "2020-03-13",
+          "codes": [
+            "44",
+            "https://www.google.com"
+          ]
+        },
         uiUserInfoTemp: {
           name: '',
           sex: 'male',
