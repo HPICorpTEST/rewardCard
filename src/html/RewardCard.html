@@ -112,7 +112,7 @@
                   </template>
 
                   <template v-else>
-                    <p v-for="(code, i) in record.codes" v-html="addHrefToCode(i, record.codes)"></p>
+                    <p v-for="(code, i) in record.codes" v-html="checkUrlInCode(i, record.codes)"></p>
                   </template>
 
                 </td>
@@ -703,14 +703,14 @@
           })
         },
         // 如果序號是網址則加上連結
-        addHrefToCode(index, codes) {
+        checkUrlInCode(index, codes) {
           if (codes.length > 1) {
             return codes[index].match('https') ? `${index+1}. <a href="${codes[index]}" target="_blank" rel="noopener">${codes[index]}</a>` : `${index+1}. ${codes[index]}`
           } else {
             return codes[index].match('https') ? `<a href="${codes[index]}" target="_blank" rel="noopener">${codes[index]}</a>` : codes[index]
           }
         },
-        // 假資料
+        // 製作 liff-msg [假資料]
         // fakeMsg() {
         //   let selectedPrize = {
         //     "rid": 60,
@@ -721,7 +721,6 @@
         //     "exchangeNumber": 3,
         //     "remainingQuantity": 3
         //   }
-
         //   // 假低
         //   let res = {
         //     "status": "ok",
@@ -747,46 +746,11 @@
         //   this.liffSendMesaage(msg)
         //     .then(response => { console.log(response) })
         //     .catch(e => alert(e))
-            
         // }
 
-        // 正式
-        runWithProduction () {
-          let liffId = '1629910250-pMnyE9oo'
-          // liff Init - 取得profile
-          this.liffInit(liffId)
-            .then((data) => {
-              if (!liff.isLoggedIn()) {    
-                liff.login()
-              } else {
-                // 取得登入者資訊
-                return this.getLIFFProfile().then(profile => profile)
-              }
-            }).then((profile) => {
-              // 取得使用者的mid
-              // this.mid = profile.userId
-              // 取得集點卡id
-              this.rewardCardId = new URL(location.href).searchParams.get("id")
-
-              // 取得集點卡的資訊
-              this.fetchProfileData(this.rewardCardId)
-
-              // fetch台灣縣市鄉鎮
-              this.fetchCityCountryData().then(response => {
-                this.cityCountry = response
-                // 取得使用者過去填寫資料
-                this.userAddress()
-              }).catch(e => {
-                console.log(e)
-              })
-
-            }).catch(msg => {
-              alert(msg)
-              location.assign('https://manager.line.biz/')
-            })
-        },
-        // 單機測試
-        runWithLocalDevelop () {
+        setBasicInfo (profile) {
+          // 取得使用者的mid
+          // this.mid = profile.userId
           // 取得集點卡id
           this.rewardCardId = new URL(location.href).searchParams.get("id")
           // 取得集點卡的資訊
@@ -799,6 +763,25 @@
           }).catch(e => {
             console.log(e)
           })
+        },
+        // 啟動時運行 liff
+        runLiffInit () {
+          let liffId = '1629910250-pMnyE9oo'
+          // liff Init - 取得profile
+          this.liffInit(liffId)
+            .then((data) => {
+              if (!liff.isLoggedIn()) {    
+                liff.login()
+              } else {
+                // 取得登入者資訊
+                return this.getLIFFProfile().then(profile => profile)
+              }
+            }).then((profile) => {
+              this.setBasicInfo(profile)
+            }).catch(msg => {
+              alert(msg)
+              location.assign('https://manager.line.biz/')
+            })
         }
       },
       filters: {
@@ -842,8 +825,8 @@
         }
       },
       created() {
-        // this.runWithProduction()
-        this.runWithLocalDevelop()
+        // this.runLiffInit()
+        this.setBasicInfo()
       }
     })
   </script>
