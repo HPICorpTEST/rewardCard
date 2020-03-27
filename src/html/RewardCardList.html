@@ -13,25 +13,29 @@
         <div class="p-rewardCardList__header">
             <img src="../Mobile/images/rewardCard/bgList.jpg" alt="">
         </div>
-        <div class="p-rewardCardList__content" v-if="rewarcCardList.length > 0">
-            <div v-for="(item, index) in rewarcCardList" :key="index" class="list"
-                :class="{'list--expiry': isExpiry(item.endTime)}" @click="goDetailPage(item.id)">
-                <div class="list__img grid-4">
-                    <img :src="item.rewardCardImage | listImage" alt=""
-                        onerror="this.src='../Mobile/images/rewardCard/temp_prize2.png'">
+        <div class="p-rewardCardList__content">
+            <template v-if="rewarcCardList.length > 0">
+                <div v-for="(item, index) in rewarcCardList" :key="index" class="list"
+                    :class="{'list--expiry': isExpiry(item.endTime)}" @click="goDetailPage(item.id)">
+                    <div class="list__img grid-4">
+                        <img :src="item.rewardCardImage | listImage" alt=""
+                            onerror="this.src='../Mobile/images/rewardCard/temp_prize2.png'">
+                    </div>
+                    <div class="list__main grid-8">
+                        <!-- <p class="list__name">{{item.title}}</p> -->
+                        <p class="list__name">{{item.title}}</p>
+                        <p class="list__discript">可用點數：{{item.totalPoints - item.usedPoints}} 點</p>
+                        <p class="list__discript">兌換截止日：{{item.endTime}}</p>
+                    </div>
                 </div>
-                <div class="list__main grid-8">
-                    <!-- <p class="list__name">{{item.title}}</p> -->
-                    <p class="list__name">{{item.title}}</p>
-                    <p class="list__discript">可用點數：{{item.totalPoints - item.usedPoints}} 點</p>
-                    <p class="list__discript">兌換截止日：{{item.endTime}}</p>
-                </div>
+            </template>
+
+            <div v-else class="noRecord">
+                <img src="../Mobile/images/rewardCard/no-record.png" alt="">
+                <p>目前尚無集點卡活動</p>
             </div>
         </div>
-        <div v-else class="noRecord">
-          <img src="../Mobile/images/rewardCard/no-record.png" alt="">
-          <p>目前尚無集點卡活動</p>
-        </div>
+
         <div class="coverArea" :class="{isload: isload}"></div>
     </div>
     <script src="https://static.line-scdn.net/liff/edge/2.1/sdk.js"></script>
