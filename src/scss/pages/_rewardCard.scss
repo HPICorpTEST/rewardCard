@@ -241,17 +241,18 @@
       }
     }
   }
-  .noRecord {
-    opacity: 0.4;
-    top: 120px;
-    img {
-      margin: auto;
-      width: 30%;
-    }
-    p {
-      text-align: center;
-      font-size: 1.2rem;
-    }
+}
+
+.noRecord {
+  opacity: 0.6;
+  top: 120px;
+  img {
+    margin: auto;
+    width: 30%;
+  }
+  p {
+    text-align: center;
+    font-size: 1.2rem;
   }
 }
 

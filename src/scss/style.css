@@ -969,17 +969,17 @@ i.i-arrow-right {
   font-size: 0.7rem;
 }
 
-.p-rewardCard .noRecord {
-  opacity: 0.4;
+.noRecord {
+  opacity: 0.6;
   top: 120px;
 }
 
-.p-rewardCard .noRecord img {
+.noRecord img {
   margin: auto;
   width: 30%;
 }
 
-.p-rewardCard .noRecord p {
+.noRecord p {
   text-align: center;
   font-size: 1.2rem;
 }

@@ -13,7 +13,7 @@
         <div class="p-rewardCardList__header">
             <img src="../Mobile/images/rewardCard/bgList.jpg" alt="">
         </div>
-        <div class="p-rewardCardList__content">
+        <div class="p-rewardCardList__content" v-if="rewarcCardList.length > 0">
             <div v-for="(item, index) in rewarcCardList" :key="index" class="list"
                 :class="{'list--expiry': isExpiry(item.endTime)}" @click="goDetailPage(item.id)">
                 <div class="list__img grid-4">
@@ -27,6 +27,10 @@
                     <p class="list__discript">兌換截止日：{{item.endTime}}</p>
                 </div>
             </div>
+        </div>
+        <div v-else class="noRecord">
+          <img src="../Mobile/images/rewardCard/no-record.png" alt="">
+          <p>目前尚無集點卡活動</p>
         </div>
         <div class="coverArea" :class="{isload: isload}"></div>
     </div>
