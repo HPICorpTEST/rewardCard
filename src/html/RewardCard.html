@@ -112,9 +112,7 @@
                   </template>
 
                   <template v-else>
-                    <p v-for="(code, i) in record.codes" v-html="addHrefToCode(i, record.codes)">
-                      <!-- {{code}} -->
-                    </p>
+                    <p v-for="(code, i) in record.codes" v-html="addHrefToCode(i, record.codes)"></p>
                   </template>
 
                 </td>
@@ -187,22 +185,22 @@
         <div v-if="modal.isFillUserInfo" class="exchangeModal top25">
           <p class="exchangeModal__header">請填寫收件資訊</p>
           <div class="exchangeModal__content">
-            <div class="flex w100">
-              <input type="text" class="exchangeModal__input mt-1 mb-2 mr-2" :class="{'border-red': uiUserInfoValidate['name'] == false}" placeholder="收件人姓名" v-model="uiUserInfoTemp.name" @blur="checkValid(uiUserInfoTemp.name, 'uiUserInfoValidate', 'name')">
-              <select class="exchangeModal__select mt-1 mb-2" v-model="uiUserInfoTemp.sex">
+            <div class="flex w100 mb-3">
+              <input type="text" class="exchangeModal__input mr-2" :class="{'border-red': uiUserInfoValidate['name'] == false}" placeholder="收件人姓名" v-model="uiUserInfoTemp.name" @blur="checkValid(uiUserInfoTemp.name, 'uiUserInfoValidate', 'name')">
+              <select class="exchangeModal__select" v-model="uiUserInfoTemp.sex">
                 <option value="male">先生</option>
                 <option value="female">小姐</option>
               </select>
             </div>
-            <input type="tel" maxlength="10" class="exchangeModal__input mb-2" :class="{'border-red': uiUserInfoValidate['phone'] == false}"  placeholder="聯絡電話 (0912345678)" v-model="uiUserInfoTemp.phone" @blur="checkPhone(uiUserInfoTemp.phone, 'uiUserInfoValidate', 'phone')">
-            <input type="text" maxlength="40" class="exchangeModal__input mb-2" :class="{'border-red': uiUserInfoValidate['email'] == false}" placeholder="電子郵件" v-model="uiUserInfoTemp.email" @blur="checkEmail(uiUserInfoTemp.email, 'uiUserInfoValidate', 'email')">
-            <div class="flex w100 mb-2">
-              <select class="exchangeModal__select mt-1 mb-1 mr-2" v-model="uiUserInfoTemp.selectedCountry" :class="{'border-red': uiUserInfoValidate['selectedCountry'] == false}">
+            <input type="tel" maxlength="10" class="exchangeModal__input mb-3" :class="{'border-red': uiUserInfoValidate['phone'] == false}"  placeholder="聯絡電話 (0912345678)" v-model="uiUserInfoTemp.phone" @blur="checkPhone(uiUserInfoTemp.phone, 'uiUserInfoValidate', 'phone')">
+            <input type="text" maxlength="40" class="exchangeModal__input mb-3" :class="{'border-red': uiUserInfoValidate['email'] == false}" placeholder="電子郵件" v-model="uiUserInfoTemp.email" @blur="checkEmail(uiUserInfoTemp.email, 'uiUserInfoValidate', 'email')">
+            <div class="flex w100 mb-3">
+              <select class="exchangeModal__select mr-2" v-model="uiUserInfoTemp.selectedCountry" :class="{'border-red': uiUserInfoValidate['selectedCountry'] == false}">
                 <option value="" selected disabled>縣市</option>
                 <option v-for="item in cityCountry" :value="item.CityName">{{item.CityName}}</option>
               </select>
               
-              <select class="exchangeModal__select mt-1 mb-1" v-model="uiUserInfoTemp.selectedCity" :class="{'border-red': uiUserInfoValidate['selectedCity'] == false}">
+              <select class="exchangeModal__select" v-model="uiUserInfoTemp.selectedCity" :class="{'border-red': uiUserInfoValidate['selectedCity'] == false}">
                 <option value="" selected disabled>鄉鎮</option>
                 <option v-for="item in cityName" :value="item.AreaName">{{item.AreaName}}</option>
               </select>
@@ -751,6 +749,57 @@
         //     .catch(e => alert(e))
             
         // }
+
+        // 正式
+        runWithProduction () {
+          let liffId = '1629910250-pMnyE9oo'
+          // liff Init - 取得profile
+          this.liffInit(liffId)
+            .then((data) => {
+              if (!liff.isLoggedIn()) {    
+                liff.login()
+              } else {
+                // 取得登入者資訊
+                return this.getLIFFProfile().then(profile => profile)
+              }
+            }).then((profile) => {
+              // 取得使用者的mid
+              // this.mid = profile.userId
+              // 取得集點卡id
+              this.rewardCardId = new URL(location.href).searchParams.get("id")
+
+              // 取得集點卡的資訊
+              this.fetchProfileData(this.rewardCardId)
+
+              // fetch台灣縣市鄉鎮
+              this.fetchCityCountryData().then(response => {
+                this.cityCountry = response
+                // 取得使用者過去填寫資料
+                this.userAddress()
+              }).catch(e => {
+                console.log(e)
+              })
+
+            }).catch(msg => {
+              alert(msg)
+              location.assign('https://manager.line.biz/')
+            })
+        },
+        // 單機測試
+        runWithLocalDevelop () {
+          // 取得集點卡id
+          this.rewardCardId = new URL(location.href).searchParams.get("id")
+          // 取得集點卡的資訊
+          this.fetchProfileData(this.rewardCardId)
+          // fetch台灣縣市鄉鎮
+          this.fetchCityCountryData().then(response => {
+            this.cityCountry = response
+            // 取得使用者過去填寫資料
+            this.userAddress()
+          }).catch(e => {
+            console.log(e)
+          })
+        }
       },
       filters: {
         // 轉換圖片
@@ -793,38 +842,8 @@
         }
       },
       created() {
-        let liffId = '1629910250-pMnyE9oo'
-        // liff Init - 取得profile
-        this.liffInit(liffId)
-          .then((data) => {
-            if (!liff.isLoggedIn()) {    
-              liff.login()
-            } else {
-              // 取得登入者資訊
-              return this.getLIFFProfile().then(profile => profile)
-            }
-          }).then((profile) => {
-            // 取得使用者的mid
-            // this.mid = profile.userId
-            // 取得集點卡id
-            this.rewardCardId = new URL(location.href).searchParams.get("id")
-
-            // 取得集點卡的資訊
-            this.fetchProfileData(this.rewardCardId)
-
-            // fetch台灣縣市鄉鎮
-            this.fetchCityCountryData().then(response => {
-              this.cityCountry = response
-              // 取得使用者過去填寫資料
-              this.userAddress()
-            }).catch(e => {
-              console.log(e)
-            })
-
-          }).catch(msg => {
-            alert(msg)
-            location.assign('https://manager.line.biz/')
-          })
+        // this.runWithProduction()
+        this.runWithLocalDevelop()
       }
     })
   </script>
